@@ -1,10 +1,18 @@
+import Login from "../../../auth"
+
 const FormLogin = () => {
+
     return(
         <>
-            <form method="post">
-                <input name="username"></input>
-                <input name="password"></input>
-                <button type="submit">Save</button>
+            <form onSubmit={Login}>
+                <input name="email" 
+                type="email"
+                placeholder="email"
+                id="email"></input>
+                <input name="password" 
+                type="password"
+                id="password"></input>
+                <button type="submit" id="button_login">Save</button>
             </form>
         </>
     )
