@@ -2,6 +2,7 @@ import React from "react";
 import getDate from "../../../blog_configs"
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Content_Post from "../../../components/Content_Post";
+import Title_Post from "../../../components/Title_Post";
 interface Post{
     id: number; // Definindo o tipo para os posts, um modelo
     cover: string;
@@ -20,6 +21,7 @@ const CardPost: React.FC<{ post: Post }> = ({ post }) => {
         <div key={post.id} className='post-card'>
             <p className='post-card_date'>{date.dateMonth} | {date.dateDay}</p>
             <span>
+                <Title_Post title={post.title}/>
                 <img src={post.cover}></img>
                 <Content_Post content={post.content} />
                 <Button_PostReadMore id={post.id}/>

@@ -42,7 +42,9 @@ const SubmitForm = (event) =>{
         }
 
         //Formatar conteudos para o submit
-        const title = editor.querySelector("h1").outerHTML
+        const title = editor.querySelector("h1").innerHTML
+        const remove_h1 = editor.querySelector("h1")
+        remove_h1.remove()
         const content = editor.innerHTML
         console.log(typeof content)
         const data = {

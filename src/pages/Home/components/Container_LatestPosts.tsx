@@ -3,6 +3,7 @@ import getDate from "../../../blog_configs";
 import axios from 'axios'
 import Content_Post from "../../../components/Content_Post";
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
+import Title_Post from "../../../components/Title_Post";
 // import DOMPurify from "dompurify";
 
 interface Post {
@@ -22,7 +23,7 @@ const Post: React.FC<{ post: Post }> = ({ post }) => {
         <div className="post">
             <div className="post_info">
                 <p className="post_info_date">{date.dateMonth} | {date.dateDay}</p>
-                <h2>{post.title}</h2>
+                <Title_Post title={post.title}/>
             </div>
             <img src={post.cover}></img>
             {/* <div className="post_content" dangerouslySetInnerHTML={{__html: content}}></div> */}
