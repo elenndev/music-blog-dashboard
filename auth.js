@@ -27,7 +27,11 @@ const Login = (event) => {
         }
         return response,json()
     }).then(data => {
-        console.log('sucess')
+        console.log('Login bem-sucedido, token:', data.access_token);
+        // Armazenar o JWT no localStorage
+        localStorage.setItem('access_token', data.access_token);
+        // Redirecionar para a rota protegida
+        window.location.href = '/new';
     }).catch((error) => {
         console.log('Erro:', error)
     })
