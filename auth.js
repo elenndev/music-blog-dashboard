@@ -13,7 +13,7 @@ const Login = (event) => {
         email: email,
         password: password
     }
-    
+    console.log('antes do fetch:', data)
     fetch('http://127.0.0.1:8000/login/',{
         method: 'POST',
         headers: {
@@ -25,9 +25,11 @@ const Login = (event) => {
         if (!response.ok){
             throw new Error('Network response was not okay')
         }
-        return response,json()
+        return response.json()
     }).then(data => {
         console.log('sucess')
+        //Armazenar JWT no local storage
+        localStorage.setItem('acess_token', data.acess_token)
     }).catch((error) => {
         console.log('Erro:', error)
     })

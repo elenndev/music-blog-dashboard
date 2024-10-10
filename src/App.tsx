@@ -21,7 +21,7 @@ function App() {
         <Route path='/all-posts' element={<AllPosts />}></Route>
         <Route path='/read/:id' element={<ReadPost />}></Route>
         <Route path='/new' element={<Dashboard />}></Route>
-        <Route path='/blog-signup' element={<FormLogin />}></Route>
+        <Route path='/blog-login' element={<FormLogin />}></Route>
         <Route path='*' element={<h2>Página nao encontrada</h2>}></Route>
       </Routes>
   )
