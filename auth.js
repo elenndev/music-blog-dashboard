@@ -1,38 +1,7 @@
-const Login = (event) => {
-    event.preventDefault()
-    const button = document.querySelector("#button_login")
-    const email = document.querySelector("#email").value
-    const password = document.querySelector("#password").value
+import { createClient } from "@supabase/supabase-js";
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 
-    if (email.length < 5 || password.length==0){
-        alert('Credenciais inválidas')
-        return
-    } 
+const supabase = createClient(supabaseUrl, supabaseKey)
 
-    const data = {
-        email: email,
-        password: password
-    }
-    console.log('antes do fetch:', data)
-    fetch('http://127.0.0.1:8000/login/',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    }).then(response => {
-        console.log("response status:",response.status)
-        if (!response.ok){
-            throw new Error('Network response was not okay')
-        }
-        return response.json()
-    }).then(data => {
-        console.log('sucess')
-        //Armazenar JWT no local storage
-        localStorage.setItem('acess_token', data.acess_token)
-    }).catch((error) => {
-        console.log('Erro:', error)
-    })
-}
-
-export default Login
+export default supabase

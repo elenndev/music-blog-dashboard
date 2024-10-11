@@ -12,7 +12,7 @@ interface Post {
     created_at: string;
 }
 
-const AllPosts: React.FC = () => {
+const AllPosts: React.FC<{isDashboard?: boolean} > = ({isDashboard = false}) => {
     const [posts, setPosts] = useState<Post[]>([]); // Define o estado como um array de Post
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null); // Define o tipo do erro
