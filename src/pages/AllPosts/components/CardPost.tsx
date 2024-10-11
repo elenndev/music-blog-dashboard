@@ -14,7 +14,7 @@ interface Post{
 
 
 
-const CardPost: React.FC<{ post: Post }> = ({ post }) => {
+const CardPost: React.FC<{ post: Post; isDashboard: boolean }> = ({ post, isDashboard }) => {
     const date = getDate(post.created_at)
 
     return(
@@ -25,7 +25,7 @@ const CardPost: React.FC<{ post: Post }> = ({ post }) => {
                 <img src={post.cover}></img>
                 <Content_Post content={post.content} />
                 <Button_PostReadMore id={post.id}/>
-                <Button_PostDelete id={post.id}/>
+                {isDashboard && <Button_PostDelete id={post.id}/>}
             </span>
         </div>
     )

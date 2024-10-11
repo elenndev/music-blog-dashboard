@@ -55,6 +55,7 @@ const AllPosts: React.FC<{isDashboard?: boolean} > = ({isDashboard = false}) => 
                 {posts.map((post) => (
                     <CardPost key={post.id}
                         post = {post}
+                        isDashboard = {isDashboard}
                     />
                 ))}
             </div>
