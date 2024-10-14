@@ -1,0 +1,81 @@
+
+.container {
+    padding: 0;
+    border: solid 1px var(--darkMode-SecondaryColor);
+    border-radius: var(--borderRadius);
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .container_header {
+        width: 100%;
+        border-bottom: solid 1px var(--darkMode-SecondaryColor);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: end;
+
+        h2 {
+            margin: 5px 0 0 20px;
+        }
+
+        button {
+            margin: 5px 20px 5px 0;
+        }
+
+    }
+
+
+    .card-container {
+        display: grid;
+        padding: 0 20px;
+        width: 80%;
+        grid-template-columns: auto auto auto;
+        margin: 10px 0 10px 0;
+        gap: 0 10px;
+
+        .post-card {
+            background: none;
+            border: solid 1px var(--darkMode-SecondaryColor);
+            border-radius: var(--borderRadius);
+            width: 200px;
+            height: fit-content;
+            padding: 0 20px 15px 20px;
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: 40px auto;
+            gap: 0;
+
+            .post-card_date {
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                text-transform: uppercase;
+                font-size: 1.5em;
+                margin: 0;
+                height: 40px;
+
+            }
+
+            span{
+                h1{
+                    font-size: 1.5em;
+                    margin: 0;
+                }
+                img {
+                    height: 200px;
+                    width: 100%;
+                    object-fit: cover;
+                }
+                .btn-danger {
+                    background: #dc3545;
+                    margin-left: 10px;
+                }
+
+
+            }
+
+        }
+    }
+}

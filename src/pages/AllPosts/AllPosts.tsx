@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import CardPost from './components/CardPost.tsx';
-import '../../All_posts.css';
+import '../AllPosts/All_posts.css';
 import '../../App.css';
 import axios from 'axios';
+import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
 
 interface Post {
     id: number; // Definindo o tipo para os posts, um modelo
@@ -47,7 +48,9 @@ const AllPosts: React.FC<{isDashboard?: boolean} > = ({isDashboard = false}) => 
 
     return (
         <div className='container all-posts'>
-            <div className='container_header'><h2>Todos as publicações</h2>
+            <div className='container_header'>
+                <h2>Todos as publicações</h2>
+                {isDashboard && <Button_SignOut/>}
             </div>
             {loading && <p>Carregando publicações...</p>}
             {/* div que guarda de fato todos os posts */}

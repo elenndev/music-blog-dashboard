@@ -4,6 +4,7 @@ import axios from 'axios'
 import Content_Post from "../../../components/Content_Post";
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Title_Post from "../../../components/Title_Post";
+import { Truncate } from "@re-dev/react-truncate";
 // import DOMPurify from "dompurify";
 
 interface Post {
@@ -27,7 +28,12 @@ const Post: React.FC<{ post: Post }> = ({ post }) => {
             </div>
             <img src={post.cover}></img>
             {/* <div className="post_content" dangerouslySetInnerHTML={{__html: content}}></div> */}
-            <Content_Post content={post.content} />
+            <Truncate
+                lines={10}
+                ellipsis={<>...</>}>
+                    {<Content_Post content={post.content}/>}
+            </Truncate>
+            {/* <Content_Post content={post.content} /> */}
             <Button_PostReadMore id={post.id} />
         </div>
     )

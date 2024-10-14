@@ -3,7 +3,7 @@ import React from "react"
 
 
 const Button_PostDelete: React.FC<{id: number }> = ({ id }) =>{
-    const key = import.meta.env.ENV_API_KEY
+    const key = import.meta.env.VITE_API_KEY
     const deletePost = async () => {
         try{
             const confirmDelete = window.confirm("Tem certeza que deseja excluir essa publicação?")
