@@ -4,6 +4,7 @@ import '../AllPosts/All_posts.css';
 import '../../App.css';
 import axios from 'axios';
 import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
+import DefaultFunction from '../../components/Interface_Function.tsx';
 
 interface Post {
     id: number; // Definindo o tipo para os posts, um modelo
@@ -13,7 +14,7 @@ interface Post {
     created_at: string;
 }
 
-const AllPosts: React.FC<{isDashboard?: boolean} > = ({isDashboard = false}) => {
+const AllPosts: React.FC<{isDashboard?: boolean, handleButton?: DefaultFunction} > = ({isDashboard = false, handleButton}) => {
     const [posts, setPosts] = useState<Post[]>([]); // Define o estado como um array de Post
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null); // Define o tipo do erro
@@ -22,7 +23,7 @@ const AllPosts: React.FC<{isDashboard?: boolean} > = ({isDashboard = false}) => 
         const getData = async () => {
             try {
                 // const data = await fetchPosts(); // Chama a função para buscar os dados
-                axios.get('https://music-archive-epi.onrender.com').then(response => {
+                axios.get('http://127.0.0.1:8000/').then(response => {
                     setPosts(response.data);   
                     console.log(response.data)                // Atualiza o estado com os dados
 
@@ -59,6 +60,7 @@ const AllPosts: React.FC<{isDashboard?: boolean} > = ({isDashboard = false}) => 
                     <CardPost key={post.id}
                         post = {post}
                         isDashboard = {isDashboard}
+                        handleClick={handleButton}
                     />
                 ))}
             </div>
