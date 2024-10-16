@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import CardPost from './components/CardPost.tsx';
 import '../AllPosts/All_posts.css';
-import '../../App.css';
 import axios from 'axios';
 import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
-import DefaultFunction from '../../components/Interface_Function.tsx';
+import FunctionGetId from '../Dashboard/components/Type_FunctionGetId.tsx';
 
 interface Post {
     id: number; // Definindo o tipo para os posts, um modelo
@@ -14,7 +13,10 @@ interface Post {
     created_at: string;
 }
 
-const AllPosts: React.FC<{isDashboard?: boolean, handleButton?: DefaultFunction} > = ({isDashboard = false, handleButton}) => {
+const AllPosts: React.FC<{isDashboard?: boolean,
+functionEdit?: FunctionGetId
+onEdit?: boolean    
+}> = ({isDashboard = false, functionEdit, onEdit}) => {
     const [posts, setPosts] = useState<Post[]>([]); // Define o estado como um array de Post
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null); // Define o tipo do erro
@@ -60,7 +62,8 @@ const AllPosts: React.FC<{isDashboard?: boolean, handleButton?: DefaultFunction}
                     <CardPost key={post.id}
                         post = {post}
                         isDashboard = {isDashboard}
-                        handleClick={handleButton}
+                        functionEdit={functionEdit}
+                        onEdit={onEdit}
                     />
                 ))}
             </div>

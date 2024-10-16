@@ -6,7 +6,7 @@ import Title_Post from "../../../components/Title_Post";
 import Button_PostDelete from "../../Dashboard/components/Button_PostDelete";
 import { Truncate } from "@re-dev/react-truncate";
 import Button_PostEdit from "../../Dashboard/components/Button_PostEdit";
-import DefaultFunction from "../../../components/Interface_Function";
+import FunctionGetId from "../../Dashboard/components/Type_FunctionGetId";
 interface Post{
     id: number; // Definindo o tipo para os posts, um modelo
     cover: string;
@@ -17,7 +17,11 @@ interface Post{
 
 
 
-const CardPost: React.FC<{ post: Post; isDashboard: boolean, handleClick?: DefaultFunction }> = ({ post, isDashboard, handleClick }) => {
+const CardPost: React.FC<{ 
+post: Post; 
+isDashboard: boolean; 
+functionEdit?: FunctionGetId; 
+onEdit?: boolean }> = ({ post, isDashboard, functionEdit, onEdit }) => {
     const date = getDate(post.created_at)
 
     return(
@@ -38,8 +42,8 @@ const CardPost: React.FC<{ post: Post; isDashboard: boolean, handleClick?: Defau
                 </Truncate>
                 <Button_PostReadMore id={post.id}/>
                 {isDashboard && <Button_PostDelete id={post.id}/>}
-                {isDashboard &&
-                <Button_PostEdit post={post} editPost={handleClick}/>}
+                {isDashboard && !onEdit &&
+                <Button_PostEdit post={post} editPost={functionEdit}/>}
             </span>
         </div>
     )

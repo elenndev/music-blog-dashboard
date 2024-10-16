@@ -1,6 +1,4 @@
-// import fetchPosts from './supabaseClient'
-// import AllPosts from './pages/AllPosts/AllPosts.tsx';
-import './App.css';
+import './components/App.css';
 import { Routes, Route } from 'react-router-dom';
 import AllPosts from './pages/AllPosts/AllPosts';
 import Home from './pages/Home/Home'

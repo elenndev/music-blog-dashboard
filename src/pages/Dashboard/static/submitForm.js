@@ -1,3 +1,6 @@
+import cleanForm from "./cleanForm"
+import exitEditMode from "./exitEditMode"
+
 const SubmitForm = (event, reqType, postId) =>{
     event.preventDefault()
     const form_submit = document.querySelector('#form_submit')
@@ -78,8 +81,9 @@ const SubmitForm = (event, reqType, postId) =>{
             return response.json()
         })
         .then(data => {
+            cleanForm()
+            exitEditMode()
             console.log('sucess:', data)
-            // alert(data.mensagem)
         }).catch((error) => {
             console.log('Fetch error:', error)
         })}

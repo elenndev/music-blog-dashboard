@@ -10,6 +10,8 @@ function EditPost(id,cover,title,content){
 
     editor.innerHTML = post_title + content
     input_cover.value = cover
+
+    return(id)
 }
 
 export default EditPost

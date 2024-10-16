@@ -1,11 +1,14 @@
 import Editor from "./Editor"
 import SubmitForm from "../static/submitForm"
 import Button_CancelPostEdit from "./Button_CancelPostEdit"
-import DefaultFunction from "../../../components/Interface_Function"
+import DefaultFunction from "../../../components/Type_FunctionDefault"
 
-const Form_post: React.FC<{onEdit: boolean, handleButton: DefaultFunction, post_id? : number}> = ({onEdit, handleButton, post_id}) => {
+const Form_post: React.FC<{
+onEdit: boolean, 
+functionExitEdit: DefaultFunction, 
+post_id? : number}> = ({onEdit, functionExitEdit, post_id}) => {
     let reqType = null
-    let id = null
+    let id = 0
 
     
     const style = {
@@ -18,7 +21,8 @@ const Form_post: React.FC<{onEdit: boolean, handleButton: DefaultFunction, post_
     
     if(onEdit){
         reqType = 'put'
-        id = post_id
+        if(post_id){id = post_id}
+        
     } else {
         reqType = 'post'
     }
@@ -31,10 +35,11 @@ const Form_post: React.FC<{onEdit: boolean, handleButton: DefaultFunction, post_
             {onEdit ?
                 <>
                     <button className="btn btn-primary" id="form_submit" 
-                    style={submitStyle} type="submit">
+                    style={submitStyle} 
+                    type="submit">
                         Salvar alterações
                     </button>
-                    <Button_CancelPostEdit cancelEdit={handleButton}/> 
+                    <Button_CancelPostEdit functionExitEdit={functionExitEdit}/> 
                 </> :
                     <button className="btn btn-primary" id="form_submit" 
                     style={submitStyle} type="submit">
