@@ -4,6 +4,7 @@ import '../AllPosts/All_posts.css';
 import axios from 'axios';
 import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
 import FunctionGetId from '../Dashboard/components/Type_FunctionGetId.tsx';
+// import { EditModeProvider } from '../Dashboard/components/Context_EditMode.tsx';
 
 interface Post {
     id: number; // Definindo o tipo para os posts, um modelo
@@ -16,7 +17,7 @@ interface Post {
 const AllPosts: React.FC<{isDashboard?: boolean,
 functionEdit?: FunctionGetId
 onEdit?: boolean    
-}> = ({isDashboard = false, functionEdit, onEdit}) => {
+}> = ({isDashboard = false, functionEdit}) => {
     const [posts, setPosts] = useState<Post[]>([]); // Define o estado como um array de Post
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null); // Define o tipo do erro
@@ -63,7 +64,6 @@ onEdit?: boolean
                         post = {post}
                         isDashboard = {isDashboard}
                         functionEdit={functionEdit}
-                        onEdit={onEdit}
                     />
                 ))}
             </div>

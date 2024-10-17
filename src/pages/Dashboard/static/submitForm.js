@@ -1,5 +1,7 @@
+import { useContext } from "react"
 import cleanForm from "./cleanForm"
 import exitEditMode from "./exitEditMode"
+import { EditModeContext } from "../components/Context_EditMode"
 
 const SubmitForm = (event, reqType, postId) =>{
     event.preventDefault()
@@ -12,6 +14,14 @@ const SubmitForm = (event, reqType, postId) =>{
     let type = reqType.reqType
     let id = postId.id 
 
+    const context = useContext(EditModeContext)
+    if (!context) {
+        // Trate o caso em que o contexto não é encontrado
+        console.error("EditModeContext não está disponível.");
+        return null;
+    }
+
+    const [setOnEdit, onEdit] = context
 
 
     //Condições
@@ -82,7 +92,7 @@ const SubmitForm = (event, reqType, postId) =>{
         })
         .then(data => {
             cleanForm()
-            exitEditMode()
+            setOnEdit(false)
             console.log('sucess:', data)
         }).catch((error) => {
             console.log('Fetch error:', error)
