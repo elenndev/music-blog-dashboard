@@ -2,13 +2,16 @@ import Editor from "./Editor"
 import SubmitForm from "../static/submitForm"
 import Button_CancelPostEdit from "./Button_CancelPostEdit"
 // import DefaultFunction from "../../../components/Type_FunctionDefault"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { EditModeContext } from "./Context_EditMode"
+import cleanForm from "../static/cleanForm"
+// import { redirect } from "react-router-dom"
 // import { EditModeProvider } from "./Context_EditMode"
 
-const Form_post: React.FC<{post_id?: number
+const Form_post: React.FC<{
+    post_id?: number
 }> = ({ post_id }) => {
-    let reqType = null
+    let reqType = ''
     let id = 0
 
 
@@ -20,12 +23,32 @@ const Form_post: React.FC<{post_id?: number
         marginTop: '10px'
     }
 
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isSubmitFail, setIsSubmitFail] = useState<string | null>(null)
+    const [isSubmitSuccess, setIsSubmitSuccess] = useState<string | null>(null)
+    const handleSubmit = async (event: React.FormEvent) => {
+        setIsSubmitting(true)
+        setIsSubmitFail(null)
+        setIsSubmitSuccess(null)
+        try {
+            const result = await SubmitForm(event, { reqType }, { id })
+            setIsSubmitSuccess("Formulario enviado!")
+            console.log('resutlado do submit form:', result)
+        } catch (error: any) {
+            setIsSubmitFail('Erro ao enviar o fomulário')
+            console.log(error.message)
+        } finally {
+            setIsSubmitting(false)
+            cleanForm()
+        }
+    }
+
     const context = useContext(EditModeContext)
     if (!context) {
         throw new Error("EditModeContext não está disponível.");
     }
 
-    const {onEdit} = context
+    const { onEdit } = context
     console.log('inicialmente o form recebe onEdit como ', onEdit)
     useEffect(() => {
         console.log("Estado de edição mudou:", context);
@@ -43,27 +66,33 @@ const Form_post: React.FC<{post_id?: number
         console.log('detectado no form que é false, req:', reqType)
     }
 
+    // function savePost() {
+    //     setIsSubmitting(false)
+    // }
+
 
     return (
-        <form onSubmit={(event) => SubmitForm(event, { reqType }, { id })} style={style}>
+        <form onSubmit={handleSubmit} style={style}>
             <Editor />
             <input type="url" id="cover" style={submitStyle}></input>
-            {onEdit && (
-                <>
-                    <button className="btn btn-primary" id="form_submit"
-                        style={submitStyle}
-                        type="submit">
-                        Salvar alterações
-                    </button>
-                    <Button_CancelPostEdit />
-                </>)}
-            {!onEdit &&
-                <button className="btn btn-primary" 
+            {isSubmitFail && <p style={{ color: 'red' }}>{isSubmitFail}</p>}
+            {isSubmitSuccess && <p style={{ color: 'green' }}>{isSubmitSuccess}</p>}
+            <button className="btn btn-primary"
                 id="form_submit"
-                style={submitStyle} 
-                type="submit">
-                    Enviar
-                </button>}
+                style={submitStyle}
+                type="submit"
+                // onClick={savePost}
+                disabled={isSubmitting}>
+                {onEdit
+                    ? (isSubmitting
+                        ? <>Salvando...</>
+                        : <>Salvar alterações</>)
+                    : (isSubmitting
+                        ? <>Salvando...</>
+                        : <>Enviar publicação</>)
+                }
+            </button>
+            {onEdit && !isSubmitting && <Button_CancelPostEdit />}
         </form>
     )
 }

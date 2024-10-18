@@ -53,6 +53,7 @@ const SubmitForm = (event, reqType, postId) =>{
         }
 
         //Formatar conteudos para o submit
+        let result = null
         const title = editor.querySelector("h1").innerHTML
         const remove_h1 = editor.querySelector("h1")
         remove_h1.remove()
@@ -88,12 +89,15 @@ const SubmitForm = (event, reqType, postId) =>{
             if (!response.ok){
                 throw new Error('Network response was not okay')
             }
+            result = response.json()
             return response.json()
         })
         .then(data => {
             cleanForm()
             setOnEdit(false)
             console.log('sucess:', data)
+            // const result = response.json()
+            return result
         }).catch((error) => {
             console.log('Fetch error:', error)
         })}
