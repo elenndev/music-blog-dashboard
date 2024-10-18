@@ -2,6 +2,10 @@
 const Aside = () => {
     return(
         <aside>
+            <div className="container profile">
+                <h3>Albúm profile</h3>
+                <span>conteudo aqui</span>
+            </div>
             <div className="container album-week">
                 <h3>Albúm da semana</h3>
                 <span>conteudo aqui</span>
