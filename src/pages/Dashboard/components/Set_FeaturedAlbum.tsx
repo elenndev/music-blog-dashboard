@@ -16,6 +16,11 @@ const Set_FeaturedAlbum: React.FC = () => {
     const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);  // Álbum selecionado
     const [token, setToken] = useState<string>('');  // Token da API
 
+    // Função para selecionar o álbum
+    const selectAlbum = (album: Album) => {
+        setSelectedAlbum(album);
+    };
+
     useEffect(() => {
         // Autentica o app assim que o componente é montado
         const authenticate = async () => {
@@ -25,27 +30,38 @@ const Set_FeaturedAlbum: React.FC = () => {
         authenticate();
     }, []);
 
-    const searchAlbum = async () => {
-        if (!query) return;
-        try {
-            const result = await axios.get(`https://api.spotify.com/v1/search`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-                params: {
-                    q: query,
-                    type: 'album'
-                }
-            });
-            setAlbums(result.data.albums.items);
-        } catch (error) {
-            console.error('Erro ao buscar os álbuns:', error);
-        }
-    };
+    useEffect(() => {
+        // Executa a busca assim que a query mudar
+        const searchAlbum = async () => {
+            if (!query) {
+                setAlbums([]); // Limpa resultados se a busca estiver vazia
+                return;
+            }
+            try {
+                const result = await axios.get(`https://api.spotify.com/v1/search`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    params: {
+                        q: query,
+                        type: 'album',
+                    },
+                });
+                setAlbums(result.data.albums.items);
+            } catch (error) {
+                console.error('Erro ao buscar os álbuns:', error);
+            }
+        };
+
+        const debounceSearch = setTimeout(() => {
+            searchAlbum();
+        }, 300); // Atraso de 300ms para debouncing
+
+        return () => clearTimeout(debounceSearch); // Limpa o timeout se a query mudar antes do tempo expirar
+    }, [query, token]); // Adicione 'token' para garantir que ele esteja atualizado
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
-
             {/* Div 1: Barra de pesquisa */}
             <div style={{ width: '30%' }}>
                 <h2>Pesquisar álbum</h2>
@@ -55,17 +71,16 @@ const Set_FeaturedAlbum: React.FC = () => {
                     onChange={e => setQuery(e.target.value)}
                     placeholder="Digite o nome do álbum"
                 />
-                <button onClick={searchAlbum}>Pesquisar</button>
             </div>
 
             {/* Div 2: Resultados da pesquisa */}
             <div style={{ width: '30%' }}>
                 <h2>Resultados</h2>
                 <ul>
-                    {albums.map((album) => (
+                    {albums.map(album => (
                         <li
                             key={album.id}
-                            onClick={() => setSelectedAlbum(album)}
+                            onClick={() => selectAlbum(album)}
                             style={{ cursor: 'pointer', marginBottom: '10px' }}
                         >
                             {album.name} - {album.artists[0].name}
