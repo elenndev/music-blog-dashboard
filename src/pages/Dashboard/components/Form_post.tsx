@@ -26,24 +26,32 @@ const Form_post: React.FC<{
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSubmitFail, setIsSubmitFail] = useState<string | null>(null)
     const [isSubmitSuccess, setIsSubmitSuccess] = useState<string | null>(null)
+    const context = useContext(EditModeContext)
     const handleSubmit = async (event: React.FormEvent) => {
         setIsSubmitting(true)
         setIsSubmitFail(null)
         setIsSubmitSuccess(null)
         try {
-            const result = await SubmitForm(event, { reqType }, { id })
-            setIsSubmitSuccess("Formulario enviado!")
-            console.log('resutlado do submit form:', result)
+            const result = await SubmitForm(event, { reqType }, { id }, context)
+            // setIsSubmitSuccess("Formulario enviado!")
+            if (result !== null){
+                setIsSubmitFail(`Falha no envio. Status: ${result}`)
+            }
+            else if (result === 200 || result === 201) {
+                setIsSubmitSuccess("Formulário enviado com sucesso!")
+            } else {
+                setIsSubmitFail("Erro desconhecido no envio.")
+            }
+            console.log('recebendo status', result)
         } catch (error: any) {
             setIsSubmitFail('Erro ao enviar o fomulário')
-            console.log(error.message)
+            console.log("ERRO:",error.message)
         } finally {
             setIsSubmitting(false)
             cleanForm()
         }
     }
 
-    const context = useContext(EditModeContext)
     if (!context) {
         throw new Error("EditModeContext não está disponível.");
     }
@@ -51,8 +59,12 @@ const Form_post: React.FC<{
     const { onEdit } = context
     console.log('inicialmente o form recebe onEdit como ', onEdit)
     useEffect(() => {
-        console.log("Estado de edição mudou:", context);
+        // console.log("Estado de edição mudou:", context);
         // Reagir às mudanças do contexto, se necessário
+        if (!onEdit){
+            setIsSubmitFail(null)
+            setIsSubmitSuccess(null)
+        }
     }, [onEdit]);
 
 

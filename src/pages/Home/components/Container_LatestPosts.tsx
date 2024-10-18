@@ -48,7 +48,7 @@ const LatestPosts = () => {
         const getData = async () => {
             try{
                 // const data = await fetchPosts()
-                axios.get('https://music-archive-epi.onrender.com').then(response => {
+                axios.get('http://127.0.0.1:8000/').then(response => {
                     setPosts(response.data)
                     console.log(response.data)
                     

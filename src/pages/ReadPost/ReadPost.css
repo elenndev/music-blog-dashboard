@@ -1,7 +1,4 @@
 main{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     article{
         display: flex;
         flex-direction: column;

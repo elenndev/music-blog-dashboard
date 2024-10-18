@@ -3,7 +3,7 @@ import cleanForm from "./cleanForm"
 import exitEditMode from "./exitEditMode"
 import { EditModeContext } from "../components/Context_EditMode"
 
-const SubmitForm = (event, reqType, postId) =>{
+const SubmitForm = (event, reqType, postId, context) =>{
     event.preventDefault()
     const form_submit = document.querySelector('#form_submit')
     const cover = document.querySelector('#cover').value
@@ -14,14 +14,14 @@ const SubmitForm = (event, reqType, postId) =>{
     let type = reqType.reqType
     let id = postId.id 
 
-    const context = useContext(EditModeContext)
-    if (!context) {
-        // Trate o caso em que o contexto não é encontrado
-        console.error("EditModeContext não está disponível.");
-        return null;
-    }
+    // const context = useContext(EditModeContext)
+    // if (!context) {
+    //     // Trate o caso em que o contexto não é encontrado
+    //     console.error("EditModeContext não está disponível.");
+    //     return null;
+    // }
 
-    const [setOnEdit, onEdit] = context
+    const {setEditMode} = context
 
 
     //Condições
@@ -89,12 +89,14 @@ const SubmitForm = (event, reqType, postId) =>{
             if (!response.ok){
                 throw new Error('Network response was not okay')
             }
-            result = response.json()
-            return response.json()
+            result = response.status
+            // return response.json()
+            console.log("no js, o result é:",result, "e o response.status direto é: ", response.status)
+            return result
         })
         .then(data => {
             cleanForm()
-            setOnEdit(false)
+            setEditMode(false)
             console.log('sucess:', data)
             // const result = response.json()
             return result

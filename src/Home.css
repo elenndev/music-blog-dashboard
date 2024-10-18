@@ -1,19 +1,29 @@
-.container.latest-posts{
-    .post{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .post_info{
+main{
+    display: grid;
+    grid-template-columns: 70% auto;
+    gap: 10px;
+    .container.latest-posts{
+        width: 100%;
+        .post{
             display: flex;
-            flex-direction: row;
-            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            .post_info{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+            }
+    
+            img{
+                height: 400px;
+                width: 90%;
+                object-fit: cover;
+    
+            }
         }
-
-        img{
-            height: 400px;
-            width: 90%;
-            object-fit: cover;
-
-        }
+    }
+    aside{
+        position: fixed;
+        right: 4%;
     }
 }
