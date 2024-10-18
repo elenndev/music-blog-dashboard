@@ -2,6 +2,7 @@ import Container_LatestPosts from "./components/Container_LatestPosts";
 import '../../Home.css'
 import Aside from "./components/Aside";
 const Home = () => {
+    
     return(
         <main id="main">
             <Container_LatestPosts />

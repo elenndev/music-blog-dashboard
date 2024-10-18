@@ -1,7 +1,19 @@
+import { useEffect, useState } from "react"
 
 
 
 const Aside = () => {
+    const [featuredAlbum, setFeaturedAlbum] = useState<string>('')
+    //pegar localStorage quando o elemento é renderizado
+    useEffect(() => {
+        const featuredAlbumId = localStorage.getItem('featureAlbumId')
+        if(!featuredAlbumId){
+            setFeaturedAlbum(value)
+        } else{
+            //se local storage ainda nao existe
+            localStorage.setItem('featuredAlbumId','null')
+        }
+    },[])
     return(
         <aside>
             <div className="container profile">

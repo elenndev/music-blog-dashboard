@@ -1,29 +1,23 @@
 import { createContext, ReactNode, useState } from "react";
 
 // Definindo a interface para os dados do álbum
-interface Album {
-    id: string;
-    name: string;
-    artists: { name: string }[];
-    images: { url: string }[];
+
+interface FeaturedAlbum_ContextType {
+    featuredAlbumId: String;
+    setFeaturedAlbumId: (id: string) => void
+
 }
 
-// Definindo o tipo para o contexto
-interface setFeaturedAlbumContext_Type {
-    featuredAlbum: Album | null;
-    setFeaturedAlbum: (value: Album | null) => void;
-}
+export const FeaturedAlbumContext= createContext<FeaturedAlbum_ContextType | undefined>(undefined);
 
-// Criando o contexto e exportando-o
-export const FeaturedAlbumContext = createContext<setFeaturedAlbumContext_Type | undefined>(undefined);
+export const featuredAlbumProvider: React.FC<{children: ReactNode}> = ({children}) => {
+    const [featuredAlbumId, setFeaturedAlbumId] = useState<string>("")
 
-// Exportando o provedor de contexto como um componente separado
-export const FeaturedAlbumProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [featuredAlbum, setFeaturedAlbum] = useState<Album | null>(null); // Estado compartilhado
-
-    return (
-        <FeaturedAlbumContext.Provider value={{ featuredAlbum, setFeaturedAlbum }}>
-            {children}
+    return(
+        <FeaturedAlbumContext.Provider value={{ featuredAlbumId, setFeaturedAlbumId }}>
+        {children}
         </FeaturedAlbumContext.Provider>
-    );
-};
+    )
+}
+
+// Ee vai iniciar buscando o album do banco de dados
