@@ -1,13 +1,16 @@
 import getToken from '../../../components/static/spotifyAuth';
 import { useState, useEffect } from 'react';
+import { getAlbumById } from '../static/getAlbumById';
 import axios from 'axios';
 
 // Tipos dos dados retornados da API
-interface Album {
+export interface Album {
     id: string;
     name: string;
     artists: { name: string }[];
     images: { url: string }[];
+    total_tracks: number;
+    uri: string;
 }
 
 const Set_FeaturedAlbum: React.FC = () => {
@@ -16,9 +19,18 @@ const Set_FeaturedAlbum: React.FC = () => {
     const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);  // Álbum selecionado
     const [token, setToken] = useState<string>('');  // Token da API
 
-    // Função para selecionar o álbum
-    const selectAlbum = (album: Album) => {
+    // Função para selecionar o álbum e salvar no localStorage
+    const selectAlbum = async (album: Album) => {
         setSelectedAlbum(album);
+        localStorage.setItem('featuredAlbumId', album.id);
+
+        // Buscar informações adicionais do álbum com base no ID
+        try {
+            const albumDetails = await getAlbumById(album.id, token);
+            console.log('Detalhes do álbum:', albumDetails);
+        } catch (error) {
+            console.error('Erro ao buscar os detalhes do álbum:', error);
+        }
     };
 
     useEffect(() => {

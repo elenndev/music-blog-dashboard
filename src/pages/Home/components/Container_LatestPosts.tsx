@@ -5,7 +5,6 @@ import Content_Post from "../../../components/Content_Post";
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Title_Post from "../../../components/Title_Post";
 import { Truncate } from "@re-dev/react-truncate";
-// import DOMPurify from "dompurify";
 
 interface Post {
     id: number; // Definindo o tipo para os posts, um modelo
@@ -17,9 +16,6 @@ interface Post {
 
 const Post: React.FC<{ post: Post }> = ({ post }) => {
     const date = getDate(post.created_at)
-    // const contentString = post.content
-    // const content = DOMPurify.sanitize(contentString)
-
     return(
         <div className="post">
             <div className="post_info">
@@ -27,13 +23,11 @@ const Post: React.FC<{ post: Post }> = ({ post }) => {
                 <Title_Post title={post.title}/>
             </div>
             <img src={post.cover}></img>
-            {/* <div className="post_content" dangerouslySetInnerHTML={{__html: content}}></div> */}
             <Truncate
                 lines={10}
                 ellipsis={<>...</>}>
-                    {<Content_Post content={post.content}/>}
+                    {<Content_Post content={post.content} />}
             </Truncate>
-            {/* <Content_Post content={post.content} /> */}
             <Button_PostReadMore id={post.id} />
         </div>
     )
@@ -47,7 +41,6 @@ const LatestPosts = () => {
     useEffect(() => {
         const getData = async () => {
             try{
-                // const data = await fetchPosts()
                 axios.get('http://127.0.0.1:8000/').then(response => {
                     setPosts(response.data)
                     console.log(response.data)

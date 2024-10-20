@@ -1,8 +1,19 @@
 main{
-    article{
+    justify-content: center;
+    .container.read-post{
         display: flex;
         flex-direction: column;
-        justify-content: center;
-
+        h1{
+            margin: 0;
+        }
+        img{
+            margin-top: 20px;
+            width: 600px;
+            height: 30%;
+            object-fit: cover;
+        }
+        .post_content{
+            padding: 0 20px;
+        }
     }
 }

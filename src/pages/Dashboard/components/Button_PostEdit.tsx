@@ -1,7 +1,7 @@
 import FunctionGetId from "./Type_FunctionGetId";
 import Post from "../../../components/InterfacePost";
 import EditPost from "../static/editPost";
-import { EditModeProvider, EditModeContext} from "../components//Context_EditMode";
+import { EditModeContext} from "../components//Context_EditMode";
 import { useContext } from "react";
 
 const Button_PostEdit: React.FC<{post: Post, editPost?: FunctionGetId}> = ({post, editPost}) => {
@@ -24,9 +24,9 @@ const Button_PostEdit: React.FC<{post: Post, editPost?: FunctionGetId}> = ({post
 
     }
     return(
-        <EditModeProvider>
-            <button type="button" className="btn btn-secundary" onClick={Edit}>Editar</button>
-        </EditModeProvider>
+        <button type="button" className="btn btn-secundary" onClick={Edit}>Editar</button>
+        // <EditModeProvider>
+        // </EditModeProvider>
     )
 }
 

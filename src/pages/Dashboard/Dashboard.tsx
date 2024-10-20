@@ -31,8 +31,8 @@ const Dashboard = () => {
                 <AllPosts 
                 isDashboard={true} 
                 functionEdit={handleButtonEdit}/>
-                <Set_FeaturedAlbum/>
             </EditModeProvider>
+                <Set_FeaturedAlbum/>
         </main>
     )
 }

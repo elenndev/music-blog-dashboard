@@ -1,32 +1,20 @@
-import { useEffect, useState } from "react"
+import FeaturedAlbum from "./Container_FeaturedAlbum"
 
 
 
 const Aside = () => {
-    const [featuredAlbum, setFeaturedAlbum] = useState<string>('')
-    //pegar localStorage quando o elemento é renderizado
-    useEffect(() => {
-        const featuredAlbumId = localStorage.getItem('featureAlbumId')
-        if(!featuredAlbumId){
-            setFeaturedAlbum(value)
-        } else{
-            //se local storage ainda nao existe
-            localStorage.setItem('featuredAlbumId','null')
-        }
-    },[])
     return(
         <aside>
             <div className="container profile">
-                <h3>Albúm profile</h3>
-                <span>conteudo aqui</span>
+                <img src="/serial-experiments-lain-750.jpg"></img>
+                <img className="social-icons" src="/Spotify.svg"></img>
+                <img className="social-icons" src="/LastFM.svg"></img>
+                <img className="social-icons" src="/musicBoard.svg"></img>
             </div>
-            <div className="container album-week">
-                <h3>Albúm da semana</h3>
-                <span>conteudo aqui</span>
-            </div>
+            <FeaturedAlbum/>
             <div className="container featured_playlist">
                 <h3>Playlist em destaque</h3>
-                <span>Conteúdo aqui</span>
+                <iframe style={{borderRadius: '12px'}} src="https://open.spotify.com/embed/playlist/0snxfBB1S70xJTSxHpoJOi?utm_source=generator&theme=0" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </aside>
     )

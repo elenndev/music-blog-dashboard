@@ -34,7 +34,8 @@ const ReadPost: React.FC = () => {
     return(
         <main>  
             {post.map((post) => (
-                <article key={post.id}>
+                <article className="container read-post" key={post.id}>
+                    <h1>{post.title}</h1>
                     <img src={post.cover}></img>
                     <Content_Post content={post.content}/>
                     <Link to={'/all-posts'} className="btn btn-secundary" style={ButtonStyle}>Voltar</Link>

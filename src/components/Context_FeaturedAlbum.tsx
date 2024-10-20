@@ -11,7 +11,7 @@ interface FeaturedAlbum_ContextType {
 export const FeaturedAlbumContext= createContext<FeaturedAlbum_ContextType | undefined>(undefined);
 
 export const featuredAlbumProvider: React.FC<{children: ReactNode}> = ({children}) => {
-    const [featuredAlbumId, setFeaturedAlbumId] = useState<string>("")
+    const [featuredAlbumId, setFeaturedAlbumId] = useState<string>("") 
 
     return(
         <FeaturedAlbumContext.Provider value={{ featuredAlbumId, setFeaturedAlbumId }}>
@@ -19,5 +19,3 @@ export const featuredAlbumProvider: React.FC<{children: ReactNode}> = ({children
         </FeaturedAlbumContext.Provider>
     )
 }
-
-// Ee vai iniciar buscando o album do banco de dados

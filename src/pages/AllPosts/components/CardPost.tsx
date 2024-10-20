@@ -8,7 +8,7 @@ import { Truncate } from "@re-dev/react-truncate";
 import Button_PostEdit from "../../Dashboard/components/Button_PostEdit";
 import FunctionGetId from "../../Dashboard/components/Type_FunctionGetId";
 import { EditModeContext} from "../../Dashboard/components/Context_EditMode";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 interface Post{
     id: number; // Definindo o tipo para os posts, um modelo
     cover: string;
@@ -23,19 +23,22 @@ post: Post;
 isDashboard: boolean; 
 functionEdit?: FunctionGetId;}> = ({ post, isDashboard, functionEdit}) => {
     const date = getDate(post.created_at)
-
     const context= useContext(EditModeContext)
     if (!context) {
         throw new Error("EditModeContext não está disponível.");
     }
 
+    // useEffect(() => {
+    //     createContext
+    // })
+
     const { onEdit} = context
 
-    // //TESTE: Detectar mudança
-    // useEffect(() => {
-    //     console.log("Estado de edição mudou:", onEdit);
-    //     // Reagir às mudanças do contexto, se necessário
-    // }, [onEdit]);
+    //TESTE: Detectar mudança
+    useEffect(() => {
+        console.log("Estado de edição mudou:", onEdit);
+        // Reagir às mudanças do contexto, se necessário
+    }, [onEdit]);
     
 
     return(

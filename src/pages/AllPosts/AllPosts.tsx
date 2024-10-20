@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CardPost from './components/CardPost.tsx';
 import '../AllPosts/All_posts.css';
 import axios from 'axios';
 import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
 import FunctionGetId from '../Dashboard/components/Type_FunctionGetId.tsx';
-// import { EditModeProvider } from '../Dashboard/components/Context_EditMode.tsx';
+import { EditModeContext } from '../Dashboard/components/Context_EditMode.tsx';
 
 interface Post {
     id: number; // Definindo o tipo para os posts, um modelo
@@ -21,25 +21,41 @@ onEdit?: boolean
     const [posts, setPosts] = useState<Post[]>([]); // Define o estado como um array de Post
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null); // Define o tipo do erro
+    //CONTEXTO
+    const context = useContext(EditModeContext)
+    if (!context){
+        throw new Error("EditModeContext não está disponível.");
+    }
 
+
+    const getData = async () => {
+        try {
+            // const data = await fetchPosts(); // Chama a função para buscar os dados
+            axios.get('http://127.0.0.1:8000/').then(response => {
+                setPosts(response.data);   
+                console.log(response.data)                // Atualiza o estado com os dados
+
+            })
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Erro desconhecido'); // Verifica se é um erro
+        } finally {
+            setLoading(false);                 // Indica que o carregamento foi concluído
+        }
+    };
     useEffect(() => {
-        const getData = async () => {
-            try {
-                // const data = await fetchPosts(); // Chama a função para buscar os dados
-                axios.get('http://127.0.0.1:8000/').then(response => {
-                    setPosts(response.data);   
-                    console.log(response.data)                // Atualiza o estado com os dados
-
-                })
-            } catch (err) {
-                setError(err instanceof Error ? err.message : 'Erro desconhecido'); // Verifica se é um erro
-            } finally {
-                setLoading(false);                 // Indica que o carregamento foi concluído
-            }
-        };
-
         getData();
+
     }, []);
+
+
+    const {submittedPost, setOnSubmittedPost} = context
+    useEffect(() => {
+        if (submittedPost){
+            console.log('submited post agora é atualizar o all posts')
+            getData()
+            setOnSubmittedPost(false)
+        }
+    }, [submittedPost])
 
 
     if (error) {
