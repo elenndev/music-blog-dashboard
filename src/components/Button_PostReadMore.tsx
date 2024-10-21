@@ -4,7 +4,7 @@ import React from "react"
 
 const Button_PostReadMore: React.FC<{id: number}> = ({ id }) =>{
     return( 
-        <Link to={`/read/${id}`} className="btn btn-primary read-more">Ler mais</Link>
+        <Link to={`/read/${id}`} className="btn btn-primary read-more"><p>Ler mais</p></Link>
     )
 }
 

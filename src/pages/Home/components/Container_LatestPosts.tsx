@@ -5,6 +5,7 @@ import Content_Post from "../../../components/Content_Post";
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Title_Post from "../../../components/Title_Post";
 import { Truncate } from "@re-dev/react-truncate";
+import { Link } from "react-router-dom";
 
 interface Post {
     id: number; // Definindo o tipo para os posts, um modelo
@@ -28,7 +29,10 @@ const Post: React.FC<{ post: Post }> = ({ post }) => {
                 ellipsis={<>...</>}>
                     {<Content_Post content={post.content} />}
             </Truncate>
-            <Button_PostReadMore id={post.id} />
+            <span className="buttons-area">
+                <Button_PostReadMore id={post.id} />
+                <hr></hr>
+            </span>
         </div>
     )
 }
@@ -62,7 +66,10 @@ const LatestPosts = () => {
     return(
         <>
             <section className="container latest-posts">
-                <div className="container_header"><h2>Últimas publicações</h2></div>
+                <div className="container_header">
+                    <h2>Últimas publicações</h2>
+                    <Link to={'/all-posts'} className="btn btn-secundary all-posts">Todas as publicações</Link>
+                </div>
                 {loading && <p>Carregando publicações...</p>}
                 {posts.map((post)=>(
                     <Post key={post.id} post = {post}/>

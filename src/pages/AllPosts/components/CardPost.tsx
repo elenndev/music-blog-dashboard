@@ -57,10 +57,14 @@ functionEdit?: FunctionGetId;}> = ({ post, isDashboard, functionEdit}) => {
                 >
                     {<Content_Post content={post.content} />}
                 </Truncate>
-                <Button_PostReadMore id={post.id}/>
-                {isDashboard && <Button_PostDelete id={post.id}/>}
-                {isDashboard && !onEdit &&
-                <Button_PostEdit post={post} editPost={functionEdit}/>}
+                <span className="buttons-area">
+                    <Button_PostReadMore id={post.id}/>
+                    {isDashboard && <span className="buttons-dashboard">
+                        {isDashboard && <Button_PostDelete id={post.id}/>}
+                        {isDashboard && !onEdit &&
+                        <Button_PostEdit post={post} editPost={functionEdit}/>}
+                    </span>}
+                </span>
             </span>
         </div>
     )

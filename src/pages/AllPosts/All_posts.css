@@ -1,32 +1,12 @@
+* {
+    --darkMode-MainColor: #2C2C30;
+    /* --darkMode-MainColor: #242424; */
+    --darkMode-SecondaryColor: white;
+    --darkMode-DecorateColor: #D5D5D6;
+}
 
 .container {
     width: 80%;
-    /* padding: 0;
-    border: solid 1px var(--darkMode-SecondaryColor);
-    border-radius: var(--borderRadius);
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; */
-
-    .container_header {
-        width: 100%;
-        border-bottom: solid 1px var(--darkMode-SecondaryColor);
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: end;
-
-        h2 {
-            margin: 5px 0 0 20px;
-        }
-
-        button {
-            margin: 5px 20px 5px 0;
-        }
-
-    }
-
 
     .card-container {
         display: grid;
@@ -39,7 +19,7 @@
         .post-card {
             background: none;
             border: solid 1px var(--darkMode-SecondaryColor);
-            border-radius: var(--borderRadius);
+            border-radius: 30px;
             width: 230px;
             height: fit-content;
             padding: 0 20px 15px 20px;
@@ -60,8 +40,7 @@
             }
 
             span{
-                display: flex;
-                flex-direction: column;
+                display: inline-block;
                 h1{
                     font-size: 1.5em;
                     margin: 0;
@@ -71,13 +50,78 @@
                     width: 100%;
                     object-fit: cover;
                 }
-                .btn-danger {
-                    background: #dc3545;
-                    margin-left: 10px;
-                }
+                .buttons-area{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .btn{
+                        height: fit-content;
+                        p{
+                            margin: 0;
+                        }
+                    }
 
-                .read-more{
-                    align-self: center;
+                    .btn.read-more{
+                        margin-bottom: 5px;
+                        align-self: center;
+                        width: 50%;
+                        min-width: fit-content;
+                        transition: width 0.5s ease-in;
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                    }
+                    .btn.read-more:hover{
+                        width: 100%;
+                    }
+                    .btn.read-more::after{
+                        content: "";
+                        position: absolute;
+                        height: 2%;
+                        bottom: 20%;
+                        width: 0;
+                        background: var(--darkMode-SecondaryColor);
+                        transition: width 0.5s ease-in;
+                    }
+                    .btn.read-more:hover::after{
+                        width: 90%;
+                    }
+                    .buttons-dashboard{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        width: 100%;
+                        gap: 10px;
+                        .btn{
+                            padding: 5px 20px;
+                            width: 50%;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            position: relative;
+                        }
+                        .btn::after{
+                            position: absolute;
+                            content: "";
+                            height: 6%;
+                            bottom: 0; 
+                            width: 0;
+                            transition: height 0.5s ease-in, width 0.5s ease-in;
+                        }
+                        .btn:hover::after{
+                            height: 6%;
+                            width: 60%;
+                        }
+                    }
+                    .btn-danger {
+                        background: #dc3545;
+                    }
+                    .btn-danger::after {
+                        background: #780e19;
+                    }
+                    .btn-secundary::after {
+                        background: #4f4f52;
+                    }
                 }
 
             }

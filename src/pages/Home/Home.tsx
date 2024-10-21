@@ -1,5 +1,5 @@
 import Container_LatestPosts from "./components/Container_LatestPosts";
-import '../../Home.css'
+import '../Home/components/static/Home.css'
 import Aside from "./components/Aside";
 const Home = () => {
     

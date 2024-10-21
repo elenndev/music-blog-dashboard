@@ -25,7 +25,7 @@ const Button_PostDelete: React.FC<{id: number }> = ({ id }) =>{
     }
 
     return( 
-        <button className="btn btn-danger" onClick={deletePost}>Deletar</button>
+        <button className="btn btn-danger" onClick={deletePost}><p>Deletar</p></button>
     )
 }
 
