@@ -1,6 +1,5 @@
 import { useState } from "react"
 import AllPosts from "../AllPosts/AllPosts"
-// import exitEditMode from "./static/exitEditMode"
 import { EditModeProvider } from "./components/Context_EditMode"
 import Form_post from "./components/Form_post"
 import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
