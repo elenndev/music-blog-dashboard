@@ -111,6 +111,7 @@
                 grid-column: 1 / 2; /* Primeira coluna na segunda linha */
                 padding: 10px;
                 padding-bottom: 20px;
+                margin-left: 10%;
             }
             .album-info{
                 grid-column: 2 / 2;

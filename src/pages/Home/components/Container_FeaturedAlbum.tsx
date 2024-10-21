@@ -44,6 +44,7 @@ const FeaturedAlbum: React.FC = () => {
             {featuredAlbum ? (
                 <>
                     <img src={featuredAlbum.images[0]?.url} alt="Album cover" style={{ width: '80%' }} />
+                    <img src="./components/imgs/disco-png.png" alt="Album cover" style={{ width: '80%' }} />
                     <span className='album-info'>
                         <p className='album-name'>{featuredAlbum.name}</p>
                         <p className='album-artist'>{featuredAlbum.artists[0].name}</p>
