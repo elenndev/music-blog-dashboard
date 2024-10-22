@@ -27,11 +27,11 @@ const Dashboard = () => {
         <main style={style}>
             <EditModeProvider>
                 <Form_post post_id={postId}/>
+                <Set_FeaturedAlbum/>
                 <AllPosts 
                 isDashboard={true} 
                 functionEdit={handleButtonEdit}/>
             </EditModeProvider>
-                <Set_FeaturedAlbum/>
         </main>
     )
 }

@@ -22,7 +22,7 @@ const Set_FeaturedAlbum: React.FC = () => {
     // Função para selecionar o álbum e salvar no localStorage
     const selectAlbum = async (album: Album) => {
         setSelectedAlbum(album);
-        localStorage.setItem('featuredAlbumId', album.id);
+        // localStorage.setItem('featuredAlbumId', album.id);
 
         // Buscar informações adicionais do álbum com base no ID
         try {
@@ -33,8 +33,12 @@ const Set_FeaturedAlbum: React.FC = () => {
         }
     };
 
+    const setFeaturedAlbum = (albumId: string) =>{
+        localStorage.setItem('featuredAlbumId', albumId)
+    }
+
+    // Autentica o app assim que o componente é montado
     useEffect(() => {
-        // Autentica o app assim que o componente é montado
         const authenticate = async () => {
             const _token = await getToken();
             setToken(_token);
@@ -105,11 +109,14 @@ const Set_FeaturedAlbum: React.FC = () => {
             <div style={{ width: '30%' }}>
                 <h2>Detalhes do álbum</h2>
                 {selectedAlbum ? (
-                    <div>
-                        <img src={selectedAlbum.images[0]?.url} alt="Album cover" style={{ width: '100%' }} />
-                        <h3>{selectedAlbum.name}</h3>
-                        <p>Artista: {selectedAlbum.artists[0].name}</p>
-                    </div>
+                    <>
+                        <div>
+                            <img src={selectedAlbum.images[0]?.url} alt="Album cover" style={{ width: '100%' }} />
+                            <h3>{selectedAlbum.name}</h3>
+                            <p>Artista: {selectedAlbum.artists[0].name}</p>
+                        </div>
+                        <button type='button' className='btn btn-primary handle_setFeaturedAlbum' onClick={() => setFeaturedAlbum(selectedAlbum.id)}>Definir album</button>
+                    </>
                 ) : (
                     <p>Selecione um álbum para ver os detalhes</p>
                 )}

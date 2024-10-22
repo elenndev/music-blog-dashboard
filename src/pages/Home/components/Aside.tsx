@@ -1,15 +1,20 @@
 import FeaturedAlbum from "./Container_FeaturedAlbum"
 
+// Midia
+import profileIcon from "./img/serial-experiments-lain-750.jpg"
+import spotifySvg from "./img/Spotify.svg"
+import lastFmSvg from "./img/LastFM.svg"
+import musicBoardSvg from "./img/musicBoard.svg"
 
 
 const Aside = () => {
     return(
         <aside>
             <div className="container profile">
-                <img src="/serial-experiments-lain-750.jpg"></img>
-                <img className="social-icons" src="/Spotify.svg"></img>
-                <img className="social-icons" src="/LastFM.svg"></img>
-                <img className="social-icons" src="/musicBoard.svg"></img>
+                <a href="#" target="_blank" rel="noopener norferrer"><img className="profile-icon" src={profileIcon}></img></a>
+                <a href="https://open.spotify.com/user/mwlwzw8omn3hdq27f8w9oa6fw?si=4tkY8qpMSTuWqHew85IarQ" target="_blank" rel="noopener norferrer"><img className="social-icons spotify" src={spotifySvg}></img></a>
+                <a href="https://www.last.fm/user/GOTHMIKASA" target="_blank" rel="noopener norferrer"><img className="social-icons lastFm" src={lastFmSvg}></img></a>
+                <a href="https://musicboard.app/mitskicomunista?rel=copy" target="_blank" rel="noopener norferrer"><img className="social-icons musicBoardSvg" src={musicBoardSvg}></img></a>
             </div>
             <FeaturedAlbum/>
             <div className="container featured_playlist">

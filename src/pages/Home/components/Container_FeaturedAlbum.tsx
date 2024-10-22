@@ -3,6 +3,10 @@ import getToken from '../../../components/static/spotifyAuth';
 import { getAlbumById } from '../../Dashboard/static/getAlbumById';
 import { Album } from '../../Dashboard/components/Set_FeaturedAlbum';
 
+//midia
+import discoIcon from './img/disco-png.png'
+const albumSize = '65%'
+
 const FeaturedAlbum: React.FC = () => {
     const [token, setToken] = useState<string>("");
     const [featuredAlbum, setFeaturedAlbum] = useState<Album | null>(null);
@@ -43,8 +47,10 @@ const FeaturedAlbum: React.FC = () => {
             <p className='container-header'>Detalhes do álbum</p>
             {featuredAlbum ? (
                 <>
-                    <img src={featuredAlbum.images[0]?.url} alt="Album cover" style={{ width: '80%' }} />
-                    <img src="./components/imgs/disco-png.png" alt="Album cover" style={{ width: '80%' }} />
+                    <span className='album-cover-area'>
+                        <img src={featuredAlbum.images[0]?.url} alt="Album cover" className='album-cover' style={{ width: albumSize }} />
+                        <img src={discoIcon} className='album-disco' alt="Disco" style={{ width: albumSize }} />
+                    </span>
                     <span className='album-info'>
                         <p className='album-name'>{featuredAlbum.name}</p>
                         <p className='album-artist'>{featuredAlbum.artists[0].name}</p>
