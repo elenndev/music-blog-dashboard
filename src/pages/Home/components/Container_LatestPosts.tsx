@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import getDate from "../../../blog_configs";
-import axios from 'axios'
 import Content_Post from "../../../components/Content_Post";
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Title_Post from "../../../components/Title_Post";
 import { Truncate } from "@re-dev/react-truncate";
 import { Link } from "react-router-dom";
+import { createClient } from "@supabase/supabase-js";
+const URL = import.meta.env.VITE_SUPABASE_URL
+const KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+
 
 interface Post {
     id: number; // Definindo o tipo para os posts, um modelo
@@ -14,6 +18,7 @@ interface Post {
     content: string;
     created_at: string;
 }
+const supabase = createClient(URL,KEY)
 
 const Post: React.FC<{ post: Post }> = ({ post }) => {
     const date = getDate(post.created_at)
@@ -44,17 +49,13 @@ const LatestPosts = () => {
     
     useEffect(() => {
         const getData = async () => {
-            try{
-                axios.get('http://127.0.0.1:8000/').then(response => {
-                    setPosts(response.data)
-                    console.log(response.data)
-                    
-                })
-            } catch(err) {
-                setError(err instanceof Error ? err.message : 'Erro')
-            } finally {
-                setLoading(false)
+            const {data} = await supabase.from('posts').select()
+            if (data){
+                setPosts(data)
+
             }
+            console.log(data)
+            setLoading(false)
         }
         getData()
     }, [])
