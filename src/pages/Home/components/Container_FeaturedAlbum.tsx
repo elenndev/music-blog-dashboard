@@ -5,11 +5,13 @@ import { Album } from '../../Dashboard/components/Set_FeaturedAlbum';
 
 //midia
 import discoIcon from './img/disco-png.png'
-const albumSize = '65%'
+import SVG_spotify from '../../../components/SVG_spotify';
+// const albumSize = '65%'
 
 const FeaturedAlbum: React.FC = () => {
     const [token, setToken] = useState<string>("");
     const [featuredAlbum, setFeaturedAlbum] = useState<Album | null>(null);
+    const release_year = featuredAlbum?.release_date.slice(0,4)
 
     const id = localStorage.getItem("featuredAlbumId");
 
@@ -43,25 +45,26 @@ const FeaturedAlbum: React.FC = () => {
     }, [token, id]); // Executa sempre que o token ou o ID mudar
 
     return (
-        <div className="container album_week">
-            <p className='container-header'>Detalhes do álbum</p>
+        <>
             {featuredAlbum ? (
                 <>
-                    <span className='album-cover-area'>
-                        <img src={featuredAlbum.images[0]?.url} alt="Album cover" className='album-cover' style={{ width: albumSize }} />
-                        <img src={discoIcon} className='album-disco' alt="Disco" style={{ width: albumSize }} />
-                    </span>
-                    <span className='album-info'>
-                        <p className='album-name'>{featuredAlbum.name}</p>
-                        <p className='album-artist'>{featuredAlbum.artists[0].name}</p>
-                        <p className='album-total_tracks'>{featuredAlbum.total_tracks} faixas</p>
-                        <a href={featuredAlbum.uri}><img className="social-icons" src="/Spotify.svg"></img></a>
+                    <span className='album-content'>
+                        <span className='album-cover-area'>
+                            <img src={featuredAlbum.images[0]?.url} alt="Album cover" className='album-cover' />
+                            <img src={discoIcon} className='album-disco' alt="Disco"/>
+                        </span>
+                        <span className='album-info'>
+                            <p className='album-name'>{featuredAlbum.name}</p>
+                            <p className='album-artist'>{featuredAlbum.artists[0].name}</p>
+                            <p className='album-total_tracks'>{featuredAlbum.total_tracks} faixas • {release_year}</p>
+                            <a href={featuredAlbum.uri}><SVG_spotify/></a>
+                        </span>
                     </span>
                 </>               
             ) : (
                 <p>Selecione um álbum para ver os detalhes</p>
             )}
-        </div>
+        </>
     );
 }
 

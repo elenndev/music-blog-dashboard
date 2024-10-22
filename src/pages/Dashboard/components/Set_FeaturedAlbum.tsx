@@ -11,6 +11,7 @@ export interface Album {
     images: { url: string }[];
     total_tracks: number;
     uri: string;
+    release_date: string;
 }
 
 const Set_FeaturedAlbum: React.FC = () => {
