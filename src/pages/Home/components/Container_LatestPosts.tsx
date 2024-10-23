@@ -5,10 +5,7 @@ import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Title_Post from "../../../components/Title_Post";
 import { Truncate } from "@re-dev/react-truncate";
 import { Link } from "react-router-dom";
-import { createClient } from "@supabase/supabase-js";
-const URL = import.meta.env.VITE_SUPABASE_URL
-const KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
-
+import supabase from "../../../components/static/auth.js"
 
 
 interface Post {
@@ -18,7 +15,6 @@ interface Post {
     content: string;
     created_at: string;
 }
-const supabase = createClient(URL,KEY)
 
 const Post: React.FC<{ post: Post }> = ({ post }) => {
     const date = getDate(post.created_at)
@@ -69,7 +65,7 @@ const LatestPosts = () => {
             <section className="container latest-posts">
                 <div className="container_header">
                     <h2>Últimas publicações</h2>
-                    <Link to={'/all-posts'} className="btn btn-secundary all-posts">Todas as publicações</Link>
+                    <Link to={'/todas-publicacoes'} className="btn btn-secundary all-posts">Todas as publicações</Link>
                 </div>
                 {loading && <p>Carregando publicações...</p>}
                 {posts.map((post)=>(

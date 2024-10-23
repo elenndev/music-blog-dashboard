@@ -5,6 +5,7 @@ import axios from 'axios';
 import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
 import FunctionGetId from '../Dashboard/components/Type_FunctionGetId.tsx';
 import { EditModeContext } from '../Dashboard/components/Context_EditMode.tsx';
+import supabase from '../../components/static/auth.js';
 
 interface Post {
     id: number; // Definindo o tipo para os posts, um modelo
@@ -29,18 +30,11 @@ onEdit?: boolean
 
 
     const getData = async () => {
-        try {
-            // const data = await fetchPosts(); // Chama a função para buscar os dados
-            axios.get('http://127.0.0.1:8000/').then(response => {
-                setPosts(response.data);   
-                console.log(response.data)                // Atualiza o estado com os dados
-
-            })
-        } catch (err) {
-            setError(err instanceof Error ? err.message : 'Erro desconhecido'); // Verifica se é um erro
-        } finally {
+        const {data} = await supabase.from("posts").select()
+        if (data){
+            setPosts(data);   
             setLoading(false);                 // Indica que o carregamento foi concluído
-        }
+        } 
     };
     useEffect(() => {
         getData();

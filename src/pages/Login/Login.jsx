@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useEffect, useState } from "react";
-import supabase from "../../../auth"
+import supabase from "../../components/static/auth"
 import Button_SignOut from "../Dashboard/components/Button_SignOut";
 
 export default function Login() {

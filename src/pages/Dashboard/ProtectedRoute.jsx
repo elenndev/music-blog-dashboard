@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 // import { supabase } from "../../../auth";  // Você deve mover a lógica de criação do supabase para um arquivo separador
 import { createClient } from "@supabase/supabase-js";
-import supabase from "../../../auth"
+import supabase from "../../components/static/auth"
 
 const ProtectedRoute = ({ children }) => {
     const [session, setSession] = useState(null);
