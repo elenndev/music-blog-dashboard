@@ -20,12 +20,9 @@ const Set_FeaturedAlbum: React.FC = () => {
     const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);  // Álbum selecionado
     const [token, setToken] = useState<string>('');  // Token da API
 
-    // Função para selecionar o álbum e salvar no localStorage
     const selectAlbum = async (album: Album) => {
         setSelectedAlbum(album);
-        // localStorage.setItem('featuredAlbumId', album.id);
 
-        // Buscar informações adicionais do álbum com base no ID
         try {
             const albumDetails = await getAlbumById(album.id, token);
             console.log('Detalhes do álbum:', albumDetails);
@@ -38,7 +35,6 @@ const Set_FeaturedAlbum: React.FC = () => {
         localStorage.setItem('featuredAlbumId', albumId)
     }
 
-    // Autentica o app assim que o componente é montado
     useEffect(() => {
         const authenticate = async () => {
             const _token = await getToken();
@@ -48,10 +44,9 @@ const Set_FeaturedAlbum: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        // Executa a busca assim que a query mudar
         const searchAlbum = async () => {
             if (!query) {
-                setAlbums([]); // Limpa resultados se a busca estiver vazia
+                setAlbums([]);
                 return;
             }
             try {
@@ -72,14 +67,13 @@ const Set_FeaturedAlbum: React.FC = () => {
 
         const debounceSearch = setTimeout(() => {
             searchAlbum();
-        }, 300); // Atraso de 300ms para debouncing
+        }, 300); 
 
-        return () => clearTimeout(debounceSearch); // Limpa o timeout se a query mudar antes do tempo expirar
-    }, [query, token]); // Adicione 'token' para garantir que ele esteja atualizado
+        return () => clearTimeout(debounceSearch); 
+    }, [query, token]); 
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
-            {/* Div 1: Barra de pesquisa */}
             <div style={{ width: '30%' }}>
                 <h2>Pesquisar álbum</h2>
                 <input
@@ -90,7 +84,6 @@ const Set_FeaturedAlbum: React.FC = () => {
                 />
             </div>
 
-            {/* Div 2: Resultados da pesquisa */}
             <div style={{ width: '30%' }}>
                 <h2>Resultados</h2>
                 <ul>
@@ -106,7 +99,6 @@ const Set_FeaturedAlbum: React.FC = () => {
                 </ul>
             </div>
 
-            {/* Div 3: Informações do álbum selecionado */}
             <div style={{ width: '30%' }}>
                 <h2>Detalhes do álbum</h2>
                 {selectedAlbum ? (

@@ -6,7 +6,6 @@ import { Album } from '../../Dashboard/components/Set_FeaturedAlbum';
 //midia
 import discoIcon from './img/disco-png.png'
 import SVG_spotify from '../../../components/SVG_spotify';
-// const albumSize = '65%'
 
 const FeaturedAlbum: React.FC = () => {
     const [token, setToken] = useState<string>("");
@@ -15,13 +14,11 @@ const FeaturedAlbum: React.FC = () => {
 
     const id = localStorage.getItem("featuredAlbumId");
 
-    // Função para buscar o token de autenticação
     const authenticate = async () => {
         const _token = await getToken();
         setToken(_token);
     };
 
-    // Função para buscar o álbum usando o ID e o token
     const fetchAlbum = async (id: string, token: string) => {
         try {
             const getAlbum = await getAlbumById(id, token);
@@ -32,17 +29,15 @@ const FeaturedAlbum: React.FC = () => {
         }
     };
 
-    // useEffect para autenticação
     useEffect(() => {
         authenticate();
-    }, []); // Executa apenas ao carregar a página
+    }, []); 
 
-    // useEffect para buscar o álbum depois que o token estiver disponível
     useEffect(() => {
         if (token && id) {
-            fetchAlbum(id, token); // Busca o álbum assim que o token estiver disponível
+            fetchAlbum(id, token); 
         }
-    }, [token, id]); // Executa sempre que o token ou o ID mudar
+    }, [token, id]); 
 
     return (
         <>

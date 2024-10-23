@@ -9,7 +9,7 @@ import supabase from "../../../components/static/auth.js"
 
 
 interface Post {
-    id: number; // Definindo o tipo para os posts, um modelo
+    id: number; 
     cover: string;
     title: string;
     content: string;

@@ -25,8 +25,6 @@ const Button_PostEdit: React.FC<{post: Post, editPost?: FunctionGetId}> = ({post
     }
     return(
         <button type="button" className="btn btn-secundary" onClick={Edit}><p>Editar</p></button>
-        // <EditModeProvider>
-        // </EditModeProvider>
     )
 }
 

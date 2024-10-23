@@ -10,7 +10,7 @@ interface EditModeContextType{
 export const EditModeContext = createContext<EditModeContextType | undefined>(undefined);
 
 export const EditModeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [onEdit, setOnEdit] = useState(false); // Estado compartilhado
+    const [onEdit, setOnEdit] = useState(false);
     const [submittedPost, setSubmittedPost] = useState(false)
 
     return (

@@ -5,11 +5,9 @@ import cleanForm from "../static/cleanForm"
 
 
 const Button_CancelPostEdit = () => {
-    // const [onEdit, setOnEdit] = useState(true)
     const context = useContext(EditModeContext);
 
     if (!context) {
-        // Trate o caso em que o contexto não é encontrado
         console.error("EditModeContext não está disponível.");
         return null;
     }

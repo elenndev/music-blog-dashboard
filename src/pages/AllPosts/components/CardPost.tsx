@@ -1,4 +1,3 @@
-// import React, { useContext, useEffect} from "react";
 import getDate from "../../../blog_configs"
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Content_Post from "../../../components/Content_Post";
@@ -10,7 +9,7 @@ import FunctionGetId from "../../Dashboard/components/Type_FunctionGetId";
 import { EditModeContext} from "../../Dashboard/components/Context_EditMode";
 import { useContext, useEffect } from "react";
 interface Post{
-    id: number; // Definindo o tipo para os posts, um modelo
+    id: number; 
     cover: string;
     title: string;
     content: string;
@@ -28,16 +27,11 @@ functionEdit?: FunctionGetId;}> = ({ post, isDashboard, functionEdit}) => {
         throw new Error("EditModeContext não está disponível.");
     }
 
-    // useEffect(() => {
-    //     createContext
-    // })
-
     const { onEdit} = context
 
     //TESTE: Detectar mudança
     useEffect(() => {
         console.log("Estado de edição mudou:", onEdit);
-        // Reagir às mudanças do contexto, se necessário
     }, [onEdit]);
     
 

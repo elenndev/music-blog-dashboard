@@ -32,7 +32,6 @@ const Form_post: React.FC<{
         setIsSubmitSuccess(false)
         try {
             const result = await SubmitForm(event, { reqType }, { id }, context)
-            // setIsSubmitSuccess("Formulario enviado!")
             if (result !== null){
                 setIsSubmitting(true)
             }
@@ -56,13 +55,9 @@ const Form_post: React.FC<{
         throw new Error("EditModeContext não está disponível.");
     }
     const { onEdit, setOnSubmittedPost } = context
-    // const { setOnSubmittedPost} = context
-
-    // console.log('inicialmente o form recebe onEdit como ', onEdit)
 
     useEffect(() => {
         console.log("Estado de edição mudou no form:", onEdit);
-        // Reagir às mudanças do contexto, se necessário
         
         if (!onEdit){
             setIsSubmitFail(false)
@@ -94,7 +89,6 @@ const Form_post: React.FC<{
                     id="form_submit"
                     style={submitStyle}
                     type="submit"
-                    // onClick={savePost}
                     disabled={isSubmitting}>
                     {onEdit
                         ? (isSubmitting

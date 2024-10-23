@@ -1,6 +1,5 @@
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import { supabase } from "../../../auth";  // Você deve mover a lógica de criação do supabase para um arquivo separador
 import { createClient } from "@supabase/supabase-js";
 import supabase from "../../components/static/auth"
 
@@ -25,7 +24,7 @@ const ProtectedRoute = ({ children }) => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;  // Pode exibir um spinner de carregamento, por exemplo
+        return <div>Loading...</div>;  
     }
 
     if (!session) {

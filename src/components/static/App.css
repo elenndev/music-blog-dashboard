@@ -23,6 +23,7 @@ header {
   margin-bottom: 30px;
 
   nav {
+    column-gap: 10px;
     a {
       font-weight: 300;
       letter-spacing: 3px;
@@ -33,7 +34,6 @@ header {
     .current-page {
       background-color: var(--darkMode-DecorateColor);
       color: var(--darkMode-MainColor);
-      margin-left: 10px;
     }
 
     :first-child {
