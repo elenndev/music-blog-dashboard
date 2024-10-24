@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import cleanForm from "./cleanForm"
 import exitEditMode from "./exitEditMode"
-import { EditModeContext } from "../components/Context_EditMode"
+import { EditModeContext } from "../Context_EditMode"
 
 const SubmitForm = (event, reqType, postId, context) =>{
     event.preventDefault()

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import getToken from '../../../components/static/spotifyAuth';
-import { getAlbumById } from '../../Dashboard/static/getAlbumById';
+import { getAlbumById } from '../../Dashboard/components/static/getAlbumById';
 import { Album } from '../../Dashboard/components/Set_FeaturedAlbum';
 
 //midia

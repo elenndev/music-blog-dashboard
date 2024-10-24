@@ -10,12 +10,12 @@
     grid-template-columns: 60% 30%;
     gap: 25px;
     .container.latest-posts{
+        padding-bottom: 30px;
         width: 100%;
         .post{
-            /* display: flex;
-            flex-direction: column; */
             align-items: center;
             margin-top: 10px;
+            margin-bottom: 10px;
             width: 90%;
             :nth-child(3){
                 span{
@@ -59,6 +59,8 @@
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
+                    border: solid 1px var(--darkMode-SecondaryColor);
+                    background: none;
                     p{
                         margin: 0;
                     }
@@ -136,7 +138,7 @@
                 top: 50%;
                 left: 100%;
                 height: 0.2vh;
-                width: 100%;
+                width: 2vw;
                 background: var(--darkMode-DecorateColor);
             }
             span{
@@ -200,6 +202,7 @@
             .album-content{
                 display: flex;
                 flex-direction: row;
+                gap: 5%;
                 width: 100%;
                 height: 100%;
                 .album-cover-area{
@@ -223,7 +226,7 @@
                 }
                 .album-info{
                     --album-listen_icons: 5vh;
-                    margin-right: 10%;
+                    width: 40%;
                     .album-name{
                         font-size: 2.5vmin;
                         font-weight: 500;
@@ -254,11 +257,19 @@
         .featured_playlist{
             width: 100%;
             padding-bottom: 20px;
+            h3{
+                font-size: 2cap;
+            }
             iframe{
                 width: 90%;
+                height: 60vh;
             }
         }
     }
+}
+
+#__next{
+    height: 100%;
 }
 
 @media (max-width: 1050px){
@@ -270,3 +281,50 @@
 
     }
 }
+
+@media (max-width: 1160px){
+    #main>aside{
+        .album_week{
+            --album-coverSize: 15vw;
+            height: 50vh;
+            .album-content{
+                align-items: center;
+                flex-direction: column;
+                .album-cover-area{
+                    width: var(--album-coverSize);
+                    height: var(--album-coverSize);
+                    .album-cover{
+                        height: var(--album-coverSize);
+                            margin: 0;
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1230px){
+    #main>aside{
+        .profile{
+            .profile-icon::after,span::after{
+                display: none;
+            }
+            span{
+                width: 100%;
+                justify-content: space-around;
+            }
+        }
+    }
+}
+
+@media (max-width: 1230px){
+    #main>aside{
+        .album_week{
+            img.album-disco{
+                display: none;
+            }
+        }
+    }
+}
+

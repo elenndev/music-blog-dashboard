@@ -1,9 +1,9 @@
 import Editor from "./Editor"
-import SubmitForm from "../static/submitForm"
+import SubmitForm from "./static/submitForm"
 import Button_CancelPostEdit from "./Button_CancelPostEdit"
 import { useContext, useEffect, useState } from "react"
 import { EditModeContext} from "./Context_EditMode"
-import cleanForm from "../static/cleanForm"
+import cleanForm from "./static/cleanForm"
 
 const Form_post: React.FC<{
     post_id?: number
@@ -80,9 +80,10 @@ const Form_post: React.FC<{
 
     return (
         <>
-            <form onSubmit={handleSubmit} style={style}>
+            <form onSubmit={handleSubmit} style={style} id="form_post">
                 <Editor />
-                <input type="url" id="cover" style={submitStyle}></input>
+                <label>Capa da publicação:</label>
+                <input name="cover" type="url" id="cover" style={submitStyle} placeholder="Insira a a url da imagem"></input>
                 {isSubmitFail && <p style={{ color: 'red' }}>{isSubmitFail}</p>}
                 {isSubmitSuccess && <p style={{ color: 'green' }}>{isSubmitSuccess}</p>}
                 <button className="btn btn-primary"

@@ -1,0 +1,103 @@
+* {
+    --darkMode-MainColor: #2C2C30;
+    /* --darkMode-MainColor: #242424; */
+    --darkMode-SecondaryColor: white;
+    --darkMode-DecorateColor: #D5D5D6;
+}
+
+main{
+    .container-header{
+        font-size: 4vh;
+        margin: 0;
+    }
+    input{
+        padding: 5px 20px;
+        margin-right: 10px;
+    }
+    
+    #form_post{
+        label{
+            margin-right: 5px;
+        }
+        button{
+            border: none;
+        }
+    }
+    
+    
+    .featured-album{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        padding-bottom: 30px;
+        button{
+            border: none;
+        }
+        .container-header{
+            width: 100%;
+            text-align: center;
+        }
+        span{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            column-gap: 15px;
+            width: 100%;
+            .search-results{
+                height: 50vh;
+                ul{
+                    height: 70%;
+                    overflow-y: scroll;
+
+                }
+            }
+        }
+    }
+    .featured-playlist{
+        position: relative;
+        display: flex;
+        margin: 0 10px;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .container-header{
+            margin-top: 10px;
+            margin-bottom: 15px;
+            width: 100%;
+            text-align: center;
+        }
+        input{
+            margin-left: 5px;
+        }
+        button{
+            padding: 5px 20px;
+        }
+        .see-playlist{
+            margin-top: 10px;
+            p{
+                margin: 0;
+                text-align: center;
+            }
+        }
+    }
+
+
+    .featured-playlist::after,.featured-playlist::before{
+        content: "";
+        width: 80%;
+        position: absolute;
+        border-top: solid 1px var(--darkMode-DecorateColor);
+    }
+    .featured-playlist::before{
+        top: 0;
+    }
+    .featured-playlist::after{
+        bottom: 0;
+    }
+
+    .all-posts{
+        margin-top: 20px;
+    }
+
+}

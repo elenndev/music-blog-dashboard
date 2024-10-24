@@ -1,7 +1,7 @@
 
 import { useContext } from "react";
 import { EditModeContext } from "../components/Context_EditMode"
-import cleanForm from "../static/cleanForm"
+import cleanForm from "./static/cleanForm"
 
 
 const Button_CancelPostEdit = () => {

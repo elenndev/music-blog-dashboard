@@ -1,6 +1,6 @@
 import FunctionGetId from "./Type_FunctionGetId";
 import Post from "../../../components/InterfacePost";
-import EditPost from "../static/editPost";
+import EditPost from "./static/editPost";
 import { EditModeContext} from "../components//Context_EditMode";
 import { useContext } from "react";
 

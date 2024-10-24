@@ -3,7 +3,7 @@
   /* --darkMode-MainColor: #242424; */
   --darkMode-SecondaryColor: white;
   --darkMode-DecorateColor: #D5D5D6;
-  --borderRadius: 20px;
+  --borderRadius: 49px;
 }
 
 body {
@@ -23,32 +23,58 @@ header {
   margin-bottom: 30px;
 
   nav {
-    column-gap: 10px;
+    display: flex;
+    flex-direction: row;
     a {
-      font-weight: 300;
-      letter-spacing: 3px;
-      color: var(--darkMode-SecondaryColor);
+      height: fit-content;
+      position: relative;
+      margin: 5px 0;
       padding-top: 5px;
+      p{
+        font-weight: 300;
+        letter-spacing: 3px;
+        padding: 0 5px;
+        color: var(--darkMode-SecondaryColor);
+        margin: 0;
+      }
+    }
+    a:hover>p{
+      background: #151518;
+    }
+    a.current-page:hover>p{
+      background: var(--darkMode-DecorateColor);
     }
 
     .current-page {
-      background-color: var(--darkMode-DecorateColor);
-      color: var(--darkMode-MainColor);
+      background: var(--darkMode-DecorateColor);
+      margin-right: 5px;
+      p{
+        color: var(--darkMode-MainColor);
+      }
     }
 
     :first-child {
       padding-left: 5px;
-      margin-right: 5px;
     }
 
+    :nth-child(2)>p{
+      margin-left: 5px;
+    }
     :nth-child(2)::before {
-      content: "|";
+      content:  "";
+      color: var(--darkMode-SecondaryColor);
+      height: 70%;
+      top: 15%;
+      width: 1vw;
+      border-left: solid 2px var(--darkMode-SecondaryColor);
+      left: 0;
+      position: absolute;
     }
   }
 }
 
 main {
-  width: 90vw;
+  width: 100vw;
 }
 
 .container{
@@ -58,11 +84,24 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+  .container_header{
+    width: 100%;
+    border-bottom: solid 1px var(--darkMode-SecondaryColor);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    h2 {
+      margin: 5px 0 0 40px;
+    }
+    a.btn,button{
+      margin: 5px 35px;
+    }
+  }}
 
 .btn,button {
   display: inline-block;
-  padding: 10px;
+  padding: 5px 10px;
   border: none;
   font-family: "League Spartan", sans-serif;
   font-size: 1rem;
@@ -71,15 +110,31 @@ main {
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
-  border-radius: 8px;
+  border-radius: 20px;
   cursor: pointer;
   color: white;
 }
 
 .btn-primary {
-  background: #0d6efd;
+  /* background: #0d6efd; */
+  /* background: var(--darkMode-DecorateColor); */
+  /* border: solid 1px var(--darkMode-SecondaryColor); */
+  /* color: #2C2C30; */
+  font-weight: 500;
+}
+.btn-primary:hover{
+  background: #151518;
+  color: white;
 }
 .btn-secundary {
   background: #151518;
   color: white;
+}
+
+.btn-secundary:hover{
+  background: var(--darkMode-DecorateColor);
+  color: var(--darkMode-MainColor);
+}
+li:hover{
+  background: #151518;
 }
