@@ -7,8 +7,8 @@ import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
 
 
 const Dashboard = () => {
-    const style:  React.CSSProperties = {
-        width: '100%', 
+    const style: React.CSSProperties = {
+        width: '100%',
         padding: '0',
         display: 'flex',
         flexDirection: 'column',
@@ -16,21 +16,25 @@ const Dashboard = () => {
     }
 
 
-    const[postId, setId] = useState(0)
+    const [postId, setId] = useState(0)
     const handleButtonEdit = (id: number) => {
         setId(id)
     }
-    
 
 
-    return(
+    return (
         <main style={style}>
             <EditModeProvider>
-                <Form_post post_id={postId}/>
-                <Set_FeaturedAlbum/>
-                <AllPosts 
-                isDashboard={true} 
-                functionEdit={handleButtonEdit}/>
+                <Form_post post_id={postId} />
+                <Set_FeaturedAlbum />
+                <form id="setFeaturedPlaylist">
+                    <label>Informe o link da sua playlist</label>
+                    <input type="url" name="playlist-link" className="playlist-link"></input>
+                    <button type="submit">Enviar</button>
+                </form>
+                <AllPosts
+                    isDashboard={true}
+                    functionEdit={handleButtonEdit} />
             </EditModeProvider>
         </main>
     )
