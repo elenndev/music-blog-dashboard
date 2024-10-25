@@ -77,6 +77,40 @@ main {
   width: 100vw;
 }
 
+footer{
+  width: 90vw;
+  margin-top: 30px;
+  border-top: solid 1px var(--darkMode-SecondaryColor);
+
+  display: flex;
+  justify-content: center;
+  p{
+    margin: 0;
+    font-size: 1rem;
+  }
+  a{
+    height: 1rem;
+    color: var(--darkMode-SecondaryColor);
+    display: flex;
+    max-width: fit-content;
+  }
+  li:hover>p,li:hover>a{
+    color: #151518;
+  }
+  ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    li{
+      padding: 5px 10px;
+      width: fit-content;
+    }
+  }
+}
+
 .container{
   padding: 0;
   border: solid 1px var(--darkMode-SecondaryColor);
@@ -99,6 +133,13 @@ main {
     }
   }}
 
+a{
+  cursor: pointer;
+}
+li{
+  cursor: pointer;
+}
+
 .btn,button {
   display: inline-block;
   padding: 5px 10px;
@@ -116,10 +157,6 @@ main {
 }
 
 .btn-primary {
-  /* background: #0d6efd; */
-  /* background: var(--darkMode-DecorateColor); */
-  /* border: solid 1px var(--darkMode-SecondaryColor); */
-  /* color: #2C2C30; */
   font-weight: 500;
 }
 .btn-primary:hover{
@@ -135,6 +172,7 @@ main {
   background: var(--darkMode-DecorateColor);
   color: var(--darkMode-MainColor);
 }
-li:hover{
-  background: #151518;
+.btn.transparent{
+  border: solid 1px var(--darkMode-SecondaryColor);
+  background: none;
 }

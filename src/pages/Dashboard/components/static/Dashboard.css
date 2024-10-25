@@ -31,6 +31,9 @@ main{
         align-items: center;
         width: 80%;
         padding-bottom: 30px;
+        li:hover{
+            background: #151518;
+        }
         button{
             border: none;
         }
