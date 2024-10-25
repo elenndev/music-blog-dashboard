@@ -6,7 +6,7 @@ import ReadPost from './pages/ReadPost/ReadPost'
 import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
 import ProtectedRoute from './pages/Dashboard/ProtectedRoute';
-import { EditModeProvider } from './pages/Dashboard/components/Context_EditMode';
+import { DashboardProvider } from './pages/Dashboard/components/Context_Dashboard';
 import AboutMe from './pages/AboutMe/AboutMe';
 
 
@@ -14,7 +14,7 @@ import AboutMe from './pages/AboutMe/AboutMe';
 function App() {
 
   return (
-    <EditModeProvider>
+    <DashboardProvider>
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/todas-publicacoes' element={<AllPosts />}></Route>
@@ -25,7 +25,7 @@ function App() {
             <ProtectedRoute> <Dashboard /></ProtectedRoute>}/>
         <Route path='*' element={<h2>Página nao encontrada</h2>}></Route>
       </Routes>
-    </EditModeProvider>
+    </DashboardProvider>
   )
 }
 

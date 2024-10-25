@@ -2,8 +2,7 @@ import Editor from "./Editor"
 import SubmitForm from "./static/submitForm"
 import Button_CancelPostEdit from "./Button_CancelPostEdit"
 import { useContext, useEffect, useState } from "react"
-import { EditModeContext} from "./Context_EditMode"
-import cleanForm from "./static/cleanForm"
+import { DashboardContext} from "./Context_Dashboard"
 
 const Form_post: React.FC<{
     post_id?: number
@@ -24,8 +23,12 @@ const Form_post: React.FC<{
     const [isSubmitFail, setIsSubmitFail] = useState(false)
     const [isSubmitSuccess, setIsSubmitSuccess] = useState(false)
     
+    const context = useContext(DashboardContext)
+    if (!context) {
+        throw new Error("DashboardContext não está disponível.");
+    }
+    const { onEdit, setEditMode, setOnSubmittedPost } = context
 
-    const context = useContext(EditModeContext)
     const handleSubmit = async (event: React.FormEvent) => {
         setIsSubmitting(true)
         setIsSubmitFail(false)
@@ -35,26 +38,22 @@ const Form_post: React.FC<{
             if (result !== null){
                 setIsSubmitting(true)
             }
-            else if (result === 200 || result === 201) {
+            else if (result === 200 || result === 201 || result === 204) {
                 setIsSubmitSuccess(true)
             } else {
                 setIsSubmitFail(true)
             }
             console.log('recebendo status', result)
-        } catch (error: any) {
-            setIsSubmitFail(true)
-            console.log("ERRO:",error.message)
-        } finally {
+        }finally {
             setIsSubmitting(false)
             setOnSubmittedPost(true)
-            // cleanForm()
+            if (onEdit){
+                setEditMode(false)
+            }
         }
     }
 
-    if (!context) {
-        throw new Error("EditModeContext não está disponível.");
-    }
-    const { onEdit, setOnSubmittedPost } = context
+    
 
     useEffect(() => {
         console.log("Estado de edição mudou no form:", onEdit);

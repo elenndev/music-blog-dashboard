@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import './components/static/Dashboard.css'
 import AllPosts from "../AllPosts/AllPosts"
-import { EditModeProvider } from "./components/Context_EditMode"
+import { DashboardProvider } from "./components/Context_Dashboard"
 import Form_post from "./components/Form_post"
 import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
 import submitFeaturedPlaylist from "./components/static/submiteFeaturedPlaylist"
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
     return (
         <main style={style}>
-            <EditModeProvider>
+            <DashboardProvider>
                 <Set_FeaturedAlbum />
                 <div className="featured-playlist">
                     <p className="container-header">Definir playlist em destaque</p>
@@ -63,7 +63,7 @@ const Dashboard = () => {
                 <AllPosts
                     isDashboard={true}
                     functionEdit={handleButtonEdit} />
-            </EditModeProvider>
+            </DashboardProvider>
         </main>
     )
 }

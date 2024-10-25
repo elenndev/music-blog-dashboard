@@ -6,7 +6,7 @@ import Button_PostDelete from "../../Dashboard/components/Button_PostDelete";
 import { Truncate } from "@re-dev/react-truncate";
 import Button_PostEdit from "../../Dashboard/components/Button_PostEdit";
 import FunctionGetId from "../../Dashboard/components/Type_FunctionGetId";
-import { EditModeContext} from "../../Dashboard/components/Context_EditMode";
+import { DashboardContext} from "../../Dashboard/components/Context_Dashboard";
 import { useContext, useEffect } from "react";
 interface Post{
     id: number; 
@@ -22,9 +22,9 @@ post: Post;
 isDashboard: boolean; 
 functionEdit?: FunctionGetId;}> = ({ post, isDashboard, functionEdit}) => {
     const date = getDate(post.created_at)
-    const context= useContext(EditModeContext)
+    const context= useContext(DashboardContext)
     if (!context) {
-        throw new Error("EditModeContext não está disponível.");
+        throw new Error("DashboardContext não está disponível.");
     }
 
     const { onEdit} = context

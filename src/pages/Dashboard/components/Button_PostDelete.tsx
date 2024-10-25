@@ -1,31 +1,43 @@
-import axios from "axios"
-import React from "react"
+import React, { useContext } from "react"
+import supabase from "../../../components/static/auth"
+import { DashboardContext } from "./Context_Dashboard"
 
 
 const Button_PostDelete: React.FC<{id: number }> = ({ id }) =>{
-    const key = import.meta.env.VITE_API_KEY
-    const deletePost = async () => {
-        try{
-            const confirmDelete = window.confirm("Tem certeza que deseja excluir essa publicação?")
+    const context = useContext(DashboardContext)
+    if (!context){
+        console.error('DashboardContext não está disponível')
+        return null
+    }
 
-            if (confirmDelete){
-                await axios.delete(`http://127.0.0.1:8000/delete-post/${id}`,{
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${key}`
+    const {setOnDeletePost} = context
+
+    const handleDeletePost = async () => {
+        const confirmDelete = window.confirm("Tem certeza que deseja excluir essa publicação?")
+        if (confirmDelete){
+            const {data: {user}} = await supabase.auth.getUser();
+            if (user){
+                if (!user) {
+                    return;
+                }
+                if(user.aud == 'authenticated'){
+                    const {error: deleteError, status} = await supabase.from('posts').delete().eq("id", id)
+                    console.log("DELETE ", status )
+                    if (deleteError){
+                        console.log('Erro ao fazer o post', deleteError)
+                        return status
                     }
-                })
-                console.log("Post deletado com sucesso")
-            } else {
-                throw new Error ('Erro ao deletar Post')
+                    setOnDeletePost(true)
+                    return status
+                }
             }
-        } catch (error){
-            console.error('Erro:', error);
+
         }
+
     }
 
     return( 
-        <button className="btn btn-danger" onClick={deletePost}><p>Deletar</p></button>
+        <button className="btn btn-danger" onClick={handleDeletePost}><p>Deletar</p></button>
     )
 }
 

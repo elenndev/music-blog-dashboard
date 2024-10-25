@@ -1,14 +1,9 @@
 import { useContext } from "react"
 import cleanForm from "./cleanForm"
 import exitEditMode from "./exitEditMode"
-import { EditModeContext } from "../Context_EditMode"
+import { DashboardContext } from "../Context_Dashboard"
 import supabase from '../../../../components/static/auth';
 
-const { user, error: userError } = await supabase.auth.getUser();
-if (userError) {
-    console.error('Erro ao obter usuário:', userError);
-    return;
-}
 
 const SubmitForm = async (event, reqType, postId, context) =>{
     event.preventDefault()
@@ -20,9 +15,16 @@ const SubmitForm = async (event, reqType, postId, context) =>{
     let method = null
     let type = reqType.reqType
     let id = postId.id 
-
+    
     const {setEditMode} = context
-
+    
+    const {data: {user}} = await supabase.auth.getUser();
+    if (user.error) {
+        console.error('Erro ao obter usuário:', user.error);
+        return;
+    }
+    
+    console.log(user.id, user.aud)
 
     //Condições
         if (!(cover.endsWith('jpg') || cover.endsWith('jpeg') || cover.endsWith('png'))){
@@ -62,62 +64,36 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         let data = {
             cover: cover,
             title: title,
-            content: content,
-            user_id: user.id
+            content: content
         }
 
         // Verificar auth e define method
-        if (user){
+        if (user.aud == 'authenticated'){
+            console.log('ta autenticado uai user.aud')
             if (type == 'post'){
-                const {error} = await supabase.from('posts').insert(data)
-                console.log('é post')
-                if (error){
-                    console.log('Erro ao fazer o post', error)
-                    return
+                const {error: insertError, status} = await supabase.from('posts').insert(data)
+                console.log("POST ", status )
+                if (insertError){
+                    console.log('Erro ao fazer o post', insertError)
+                    return status
                 }
+                cleanForm()
+                return status
             } else if(type == 'put'){
-                const {error} = await supabase.from('posts').update(data).eq("id", data.id)
-                console.log("é put")
-                if (error){
-                    console.log('Erro ao fazer o update', error)
-                    return
+                const {error: updateError, status} = await supabase.from('posts').update(data).eq("id",id)
+                console.log("UPDATE: ", status )
+                if (updateError){
+                    console.log('Erro ao fazer o update', updateError)
+                    return status
                 }
+                cleanForm()
+                return status
             }
 
         } else {
             console.log('usuário não autenticado')
         }
-        // Submit form
-        console.log("a data é ", data)
-        console.log('a resposta da req supabase: ', error)
 
-        // fetch(reqURL, {
-        //     method: method,
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(data)
-        // })
-        // .then(response => {
-        //     console.log("response status:", response.status)
-        //     if (!response.ok){
-        //         throw new Error('Network response was not okay')
-        //     }
-        //     result = response.status
-        //     if (response.sttus == 200){
-        //         cleanForm()
-
-        //     }
-        //     console.log("no js, o result é:",result, "e o response.status direto é: ", response.status)
-        //     return result
-        // })
-        // .then(data => {
-        //     setEditMode(false)
-        //     console.log('sucess:', data)
-        //     return result
-        // }).catch((error) => {
-        //     console.log('Fetch error:', error)
-        // })
     
     }
 

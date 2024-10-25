@@ -1,14 +1,14 @@
 
 import { useContext } from "react";
-import { EditModeContext } from "../components/Context_EditMode"
+import { DashboardContext } from "./Context_Dashboard"
 import cleanForm from "./static/cleanForm"
 
 
 const Button_CancelPostEdit = () => {
-    const context = useContext(EditModeContext);
+    const context = useContext(DashboardContext);
 
     if (!context) {
-        console.error("EditModeContext não está disponível.");
+        console.error("DashboardContext não está disponível.");
         return null;
     }
     const { setEditMode } = context;

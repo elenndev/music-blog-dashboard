@@ -3,7 +3,7 @@ import CardPost from './components/CardPost.tsx';
 import './components/static/All_posts.css';
 import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
 import FunctionGetId from '../Dashboard/components/Type_FunctionGetId.tsx';
-import { EditModeContext } from '../Dashboard/components/Context_EditMode.tsx';
+import { DashboardContext } from '../Dashboard/components/Context_Dashboard.tsx';
 import supabase from '../../components/static/auth.js';
 
 interface Post {
@@ -22,9 +22,9 @@ onEdit?: boolean
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const context = useContext(EditModeContext)
+    const context = useContext(DashboardContext)
     if (!context){
-        throw new Error("EditModeContext não está disponível.");
+        throw new Error("DashboardContext não está disponível.");
     }
 
     const getData = async () => {
@@ -32,7 +32,9 @@ onEdit?: boolean
         if (data){
             setPosts(data);   
             setLoading(false);
-        } 
+        } else if(!data){
+            setError("Publicações não disponíveis")
+        }
     };
     useEffect(() => {
         getData();
@@ -40,7 +42,7 @@ onEdit?: boolean
     }, []);
 
 
-    const {submittedPost, setOnSubmittedPost} = context
+    const {submittedPost, setOnSubmittedPost, deletePost, setOnDeletePost} = context
     useEffect(() => {
         if (submittedPost){
             console.log('submited post agora é atualizar o all posts')
@@ -48,6 +50,13 @@ onEdit?: boolean
             setOnSubmittedPost(false)
         }
     }, [submittedPost])
+
+    useEffect(() => {
+        if (deletePost){
+            getData()
+            setOnDeletePost(false)
+        }
+    }, [deletePost])
 
 
     if (error) {
