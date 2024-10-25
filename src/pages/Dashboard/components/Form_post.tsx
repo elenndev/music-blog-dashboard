@@ -47,7 +47,7 @@ const Form_post: React.FC<{
         } finally {
             setIsSubmitting(false)
             setOnSubmittedPost(true)
-            cleanForm()
+            // cleanForm()
         }
     }
 

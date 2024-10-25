@@ -22,7 +22,7 @@ const Dashboard = () => {
         setId(id)}
 
     const [featuredPlaylist, setFeaturedPlaylist] = useState<string>('3AqqJn20LczJtoaHjVLipe?utm_source=generator')
-    function getFeaturedPlaylist(){
+    const getFeaturedPlaylist = async()=>{
         const link = localStorage.getItem('featuredPlaylist')
         if (link){
             console.log('pegou o localStorage', link)
@@ -53,7 +53,9 @@ const Dashboard = () => {
                     </form>
                     <span className="see-playlist">
                         <p>Playlist em destaque atual</p>
-                        <Iframe playlist={featuredPlaylist}/>
+                        {featuredPlaylist?
+                            <Iframe playlist={featuredPlaylist}/>
+                        : <p>Carregando playlist</p>}
                     </span>
                 </div>
                 <p className="container-header post-form">Criar uma nova publicação</p>

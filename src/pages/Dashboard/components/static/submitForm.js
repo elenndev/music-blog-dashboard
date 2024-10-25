@@ -14,13 +14,6 @@ const SubmitForm = (event, reqType, postId, context) =>{
     let type = reqType.reqType
     let id = postId.id 
 
-    // const context = useContext(EditModeContext)
-    // if (!context) {
-    //     // Trate o caso em que o contexto não é encontrado
-    //     console.error("EditModeContext não está disponível.");
-    //     return null;
-    // }
-
     const {setEditMode} = context
 
 
@@ -90,15 +83,16 @@ const SubmitForm = (event, reqType, postId, context) =>{
                 throw new Error('Network response was not okay')
             }
             result = response.status
-            // return response.json()
+            if (response.sttus == 200){
+                cleanForm()
+
+            }
             console.log("no js, o result é:",result, "e o response.status direto é: ", response.status)
             return result
         })
         .then(data => {
-            cleanForm()
             setEditMode(false)
             console.log('sucess:', data)
-            // const result = response.json()
             return result
         }).catch((error) => {
             console.log('Fetch error:', error)
