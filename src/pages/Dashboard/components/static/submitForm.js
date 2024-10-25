@@ -2,8 +2,15 @@ import { useContext } from "react"
 import cleanForm from "./cleanForm"
 import exitEditMode from "./exitEditMode"
 import { EditModeContext } from "../Context_EditMode"
+import supabase from '../../../../components/static/auth';
 
-const SubmitForm = (event, reqType, postId, context) =>{
+const { user, error: userError } = await supabase.auth.getUser();
+if (userError) {
+    console.error('Erro ao obter usuário:', userError);
+    return;
+}
+
+const SubmitForm = async (event, reqType, postId, context) =>{
     event.preventDefault()
     const form_submit = document.querySelector('#form_submit')
     const cover = document.querySelector('#cover').value
@@ -56,47 +63,63 @@ const SubmitForm = (event, reqType, postId, context) =>{
             cover: cover,
             title: title,
             content: content,
+            user_id: user.id
         }
 
-        // Define method
-        if (type == 'post'){
-            reqURL = 'http://127.0.0.1:8000/create-new-post/'
-            method = 'POST'
-            console.log('é post')
-        } else if(type == 'put'){
-            reqURL = `http://127.0.0.1:8000/update-post/${id}`
-            method = 'PUT'
-            console.log("é put")
+        // Verificar auth e define method
+        if (user){
+            if (type == 'post'){
+                const {error} = await supabase.from('posts').insert(data)
+                console.log('é post')
+                if (error){
+                    console.log('Erro ao fazer o post', error)
+                    return
+                }
+            } else if(type == 'put'){
+                const {error} = await supabase.from('posts').update(data).eq("id", data.id)
+                console.log("é put")
+                if (error){
+                    console.log('Erro ao fazer o update', error)
+                    return
+                }
+            }
+
+        } else {
+            console.log('usuário não autenticado')
         }
         // Submit form
         console.log("a data é ", data)
-        fetch(reqURL, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            console.log("response status:", response.status)
-            if (!response.ok){
-                throw new Error('Network response was not okay')
-            }
-            result = response.status
-            if (response.sttus == 200){
-                cleanForm()
+        console.log('a resposta da req supabase: ', error)
 
-            }
-            console.log("no js, o result é:",result, "e o response.status direto é: ", response.status)
-            return result
-        })
-        .then(data => {
-            setEditMode(false)
-            console.log('sucess:', data)
-            return result
-        }).catch((error) => {
-            console.log('Fetch error:', error)
-        })}
+        // fetch(reqURL, {
+        //     method: method,
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(data)
+        // })
+        // .then(response => {
+        //     console.log("response status:", response.status)
+        //     if (!response.ok){
+        //         throw new Error('Network response was not okay')
+        //     }
+        //     result = response.status
+        //     if (response.sttus == 200){
+        //         cleanForm()
+
+        //     }
+        //     console.log("no js, o result é:",result, "e o response.status direto é: ", response.status)
+        //     return result
+        // })
+        // .then(data => {
+        //     setEditMode(false)
+        //     console.log('sucess:', data)
+        //     return result
+        // }).catch((error) => {
+        //     console.log('Fetch error:', error)
+        // })
+    
+    }
 
 
 export default SubmitForm
