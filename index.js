@@ -5,6 +5,10 @@ if (window.location.pathname == "/") {
         about_me.classList.remove('current-page')
     }
     home.classList.add('current-page')
+} else {
+    if (window.location.pathname == "/sobre-mim"){
+        home.classList.remove('current-page')
+    }
 }
 
 if (window.location.pathname == "/sobre-mim"){
