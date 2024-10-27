@@ -46,11 +46,12 @@ const LatestPosts = () => {
     useEffect(() => {
         const getData = async () => {
             const {data} = await supabase.from('posts').select()
+            
             if (data){
                 setPosts(data)
-
+            } if (!data){
+                setError('Erro ao buscar publicações')
             }
-            console.log(data)
             setLoading(false)
         }
         getData()

@@ -31,7 +31,6 @@ functionEdit?: FunctionGetId;}> = ({ post, isDashboard, functionEdit}) => {
 
     //TESTE: Detectar mudança
     useEffect(() => {
-        console.log("Estado de edição mudou:", onEdit);
     }, [onEdit]);
     
 

@@ -15,7 +15,6 @@ const ReadPost: React.FC = () => {
     const {id} = useParams<{id: string}>()
     const [post, setPost] = useState<Post[]>([])
     const [loading, setLoading] = useState(true)
-    console.log(id)
 
     const getData = async () =>{
         const {data} = await supabase.from("posts").select('*').eq("id",id)

@@ -22,9 +22,7 @@ const Button_PostDelete: React.FC<{id: number }> = ({ id }) =>{
                 }
                 if(user.aud == 'authenticated'){
                     const {error: deleteError, status} = await supabase.from('posts').delete().eq("id", id)
-                    console.log("DELETE ", status )
                     if (deleteError){
-                        console.log('Erro ao fazer o post', deleteError)
                         return status
                     }
                     setOnDeletePost(true)

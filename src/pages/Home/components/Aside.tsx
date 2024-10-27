@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import SVG_lastFm from "../../../components/SVG_lastFm"
-import SVG_musicBoard from "../../../components/SVG_musicBoard"
 import SVG_spotify from "../../../components/SVG_spotify"
 import FeaturedAlbum from "./Container_FeaturedAlbum"
 
-// Midia
+// Images
 import profileIcon from "./img/profile-icon.jpg"
+import musicboardLogo from "../../../components/musicboard.png"
 
 
 const Aside = () => {
@@ -13,7 +13,6 @@ const Aside = () => {
     useEffect(() => {
         const link = localStorage.getItem('featuredPlaylist')
         if (link){
-            console.log('pegou o localStorage', link)
             setFeaturedPlaylist(link)
         }
     }, [])
@@ -39,7 +38,7 @@ const Aside = () => {
                 <span>
                     <a href="https://open.spotify.com/user/mwlwzw8omn3hdq27f8w9oa6fw?si=4tkY8qpMSTuWqHew85IarQ" target="_blank" rel="noopener norferrer" className="social-icons spotify"><SVG_spotify /></a>
                     <a href="https://www.last.fm/user/GOTHMIKASA" target="_blank" rel="noopener norferrer" className="social-icons lastFm"><SVG_lastFm /></a>
-                    <a href="https://musicboard.app/mitskidasilva?rel=options" target="_blank" rel="noopener norferrer" className="social-icons musicBoard"><SVG_musicBoard /></a>
+                    <a href="https://musicboard.app/mitskidasilva?rel=options" target="_blank" rel="noopener norferrer" className="social-icons musicBoard"><img src={musicboardLogo}></img></a>
                 </span>
             </div>
             <div className="container album_week">

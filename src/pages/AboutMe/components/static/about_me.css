@@ -1,3 +1,10 @@
+* {
+    --MainColor: #2C2C30;
+    /* --darkMode-MainColor: #242424; */
+    --SecondaryColor: white;
+    --DecorateColor: #D5D5D6;
+}
+
 .about-me{
     display: flex;
     flex-direction: column;
@@ -5,22 +12,45 @@
     padding: 20px;
     width: 90%;
     height: 80vh;
-    img{
+    p{
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    img.profile{
         border-radius: 50%;
         height: 20vh;
     }
     .info{
         width: 90%;
+        font-size: 3.5vh;
     }
     .links{
-        width: 100%;
+        width: 70%;
         height: fit-content;
         display: grid;
-        gap: 20px;
-        grid-template-columns: auto auto;
+        gap: 1px;
+        grid-template-columns: auto auto auto;
+        row-gap: 10px;
         a{
-            width: 30%;
-            margin: 0 50px;
+            display: flex;
+            width: 10vw;
+            padding-right: 20px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 3vh;
+            font-weight: 400;
+            letter-spacing: 1px;
+            svg{
+                margin-right: 10px;
+                fill: var(--DecorateColor);
+            }
+        }
+        a:hover{
+            background: #151518;
+        }
+        img.musicboard{
+            margin-right: 10px;
         }
     }
 }

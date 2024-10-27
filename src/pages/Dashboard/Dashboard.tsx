@@ -25,7 +25,6 @@ const Dashboard = () => {
     const getFeaturedPlaylist = async()=>{
         const link = localStorage.getItem('featuredPlaylist')
         if (link){
-            console.log('pegou o localStorage', link)
             setFeaturedPlaylist(link)
         }}
 

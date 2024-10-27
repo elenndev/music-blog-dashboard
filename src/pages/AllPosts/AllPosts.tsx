@@ -45,7 +45,6 @@ onEdit?: boolean
     const {submittedPost, setOnSubmittedPost, deletePost, setOnDeletePost} = context
     useEffect(() => {
         if (submittedPost){
-            console.log('submited post agora é atualizar o all posts')
             getData()
             setOnSubmittedPost(false)
         }

@@ -188,6 +188,7 @@
             height: 25.0vh;
             display: flex;
             flex-direction: column;
+            padding-bottom: 15px;
             gap: 0; 
 
             .container-header{

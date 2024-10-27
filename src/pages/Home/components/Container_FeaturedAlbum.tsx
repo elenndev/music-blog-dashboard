@@ -22,10 +22,8 @@ const FeaturedAlbum: React.FC = () => {
     const fetchAlbum = async (id: string, token: string) => {
         try {
             const getAlbum = await getAlbumById(id, token);
-            console.log('album: ', getAlbum);
             setFeaturedAlbum(getAlbum);
         } catch (error) {
-            console.log('erro ao pegar álbum: ', error);
         }
     };
 

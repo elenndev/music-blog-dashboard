@@ -46,9 +46,9 @@ header {
     }
 
     .current-page {
-      background: var(--darkMode-DecorateColor);
       margin-right: 5px;
       p{
+        background: var(--darkMode-DecorateColor);
         color: var(--darkMode-MainColor);
       }
     }
@@ -94,8 +94,8 @@ footer{
     display: flex;
     max-width: fit-content;
   }
-  li:hover>p,li:hover>a{
-    color: #151518;
+  li:hover>a{
+    font-weight: 600;
   }
   ul{
     list-style-type: none;

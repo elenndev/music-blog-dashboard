@@ -24,27 +24,23 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         return;
     }
     
-    console.log(user.id, user.aud)
 
-    //Condições
         if (!(cover.endsWith('jpg') || cover.endsWith('jpeg') || cover.endsWith('png'))){
             alert('Imagem com formato inválido, por favor tente usar uma imagem diferente')
             return
         }
 
         if (editor.querySelectorAll("h1").length<1){
-            console.log('Nenhum elemento')
             alert('Seu post deve possuir um título! (h1)')
             return
         } else if (!/[^\s]/.test(h1.textContent.trim())){
             alert('Seu titulo está vazio')
             return
         } else if (editor.querySelectorAll('h1').length>1){
-            console.log("mais de um h1")
             const header = document.querySelectorAll('h1')
 
             const removeTag = Array.from(header)
-            removeTag.shift() //remove o primeiro item
+            removeTag.shift()
 
             removeTag.forEach(function(changeTag){
                 const h2 = document.createElement('h2')
@@ -60,7 +56,6 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         const remove_h1 = editor.querySelector("h1")
         remove_h1.remove()
         const content = editor.innerHTML
-        console.log(typeof content)
         let data = {
             cover: cover,
             title: title,
@@ -69,21 +64,16 @@ const SubmitForm = async (event, reqType, postId, context) =>{
 
         // Verificar auth e define method
         if (user.aud == 'authenticated'){
-            console.log('ta autenticado uai user.aud')
             if (type == 'post'){
                 const {error: insertError, status} = await supabase.from('posts').insert(data)
-                console.log("POST ", status )
                 if (insertError){
-                    console.log('Erro ao fazer o post', insertError)
                     return status
                 }
                 cleanForm()
                 return status
             } else if(type == 'put'){
                 const {error: updateError, status} = await supabase.from('posts').update(data).eq("id",id)
-                console.log("UPDATE: ", status )
                 if (updateError){
-                    console.log('Erro ao fazer o update', updateError)
                     return status
                 }
                 cleanForm()
@@ -91,7 +81,7 @@ const SubmitForm = async (event, reqType, postId, context) =>{
             }
 
         } else {
-            console.log('usuário não autenticado')
+            return
         }
 
     

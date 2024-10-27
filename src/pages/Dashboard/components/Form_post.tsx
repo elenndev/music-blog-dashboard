@@ -43,7 +43,6 @@ const Form_post: React.FC<{
             } else {
                 setIsSubmitFail(true)
             }
-            console.log('recebendo status', result)
         }finally {
             setIsSubmitting(false)
             setOnSubmittedPost(true)
@@ -56,7 +55,6 @@ const Form_post: React.FC<{
     
 
     useEffect(() => {
-        console.log("Estado de edição mudou no form:", onEdit);
         
         if (!onEdit){
             setIsSubmitFail(false)
@@ -65,11 +63,9 @@ const Form_post: React.FC<{
         if (onEdit) {
             reqType = 'put'
             if (post_id) { id = post_id }
-            console.log('detectado no form que é true, req:', reqType)
     
         } else {
             reqType = 'post'
-            console.log('detectado no form que é false, req:', reqType)
         }    
     }, [onEdit]);
 

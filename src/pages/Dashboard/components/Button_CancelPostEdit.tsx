@@ -15,7 +15,6 @@ const Button_CancelPostEdit = () => {
     function exitEdit(){
         cleanForm()
         setEditMode(false)
-        console.log('funcao cancelar edit')
     }
 
     return(
