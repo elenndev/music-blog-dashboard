@@ -6,6 +6,7 @@ import Form_post from "./components/Form_post"
 import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
 import submitFeaturedPlaylist from "./components/static/submiteFeaturedPlaylist"
 import Iframe from "../../components/EmbedPlaylist"
+import supabase from "../../components/static/auth"
 
 
 
@@ -21,12 +22,17 @@ const Dashboard = () => {
     const handleButtonEdit = (id: number) => {
         setId(id)}
 
-    const [featuredPlaylist, setFeaturedPlaylist] = useState<string>('3AqqJn20LczJtoaHjVLipe?utm_source=generator')
+    const [featuredPlaylist, setFeaturedPlaylist] = useState<string | null>('3AqqJn20LczJtoaHjVLipe?utm_source=generator')
     const getFeaturedPlaylist = async()=>{
-        const link = localStorage.getItem('featuredPlaylist')
-        if (link){
-            setFeaturedPlaylist(link)
-        }}
+        const {data} = await supabase.from("blog-saves").select('*').eq("info_name","featured_playlist")
+        if (data && data.length > 0){
+            setFeaturedPlaylist(data[0].text_value)
+        } else {
+            setFeaturedPlaylist("Playlist não definida")
+        }
+
+        // const link = localStorage.getItem('featuredPlaylist')
+    }
 
     function handleSubmitPlaylist(event: React.FormEvent){
         submitFeaturedPlaylist(event)
