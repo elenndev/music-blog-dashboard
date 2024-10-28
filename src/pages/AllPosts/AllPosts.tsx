@@ -5,20 +5,14 @@ import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
 import FunctionGetId from '../Dashboard/components/Type_FunctionGetId.tsx';
 import { DashboardContext } from '../Dashboard/components/Context_Dashboard.tsx';
 import supabase from '../../components/static/auth.js';
+import Model_Post from '../../components/InterfacePost.tsx';
 
-interface Post {
-    id: number;
-    cover: string;
-    title: string;
-    content: string;
-    created_at: string;
-}
 
 const AllPosts: React.FC<{isDashboard?: boolean,
 functionEdit?: FunctionGetId
 onEdit?: boolean    
 }> = ({isDashboard = false, functionEdit}) => {
-    const [posts, setPosts] = useState<Post[]>([]);
+    const [posts, setPosts] = useState<Model_Post[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
