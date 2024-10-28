@@ -4,7 +4,12 @@
     --SecondaryColor: white;
     --DecorateColor: #D5D5D6;
 }
-
+main#main_all-posts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
 .container.all-posts {
     width: 80%;
     display: flex;

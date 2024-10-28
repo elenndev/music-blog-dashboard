@@ -60,8 +60,9 @@ onEdit?: boolean
         return <p>Carregando publicações</p>
     }
 
-    return (
-        <div className='container all-posts'>
+    const Container_AllPosts = () =>{
+        return(
+            <div className='container all-posts'>
             <div className='container_header'>
                 <h2>Todos as publicações</h2>
                 {isDashboard && <Button_SignOut/>}
@@ -76,8 +77,20 @@ onEdit?: boolean
                     />
                 ))}
             </div>
-            
         </div>
+        )
+    }
+
+    return (
+        <>
+            {isDashboard ? (
+                <>
+                    <Container_AllPosts/>
+                </>
+            ) : (
+                <main id='main_all-posts'><Container_AllPosts /></main>
+            )}
+        </>
     );
 };
 
