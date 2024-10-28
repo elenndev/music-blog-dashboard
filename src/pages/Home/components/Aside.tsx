@@ -20,6 +20,7 @@ const Aside = () => {
     const Iframe = () => {
         return(
             <iframe
+                        title="Playlist em destaque"
                         style={{ borderRadius: '12px' }}
                         src={featuredPlaylist}
                         width="100%"
