@@ -1,4 +1,4 @@
-interface Post {
+interface Model_Post {
     id: number; 
     cover: string;
     cover_description: string;
@@ -7,4 +7,4 @@ interface Post {
     created_at: string;
 }
 
-export default Post
+export default Model_Post

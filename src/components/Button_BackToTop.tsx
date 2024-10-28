@@ -56,7 +56,7 @@ const ArrowUp: React.FC<React.SVGProps<SVGSVGElement>> = () => (
     }, []);
 
     return (
-        <button id="button_BackToTop" onClick={scrollToTop} style={buttonStyle}><ArrowUp/></button>
+        <button aria-label='Voltar ao topo da pagina' id="button_BackToTop" onClick={scrollToTop} style={buttonStyle}><ArrowUp/></button>
     );
 };
 

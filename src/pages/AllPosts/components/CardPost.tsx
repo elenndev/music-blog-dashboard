@@ -1,5 +1,5 @@
 import getDate from "../../../blog_configs"
-import type Post from "../../../components/InterfacePost"
+import type Model_Post from "../../../components/InterfacePost"
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Content_Post from "../../../components/Content_Post";
 import Title_Post from "../../../components/Title_Post";
@@ -12,7 +12,7 @@ import { useContext, useEffect } from "react";
 
 
 const CardPost: React.FC<{ 
-post: Post; 
+post: Model_Post; 
 isDashboard: boolean; 
 functionEdit?: FunctionGetId;}> = ({ post, isDashboard, functionEdit}) => {
     const date = getDate(post.created_at)

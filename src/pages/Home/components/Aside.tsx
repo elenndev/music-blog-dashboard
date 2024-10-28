@@ -42,11 +42,11 @@ const Aside = () => {
                 </span>
             </div>
             <div className="container album_week">
-                <h3 className="container-header">Albúm da semana</h3>
+                <p className="container-header">Albúm da semana</p>
                 <FeaturedAlbum />
             </div>
             <div className="container featured_playlist">
-                <h3>Playlist em destaque</h3>
+                <p className="container-header">Playlist em destaque</p>
                 {featuredPlaylist &&
                     <Iframe/>
                 }

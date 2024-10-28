@@ -259,8 +259,9 @@
         .featured_playlist{
             width: 100%;
             padding-bottom: 20px;
-            h3{
+            .container-header{
                 font-size: 2cap;
+                font-weight: 700;
             }
             iframe{
                 width: 90%;

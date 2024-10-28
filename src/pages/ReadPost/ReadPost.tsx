@@ -1,4 +1,4 @@
-import type Post from "../../components/InterfacePost"
+import type Model_Post from "../../components/InterfacePost"
 
 import { useEffect, useState } from "react"
 import Content_Post from "../../components/Content_Post"
@@ -13,7 +13,7 @@ const ReadPost: React.FC = () => {
         'padding': '5px 30px'
     }
     const {id} = useParams<{id: string}>()
-    const [post, setPost] = useState<Post[]>([])
+    const [post, setPost] = useState<Model_Post[]>([])
     const [loading, setLoading] = useState(true)
 
     const getData = async () =>{

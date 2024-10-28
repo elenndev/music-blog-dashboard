@@ -1,5 +1,5 @@
 import Editor from "./Editor"
-import SubmitForm from "./static/submitForm"
+import SubmitForm from "./static/submitPostForm"
 import Button_CancelPostEdit from "./Button_CancelPostEdit"
 import { useContext, useEffect, useState } from "react"
 import { DashboardContext} from "./Context_Dashboard"

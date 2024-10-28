@@ -22,7 +22,7 @@
     }
     .info{
         width: 90%;
-        font-size: 1.300rem;
+        font-size: 1.250rem;
     }
     .links{
         width: 70%;
@@ -40,7 +40,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: flex-start;
-            font-size: 3vh;
+            font-size: 1.250rem;
             font-weight: 400;
             letter-spacing: 1px;
             svg{

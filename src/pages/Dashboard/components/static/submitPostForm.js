@@ -9,6 +9,7 @@ const SubmitForm = async (event, reqType, postId, context) =>{
     event.preventDefault()
     const form_submit = document.querySelector('#form_submit')
     const cover = document.querySelector('#cover').value
+    const cover_description = document.querySelector("#cover_description").value
     const editor = document.querySelector('div.ql-editor')
     const h1 = editor.querySelector("h1")
     let reqURL = null
@@ -27,6 +28,9 @@ const SubmitForm = async (event, reqType, postId, context) =>{
 
         if (!(cover.endsWith('jpg') || cover.endsWith('jpeg') || cover.endsWith('png'))){
             alert('Imagem com formato inválido, por favor tente usar uma imagem diferente')
+            return
+        } else if (cover_description.length<10){
+            alert('Por favor preencha corretamente o campo da descrição da capa da publicação')
             return
         }
 
@@ -53,11 +57,12 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         //Formatar conteudos para o submit
         let result = null
         const title = editor.querySelector("h1").innerHTML
-        const remove_h1 = editor.querySelector("h1")
-        remove_h1.remove()
+        // const remove_h1 = editor.querySelector("h1")
+        // remove_h1.remove()
         const content = editor.innerHTML
         let data = {
             cover: cover,
+            cover_description: cover_description,
             title: title,
             content: content
         }

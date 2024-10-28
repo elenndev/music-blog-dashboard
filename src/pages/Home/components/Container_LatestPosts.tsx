@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type Post from "../../../components/InterfacePost"
+import type Model_Post from "../../../components/InterfacePost"
 import getDate from "../../../blog_configs";
 import Content_Post from "../../../components/Content_Post";
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import supabase from "../../../components/static/auth.js"
 
 
-const Post: React.FC<{ post: Post }> = ({ post }) => {
+const Post: React.FC<{ post: Model_Post }> = ({ post }) => {
     const date = getDate(post.created_at)
     return(
         <div className="post">
@@ -32,7 +32,7 @@ const Post: React.FC<{ post: Post }> = ({ post }) => {
 }
 
 const LatestPosts = () => {
-    const [posts, setPosts] = useState<Post[]>([])
+    const [posts, setPosts] = useState<Model_Post[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null);
     
