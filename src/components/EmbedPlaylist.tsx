@@ -2,6 +2,7 @@ const Iframe: React.FC<{playlist: string}> = ({playlist}) => {
     return(
         <iframe
         style={{ borderRadius: '12px' }}
+        title="Playlist em destaque"
         src={playlist}
         width="100%"
         height="152"

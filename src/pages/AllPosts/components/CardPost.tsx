@@ -1,4 +1,5 @@
 import getDate from "../../../blog_configs"
+import type Post from "../../../components/InterfacePost"
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Content_Post from "../../../components/Content_Post";
 import Title_Post from "../../../components/Title_Post";
@@ -8,13 +9,6 @@ import Button_PostEdit from "../../Dashboard/components/Button_PostEdit";
 import FunctionGetId from "../../Dashboard/components/Type_FunctionGetId";
 import { DashboardContext} from "../../Dashboard/components/Context_Dashboard";
 import { useContext, useEffect } from "react";
-interface Post{
-    id: number; 
-    cover: string;
-    title: string;
-    content: string;
-    created_at: string;
-}
 
 
 const CardPost: React.FC<{ 
@@ -38,7 +32,7 @@ functionEdit?: FunctionGetId;}> = ({ post, isDashboard, functionEdit}) => {
         <div key={post.id} className='post-card'>
             <p className='post-card_date'>{date.dateMonth} | {date.dateDay}</p>
             <span>
-                <img src={post.cover}></img>
+                <img alt={post.cover_description} src={post.cover}></img>
                 <Title_Post title={post.title}/>
                 <Truncate
                     lines={3}

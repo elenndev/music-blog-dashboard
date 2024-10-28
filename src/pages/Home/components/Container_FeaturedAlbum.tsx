@@ -43,14 +43,14 @@ const FeaturedAlbum: React.FC = () => {
                 <>
                     <span className='album-content'>
                         <span className='album-cover-area'>
-                            <img src={featuredAlbum.images[0]?.url} alt="Album cover" className='album-cover' />
+                            <img src={featuredAlbum.images[0]?.url}  alt={`capa do album ${featuredAlbum.name} do artista ${featuredAlbum.artists}`} className='album-cover' />
                             <img src={discoIcon} className='album-disco' alt="Disco"/>
                         </span>
                         <span className='album-info'>
                             <p className='album-name'>{featuredAlbum.name}</p>
                             <p className='album-artist'>{featuredAlbum.artists[0].name}</p>
                             <p className='album-total_tracks'>{featuredAlbum.total_tracks} faixas • {release_year}</p>
-                            <a href={featuredAlbum.uri}><SVG_spotify/></a>
+                            <a aria-label="Abrir album em destaque no spotify" href={featuredAlbum.uri}><SVG_spotify/></a>
                         </span>
                     </span>
                 </>               

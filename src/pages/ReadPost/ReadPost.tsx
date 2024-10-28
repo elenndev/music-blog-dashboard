@@ -1,4 +1,4 @@
-import Post from "../../components/InterfacePost"
+import type Post from "../../components/InterfacePost"
 
 import { useEffect, useState } from "react"
 import Content_Post from "../../components/Content_Post"

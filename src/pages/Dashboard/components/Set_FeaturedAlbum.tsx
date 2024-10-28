@@ -86,7 +86,7 @@ const Set_FeaturedAlbum: React.FC = () => {
                     {selectedAlbum ? (
                         <>
                             <div>
-                                <img src={selectedAlbum.images[0]?.url} alt="Album cover" style={{ width: '100%' }} />
+                                <img alt={`capa do album ${selectedAlbum.name} do artista ${selectedAlbum.artists}`} src={selectedAlbum.images[0]?.url} style={{ width: '100%' }} />
                                 <h3>{selectedAlbum.name}</h3>
                                 <p>Artista: {selectedAlbum.artists[0].name}</p>
                             </div>

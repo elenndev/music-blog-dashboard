@@ -79,6 +79,7 @@ const Form_post: React.FC<{
                 <Editor />
                 <label>Capa da publicação:</label>
                 <input name="cover" type="url" id="cover" style={submitStyle} placeholder="Insira a a url da imagem"></input>
+                <input name="cover_description" type="text" id="cover_description" style={submitStyle} placeholder="Faça uma descrição da imagem"></input>
                 {isSubmitFail && <p style={{ color: 'red' }}>{isSubmitFail}</p>}
                 {isSubmitSuccess && <p style={{ color: 'green' }}>{isSubmitSuccess}</p>}
                 <button className="btn btn-primary"

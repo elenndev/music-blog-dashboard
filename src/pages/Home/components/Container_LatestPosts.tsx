@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type Post from "../../../components/InterfacePost"
 import getDate from "../../../blog_configs";
 import Content_Post from "../../../components/Content_Post";
 import Button_PostReadMore from "../../../components/Button_PostReadMore";
@@ -8,14 +9,6 @@ import { Link } from "react-router-dom";
 import supabase from "../../../components/static/auth.js"
 
 
-interface Post {
-    id: number; 
-    cover: string;
-    title: string;
-    content: string;
-    created_at: string;
-}
-
 const Post: React.FC<{ post: Post }> = ({ post }) => {
     const date = getDate(post.created_at)
     return(
@@ -24,7 +17,7 @@ const Post: React.FC<{ post: Post }> = ({ post }) => {
                 <p className="post_info_date">{date.dateMonth} | {date.dateDay}</p>
                 <Title_Post title={post.title}/>
             </div>
-            <img src={post.cover}></img>
+            <img alt={post.cover_description} src={post.cover}></img>
             <Truncate
                 lines={10}
                 ellipsis={<>...</>}>

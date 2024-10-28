@@ -186,9 +186,10 @@
         .album_week{
             width: 100%;
             height: 25.0vh;
+            min-height: fit-content;
             display: flex;
             flex-direction: column;
-            padding-bottom: 15px;
+            padding-bottom: 25px;
             gap: 0; 
 
             .container-header{
@@ -229,12 +230,12 @@
                     --album-listen_icons: 5vh;
                     width: 40%;
                     .album-name{
-                        font-size: 2.5vmin;
+                        font-size: 1rem;
                         font-weight: 500;
                         margin: 0;
                     }
                     .album-artist,.album-total_tracks{
-                        font-size: 2.5vmin;
+                        font-size: 0.900rem;
                         margin: 0;
                         font-weight: 300;
                     }
@@ -275,19 +276,49 @@
 
 @media (max-width: 1050px){
     #main{
+        --album-coverSize: 35vw;
         grid-template-columns: 90%;
+        .container.latest-posts{
+            order: 2;
+        }
         aside{
-            display: none;
+            order: 1;
+            .container.profile{
+                height: 15vh;
+                min-height: fit-content;
+                grid-template-columns: fit-content 70%;
+            }
+            .album_week{
+                min-height: fit-content;
+                padding-bottom: 10px;
+                .album-content{
+                    width: 70%;
+                    min-height: fit-content;
+                    justify-content: center;
+                    column-gap: 0;
+                    .album-cover-area{
+                        display: flex;
+                        justify-content: center;
+                    }
+                    .album-info{
+                        margin-top: 10px;
+                    }
+                    .album-info > p{
+                        font-size: 1.3rem;
+                    }
+                }
+            }
         }
 
     }
 }
 
-@media (max-width: 1160px){
+@media (max-width: 1160px) and (min-width: 1051px){
     #main>aside{
         .album_week{
             --album-coverSize: 15vw;
             height: 50vh;
+            padding-bottom: 30px;
             .album-content{
                 align-items: center;
                 flex-direction: column;
@@ -305,15 +336,27 @@
     }
 }
 
-@media (max-width: 1230px){
+@media (max-width: 1240px){
+    
+
     #main>aside{
         .profile{
-            .profile-icon::after,span::after{
-                display: none;
+            .profile-icon::after{
+                width: 50%;
             }
             span{
                 width: 100%;
                 justify-content: space-around;
+            }
+            span::after{
+                display: none;
+            }
+        }
+        .featured_playlist{
+            height: fit-content;
+            iframe{
+                width: 90%;
+                height: 36%;
             }
         }
     }
