@@ -6,15 +6,23 @@ import FeaturedAlbum from "./Container_FeaturedAlbum"
 // Images
 import profileIcon from "./img/profile-icon.jpg"
 import musicboardLogo from "../../../components/musicboard.png"
+import supabase from "../../../components/static/auth"
 
 
 const Aside = () => {
     const [featuredPlaylist, setFeaturedPlaylist] = useState<string>('3AqqJn20LczJtoaHjVLipe?utm_source=generator')
-    useEffect(() => {
-        const link = localStorage.getItem('featuredPlaylist')
-        if (link){
-            setFeaturedPlaylist(link)
+
+    const getPlaylistLink = async () => {
+        const {data} = await supabase.from("blog-saves").select('*').eq("info_name", "featured_playlist")
+        if (data && data.length > 0) {
+            setFeaturedPlaylist(data[0].text_value)
+        } else {
+            return
         }
+    }
+
+    useEffect(() => {
+        getPlaylistLink()
     }, [])
 
     const Iframe = () => {
