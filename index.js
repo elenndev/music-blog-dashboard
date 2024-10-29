@@ -6,13 +6,11 @@ function check_path (){
             about_me.classList.remove('current-page')
         }
         home.classList.add('current-page')
-        console.log("identifica que é")
     } 
     if (window.location.pathname !== "/") {
         if(home.classList.contains('current-page')){
             home.classList.remove('current-page')
         }
-        console.log("identifica que não é")
     }
     
     if (window.location.pathname == "/sobre-mim"){
