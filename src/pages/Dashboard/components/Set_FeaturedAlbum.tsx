@@ -1,6 +1,7 @@
 import getToken from '../../../components/static/spotifyAuth';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import submitBlogInfo from './static/submitBlogInfo';
 
 export interface Album {
     id: string;
@@ -43,10 +44,12 @@ const Set_FeaturedAlbum: React.FC = () => {
                     },
                 });
                 setAlbums(result.data.albums.items);
+
             } catch (error) {
                 console.error('Erro ao buscar os álbuns:', error);
             }
         };
+
 
         const debounceSearch = setTimeout(() => {
             searchAlbum();
@@ -90,7 +93,8 @@ const Set_FeaturedAlbum: React.FC = () => {
                                 <h3>{selectedAlbum.name}</h3>
                                 <p>Artista: {selectedAlbum.artists[0].name}</p>
                             </div>
-                            <button type='button' className='btn btn-primary handle_setFeaturedAlbum' onClick={() => localStorage.setItem('featuredAlbumId',selectedAlbum.id)}>Definir album</button>
+                            
+                            <button type='button' className='btn btn-primary handle_setFeaturedAlbum' onClick={() => submitBlogInfo("week album", null, selectedAlbum.id)}>Definir album</button>
                         </>
                     ) : (
                         <p>Selecione um álbum para ver os detalhes</p>

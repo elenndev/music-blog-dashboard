@@ -5,6 +5,8 @@ import Content_Post from "../../components/Content_Post"
 import { Link, useParams } from "react-router-dom"
 import './ReadPost.css'
 import supabase from "../../components/static/auth"
+import check_path from '../../../index.js'
+
 
 
 const ReadPost: React.FC = () => {
@@ -27,6 +29,7 @@ const ReadPost: React.FC = () => {
 
     useEffect(() => {
         getData()
+        check_path()
     }, [])
 
     if (loading){

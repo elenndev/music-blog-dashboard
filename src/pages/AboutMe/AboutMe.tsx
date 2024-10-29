@@ -3,12 +3,19 @@ import SVG_spotify from '../../components/SVG_spotify'
 import SVG_lastFm from '../../components/SVG_lastFm'
 import SVG_email from '../../components/SVG_email'
 import SVG_github from '../../components/SVG_github'
+import check_path from '../../../index.js'
+
 
 // Images
 import profileIcon from "./components/midia/profile-icon.jpg"
 import musicboardLogo from "../../components/musicboard.png"
+import { useEffect } from 'react'
 
 const AboutMe = () => {
+    useEffect(()=> {
+        check_path()
+    }, [])
+
     return(
         <main className="container about-me">
             <img role="none" className='profile' src={profileIcon}></img>

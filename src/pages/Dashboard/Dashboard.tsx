@@ -4,9 +4,11 @@ import AllPosts from "../AllPosts/AllPosts"
 import { DashboardProvider } from "./components/Context_Dashboard"
 import Form_post from "./components/Form_post"
 import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
-import submitFeaturedPlaylist from "./components/static/submiteFeaturedPlaylist"
 import Iframe from "../../components/EmbedPlaylist"
 import supabase from "../../components/static/auth"
+import submitBlogInfo from "./components/static/submitBlogInfo"
+import check_path from '../../../index.js'
+
 
 
 
@@ -31,18 +33,18 @@ const Dashboard = () => {
             setFeaturedPlaylist("Playlist não definida")
         }
 
-        // const link = localStorage.getItem('featuredPlaylist')
+    
     }
 
     function handleSubmitPlaylist(event: React.FormEvent){
-        submitFeaturedPlaylist(event)
+        submitBlogInfo("featured playlist",event, null)
         getFeaturedPlaylist()
     }
 
 
-    // Inicialização
     useEffect(() => {
         getFeaturedPlaylist()
+        check_path()
     }, [])
 
     return (
@@ -74,3 +76,4 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+

@@ -6,7 +6,6 @@ const BackToTop: React.FC = () => {
     const buttonStyle: React.CSSProperties = {
         position: 'fixed',
         bottom: '20px',
-        right: '50px',
         borderRadius: '50%',
         cursor: 'pointer',
         zIndex: 1000,

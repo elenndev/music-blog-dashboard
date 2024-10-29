@@ -12,16 +12,18 @@ const FeaturedAlbum: React.FC = () => {
     const [featuredAlbum, setFeaturedAlbum] = useState<Album | null>(null);
     const release_year = featuredAlbum?.release_date.slice(0,4)
 
-    const id = localStorage.getItem("featuredAlbumId");
+    // const id = localStorage.getItem("featuredAlbumId");
 
     const authenticate = async () => {
         const _token = await getToken();
         setToken(_token);
     };
 
-    const fetchAlbum = async (id: string, token: string) => {
+
+
+    const fetchAlbum = async (token: string) => {
         try {
-            const getAlbum = await getAlbumById(id, token);
+            const getAlbum = await getAlbumById(token);
             setFeaturedAlbum(getAlbum);
         } catch (error) {
         }
@@ -32,10 +34,10 @@ const FeaturedAlbum: React.FC = () => {
     }, []); 
 
     useEffect(() => {
-        if (token && id) {
-            fetchAlbum(id, token); 
+        if (token) {
+            fetchAlbum(token); 
         }
-    }, [token, id]); 
+    }, [token]); 
 
     return (
         <>
