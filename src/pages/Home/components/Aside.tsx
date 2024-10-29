@@ -29,14 +29,14 @@ const Aside = () => {
         return(
             <iframe
                         title="Playlist em destaque"
-                        style={{ borderRadius: '12px' }}
+                        style={{ borderRadius: '12px', border: 'none'}}
                         src={featuredPlaylist}
-                        width="100%"
-                        height="152"
-                        frameBorder="0"
+                        width="90%"
+                        height="352"
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                         loading="lazy"
                     ></iframe>
+        
         )
     }
     return (

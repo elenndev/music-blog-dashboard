@@ -266,21 +266,15 @@
 
         .featured_playlist{
             width: 100%;
+            height: auto;
             padding-bottom: 20px;
+            max-height: 80vh;
             .container-header{
                 font-size: 2cap;
                 font-weight: 700;
             }
-            iframe{
-                width: 90%;
-                height: 60vh;
-            }
         }
     }
-}
-
-#__next{
-    height: 100%;
 }
 
 #button_BackToTop{
