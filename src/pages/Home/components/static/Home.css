@@ -1,4 +1,7 @@
 * {
+    --imgProfileSize: 10vmin;
+    --social-iconsSize: 4.5vmin;
+    --album-coverSize: 20vmin;
     --darkMode-MainColor: #2C2C30;
     /* --darkMode-MainColor: #242424; */
     --darkMode-SecondaryColor: white;
@@ -104,14 +107,14 @@
         align-items: center;
         gap: 20px;
         .profile{
-            --imgProfileSize: 8vmax;
-            --social-iconsSize: 5vmin;
             display: grid;
             grid-template-columns: 40% auto;
             grid-row: auto;
             align-items: center;
             width: 100%;
-            height: 20vh;
+            /* height: 20vh; */
+            height: fit-content;
+            padding: 15px 0;
             --marginLR: 25%;
             a{
                 height: 20%;
@@ -185,13 +188,12 @@
         }
         .album_week{
             width: 100%;
-            height: 25.0vh;
             min-height: fit-content;
             display: flex;
             flex-direction: column;
             padding-bottom: 25px;
             gap: 0; 
-
+            
             .container-header{
                 text-align: center;
                 font-size: 2cap;
@@ -216,6 +218,7 @@
                     height: auto;
                     width: 50%;
                     img{
+                        height: var(--album-coverSize);
                         height: 90%;
                         width: auto;
                     }
@@ -250,7 +253,7 @@
                         text-align: end;
                     }
                     a{
-                        --album-listen_icons: 3.5vmax;
+                        --album-listen_icons: 2rem;
                         height: var(--album-listen_icons);
                         width: var(--album-listen_icons);
                         svg{
@@ -281,28 +284,10 @@
     right: 50px;
 }
 
-@media (max-width: 1553px){
-    #main>aside{
-        .profile{
-            .profile-icon::after{
-                display: none;
-            }}}
-}
-
-@media (max-width: 1485px){
-    #main>aside{
-        .album_week{
-            img.album-disco{
-                display: none;
-            }
-        }
-    }
-}
 
 @media (max-width: 1310px){
     #main>aside{
         .album_week{
-            --album-coverSize: 15vw;
             height: fit-content;
             .album-content{
                 align-items: center;
@@ -330,6 +315,7 @@
             grid-template-columns: auto 30%;
             span{
                 flex-direction: column;
+                row-gap: 10px;
                 align-items: flex-start;
             }}}
 }
@@ -371,7 +357,6 @@
                 }
             }
             .album_week{
-                --album-coverSize: 20vmin;
                 min-height: fit-content;
                 padding-bottom: 30px;
                 .album-content{
