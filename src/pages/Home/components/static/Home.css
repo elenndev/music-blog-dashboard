@@ -343,7 +343,6 @@
         aside{
             order: 1;
             .container.profile{
-                height: 15vh;
                 min-height: fit-content;
                 grid-template-columns: auto 70%;
                 .profile-icon::after{
