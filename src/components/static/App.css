@@ -7,7 +7,7 @@
 }
 
 body {
-  background: var(--darkMode-MainColor);
+  /* background: var(--darkMode-MainColor); */
   font-family: "League Spartan", sans-serif;
   color: var(--darkMode-SecondaryColor);
   display: flex;

@@ -1,3 +1,5 @@
+
+
 function check_path (){
     const home = document.querySelector('header>nav>a.home-link')
     const about_me = document.querySelector('header>nav>a.aboutMe-link')

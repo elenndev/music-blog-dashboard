@@ -4,6 +4,7 @@ import Aside from "./components/Aside";
 import BackToTop from "../../components/Button_BackToTop";
 import { useEffect } from "react";
 import check_path from '../../../index.js'
+import styled from 'styled-components'
 
 const Home = () => {
     useEffect(() => {
