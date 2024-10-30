@@ -57,8 +57,9 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         //Formatar conteudos para o submit
         let result = null
         const title = editor.querySelector("h1").innerHTML
-        // const remove_h1 = editor.querySelector("h1")
-        // remove_h1.remove()
+        const saveTitle = editor.querySelector("h1")
+        const remove_h1 = editor.querySelector("h1")
+        remove_h1.remove()
         const content = editor.innerHTML
         let data = {
             cover: cover,
@@ -72,21 +73,22 @@ const SubmitForm = async (event, reqType, postId, context) =>{
             if (type == 'post'){
                 const {error: insertError, status} = await supabase.from('posts').insert(data)
                 if (insertError){
+                    editor.prepend(saveTitle);
                     return status
                 }
                 cleanForm()
                 return status
+
             } else if(type == 'put'){
                 const {error: updateError, status} = await supabase.from('posts').update(data).eq("id",id)
                 if (updateError){
+                    editor.prepend(saveTitle);
                     return status
                 }
                 cleanForm()
                 return status
             }
 
-        } else {
-            return
         }
 
     
