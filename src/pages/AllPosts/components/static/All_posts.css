@@ -152,6 +152,14 @@ main#main_all-posts{
 
 }
 
+@media (max-width: 1030px){
+    main >.container.all-posts > .card-container > .post-card{
+        span>img{
+            height: 150px;
+        }
+    }
+}
+
 @media (max-width: 900px){
     .container.all-posts{
         .card-container{
@@ -159,6 +167,29 @@ main#main_all-posts{
             grid-template-columns: repeat(2, auto);
             .post-card{
                 width: 30vw;
+            }
+        }
+    }
+}
+
+@media (max-width: 580px){
+    main >.container.all-posts > .card-container > .post-card{
+        span>img{
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 505px){
+    .container.all-posts{
+        .card-container{
+            display: grid;
+            grid-template-columns: auto;
+            .post-card{
+                width: 70%;
+                span{
+                    width: 100%;
+                }
             }
         }
     }

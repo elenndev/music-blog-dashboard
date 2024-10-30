@@ -104,8 +104,8 @@
         align-items: center;
         gap: 20px;
         .profile{
-            --imgProfileSize: 10vh;
-            --social-iconsSize: 5vh;
+            --imgProfileSize: 8vmax;
+            --social-iconsSize: 5vmin;
             display: grid;
             grid-template-columns: 40% auto;
             grid-row: auto;
@@ -232,7 +232,6 @@
                     }
                 }
                 .album-info{
-                    --album-listen_icons: 3.5vh;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -251,13 +250,14 @@
                         text-align: end;
                     }
                     a{
+                        --album-listen_icons: 3.5vmax;
                         height: var(--album-listen_icons);
                         width: var(--album-listen_icons);
-                    }
-                    a>svg{
-                        fill: var(--darkMode-DecorateColor);
-                        height: var(--album-listen_icons);
-                        width: var(--album-listen_icons);
+                        svg{
+                            fill: var(--darkMode-DecorateColor);
+                            height: var(--album-listen_icons);
+                            width: var(--album-listen_icons);
+                        }
                     }
                 }
             }
@@ -350,7 +350,6 @@
 
 @media (max-width: 910px){
     #main{
-        --album-coverSize: 35vw;
         grid-template-columns: 90%;
         .container.latest-posts{
             order: 2;
@@ -372,10 +371,12 @@
                 }
             }
             .album_week{
+                --album-coverSize: 20vmin;
                 min-height: fit-content;
                 padding-bottom: 30px;
                 .album-content{
                     width: 70%;
+                    min-width: fit-content;
                     display: grid;
                     grid-template-columns: 30% auto;
                     min-height: fit-content;
@@ -385,14 +386,18 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        img{
+                            height: var(--album-coverSize);
+                        }
                         img.album-disco{
                             display: flex;
                         }
                     }
                     .album-info{
-                        --album-listen_icons: 3vh;
                         margin-top: 10px;
-                        width: 100%;
+                        margin-left: 40px;
+                        justify-self: center;
+                        width: 80%;
                         font-size: 1.3rem;
                         a{
                             height: var(--album-listen_icons);
@@ -424,6 +429,7 @@
                 display: none;
             }}}
 }
+
 
 
 
