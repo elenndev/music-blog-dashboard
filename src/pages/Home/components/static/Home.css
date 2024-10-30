@@ -167,8 +167,7 @@
                     height: var(--social-iconsSize);
                     
                 }
-                .social-icons.musicBoard>svg{
-                    fill: var(--darkMode-DecorateColor);
+                .social-icons.musicBoard>img{
                     height: var(--social-iconsSize);
                     
                 }
