@@ -7,6 +7,8 @@ import check_path from '../../../index.js'
 import { DashboardContext } from '../Dashboard/components/Context_Dashboard.tsx';
 import supabase from '../../components/static/auth.js';
 import Model_Post from '../../components/InterfacePost.tsx';
+import Header from '../../components/Header.tsx';
+import Footer from '../../components/Footer.tsx';
 
 
 const AllPosts: React.FC<{isDashboard?: boolean,
@@ -89,7 +91,11 @@ onEdit?: boolean
                     <Container_AllPosts/>
                 </>
             ) : (
-                <main id='main_all-posts'><Container_AllPosts /></main>
+                <>
+                    <Header/>
+                    <main id='main_all-posts'><Container_AllPosts /></main>
+                    <Footer/>
+                </>
             )}
         </>
     );

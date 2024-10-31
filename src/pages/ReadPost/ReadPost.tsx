@@ -2,6 +2,8 @@ import type Model_Post from "../../components/InterfacePost"
 
 import { useEffect, useState } from "react"
 import Content_Post from "../../components/Content_Post"
+import Header from '../../components/Header.tsx';
+import Footer from '../../components/Footer.tsx';
 import { Link, useParams } from "react-router-dom"
 import './ReadPost.css'
 import supabase from "../../components/static/auth"
@@ -37,17 +39,21 @@ const ReadPost: React.FC = () => {
     }
 
     return(
-        <main>  
-            {post.map((post) => (
-                <article className="container read-post" key={post.id}>
-                    <h1>{post.title}</h1>
-                    <img src={post.cover}></img>
-                    <Content_Post content={post.content}/>
-                    <Link to={'/todas-publicacoes'} className="btn btn-secundary" style={ButtonStyle}>Voltar</Link>
-                </article>
+        <>
+            <Header/>
+            <main>  
+                {post.map((post) => (
+                    <article className="container read-post" key={post.id}>
+                        <h1>{post.title}</h1>
+                        <img src={post.cover}></img>
+                        <Content_Post content={post.content}/>
+                        <Link to={'/todas-publicacoes'} className="btn btn-secundary" style={ButtonStyle}>Voltar</Link>
+                    </article>
 
-            ))}
-        </main>
+                ))}
+            </main>
+            <Footer />
+        </>
     )
 }
 
