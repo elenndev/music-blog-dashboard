@@ -2,10 +2,7 @@
     --imgProfileSize: 10vmin;
     --social-iconsSize: 4.5vmin;
     --album-coverSize: 20vmin;
-    --darkMode-MainColor: #2C2C30;
-    /* --darkMode-MainColor: #242424; */
     --darkMode-SecondaryColor: white;
-    --darkMode-DecorateColor: #D5D5D6;
 
 }
 #main{
@@ -142,7 +139,7 @@
                 left: 100%;
                 height: 0.2vh;
                 width: 2vw;
-                background: var(--darkMode-DecorateColor);
+                background: var(--DecorateColor);
             }
             span{
                 justify-self: left;
@@ -159,11 +156,11 @@
                     height: 100%;
                 }
                 .social-icons.spotify>svg{
-                    fill: var(--darkMode-DecorateColor);
+                    fill: var(--DecorateColor);
                     height: var(--social-iconsSize);
                 }
                 .social-icons.lastFm>svg{
-                    fill: var(--darkMode-DecorateColor);
+                    fill: var(--DecorateColor);
                     height: var(--social-iconsSize);
                     
                 }
@@ -182,7 +179,7 @@
                 left: 100%;
                 height: 0.2vh;
                 width: 40%;
-                background: var(--darkMode-DecorateColor);
+                background: var(--DecorateColor);
             }
         }
         .album_week{
@@ -256,7 +253,7 @@
                         height: var(--album-listen_icons);
                         width: var(--album-listen_icons);
                         svg{
-                            fill: var(--darkMode-DecorateColor);
+                            fill: var(--DecorateColor);
                             height: var(--album-listen_icons);
                             width: var(--album-listen_icons);
                         }

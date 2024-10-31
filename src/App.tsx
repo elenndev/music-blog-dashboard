@@ -8,8 +8,8 @@ import Login from './pages/Login/Login';
 import ProtectedRoute from './pages/Dashboard/ProtectedRoute';
 import { DashboardProvider } from './pages/Dashboard/components/Context_Dashboard';
 import AboutMe from './pages/AboutMe/AboutMe';
-import { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme } from './components/static/themes';
+// import { ThemeProvider } from 'styled-components';
+// import { lightTheme, darkTheme } from './components/static/themes';
 import { useEffect } from 'react';
 // import globals from './components/static/globals';
 

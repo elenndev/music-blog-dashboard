@@ -1,8 +1,6 @@
 * {
-    --darkMode-MainColor: #2C2C30;
     /* --darkMode-MainColor: #242424; */
     --darkMode-SecondaryColor: white;
-    --darkMode-DecorateColor: #D5D5D6;
 }
 
 main{
@@ -90,7 +88,7 @@ main{
         content: "";
         width: 80%;
         position: absolute;
-        border-top: solid 1px var(--darkMode-DecorateColor);
+        border-top: solid 1px var(--DecorateColor);
     }
     .featured-playlist::before{
         top: 0;

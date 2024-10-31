@@ -9,9 +9,10 @@ import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
 import Iframe from "../../components/EmbedPlaylist"
 import supabase from "../../components/static/auth"
 import submitBlogInfo from "./components/static/submitBlogInfo"
-import check_path from '../../../index.js'
 
-
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "../../components/static/themes.js";
+import GlobalTheme from "../../components/static/globals.js";
 
 
 const Dashboard = () => {
@@ -23,8 +24,7 @@ const Dashboard = () => {
         alignItems: 'center'
     }
     const [postId, setId] = useState(0)
-    const handleButtonEdit = (id: number) => {
-        setId(id)}
+    const handleButtonEdit = (id: number) => {setId(id)}
 
     const [featuredPlaylist, setFeaturedPlaylist] = useState<string | null>('3AqqJn20LczJtoaHjVLipe?utm_source=generator')
     const getFeaturedPlaylist = async()=>{
@@ -37,21 +37,38 @@ const Dashboard = () => {
 
     
     }
-
     function handleSubmitPlaylist(event: React.FormEvent){
         submitBlogInfo("featured playlist",event, null)
         getFeaturedPlaylist()
     }
 
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark")
+    const updateStorageChange = () => {
+        const currentTheme = localStorage.getItem("theme");
+        setTheme(currentTheme || "dark");
+    };
+    
+    const handleChangeTheme = (newTheme: string) => {
+        setTheme(newTheme)
+        localStorage.setItem("theme", newTheme)
+    }
 
     useEffect(() => {
+        window.addEventListener("storage", (event) => {
+            if (event.key === "theme") {
+                updateStorageChange();
+            }
+        });
+        updateStorageChange()
+
         getFeaturedPlaylist()
-        check_path()
     }, [])
 
     return (
         <>
-            <Header/>
+        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <GlobalTheme />
+            <Header onChangeTheme={handleChangeTheme}/>
             <main style={style}>
                 <DashboardProvider>
                     <Set_FeaturedAlbum />
@@ -77,6 +94,7 @@ const Dashboard = () => {
                 </DashboardProvider>
             </main>
             <Footer/>
+        </ThemeProvider>
         </>
     )
 }

@@ -1,13 +1,10 @@
 * {
-  --darkMode-MainColor: #2C2C30;
-  /* --darkMode-MainColor: #242424; */
+  /* --darkMode-MainColor: #2C2C30; */
   --darkMode-SecondaryColor: white;
-  --darkMode-DecorateColor: #D5D5D6;
   --borderRadius: 49px;
 }
 
 body {
-  /* background: var(--darkMode-MainColor); */
   font-family: "League Spartan", sans-serif;
   color: var(--darkMode-SecondaryColor);
   display: flex;
@@ -42,13 +39,12 @@ header {
       background: #151518;
     }
     a.current-page:hover>p{
-      background: var(--darkMode-DecorateColor);
+      background: var(--DecorateColor);
     }
 
     .current-page {
-      margin-right: 5px;
       p{
-        background: var(--darkMode-DecorateColor);
+        background: var(--DecorateColor);
         color: var(--darkMode-MainColor);
       }
     }
@@ -58,11 +54,12 @@ header {
     }
 
     :nth-child(2)>p{
-      margin-left: 5px;
+      margin-left: 10px;
     }
     :nth-child(2)::before {
       content:  "";
       color: var(--darkMode-SecondaryColor);
+      margin-left: 5px;
       height: 70%;
       top: 15%;
       width: 1vw;
@@ -137,6 +134,9 @@ a{
   cursor: pointer;
   text-decoration: none ;
 }
+a.current-page>p{
+  font-weight: 400;
+}
 li{
   cursor: pointer;
 }
@@ -153,7 +153,7 @@ li{
   svg{
     height: var(--buttonToTopSize); width: var(--buttonToTopSize);
     path{
-      fill: var(--darkMode-DecorateColor);
+      fill: var(--DecorateColor);
     }
   }
 }
@@ -178,16 +178,16 @@ li{
   font-weight: 500;
 }
 .btn-primary:hover{
-  background: #151518;
+  background: var(--SecondaryColor);
   color: white;
 }
-.btn-secundary {
-  background: #151518;
+.btn-secondary {
+  background: var(--SecondaryColor);
   color: white;
 }
 
-.btn-secundary:hover{
-  background: var(--darkMode-DecorateColor);
+.btn-secondary:hover{
+  background: var(--DecorateColor);
   color: var(--darkMode-MainColor);
 }
 .btn.transparent{

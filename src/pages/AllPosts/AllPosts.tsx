@@ -3,7 +3,6 @@ import CardPost from './components/CardPost.tsx';
 import './components/static/All_posts.css';
 import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
 import FunctionGetId from '../Dashboard/components/Type_FunctionGetId.tsx';
-import check_path from '../../../index.js'
 import { DashboardContext } from '../Dashboard/components/Context_Dashboard.tsx';
 import supabase from '../../components/static/auth.js';
 import Model_Post from '../../components/InterfacePost.tsx';

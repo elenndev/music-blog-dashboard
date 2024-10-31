@@ -3,24 +3,45 @@ import SVG_spotify from '../../components/SVG_spotify'
 import SVG_lastFm from '../../components/SVG_lastFm'
 import SVG_email from '../../components/SVG_email'
 import SVG_github from '../../components/SVG_github'
-import check_path from '../../../index.js'
+// import check_path from '../../../index.js'
 
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "../../components/static/themes.js";
+import GlobalTheme from "../../components/static/globals.js";
 
 // Images
 import profileIcon from "./components/midia/profile-icon.jpg"
 import musicboardLogo from "../../components/musicboard.png"
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../../components/Header.js'
 import Footer from '../../components/Footer.js'
 
 const AboutMe = () => {
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark")
+    const updateStorageChange = () => {
+        const currentTheme = localStorage.getItem("theme");
+        setTheme(currentTheme || "dark");
+    };
+    const handleChangeTheme = (newTheme: string) => {
+        setTheme(newTheme)
+        localStorage.setItem("theme", newTheme)
+    }
+    
     useEffect(()=> {
-        check_path()
+        window.addEventListener("storage", (event) => {
+            if (event.key === "theme") {
+                updateStorageChange();
+            }
+        });
+        updateStorageChange()
+        // check_path()
     }, [])
 
     return(
         <>
-            <Header/>
+        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <GlobalTheme />
+            <Header onChangeTheme={handleChangeTheme} />
             <main className="container about-me">
                 <img role="none" className='profile' src={profileIcon}></img>
                 <h1>Boas vindas ao meu blog !</h1>
@@ -34,6 +55,7 @@ const AboutMe = () => {
                 </span>
             </main>
             <Footer/>
+        </ThemeProvider>
         </>
     )
 }

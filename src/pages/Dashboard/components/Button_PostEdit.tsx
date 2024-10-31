@@ -19,7 +19,7 @@ const Button_PostEdit: React.FC<{post: Post, editPost?: FunctionGetId}> = ({post
             editPost(post.id)}
     }
     return(
-        <button type="button" className="btn btn-secundary" onClick={Edit}><p>Editar</p></button>
+        <button type="button" className="btn btn-secondary" onClick={Edit}><p>Editar</p></button>
     )
 }
 

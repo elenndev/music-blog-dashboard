@@ -133,8 +133,8 @@ main#main_all-posts{
                     .btn-danger::after {
                         background: #780e19;
                     }
-                    .btn-secundary::after {
-                        background: #4f4f52;
+                    .btn-secondary::after {
+                        background: var(--SecondaryColorDecorate);
                     }
                 }
 
