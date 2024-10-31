@@ -10,6 +10,10 @@ import Model_Post from '../../components/InterfacePost.tsx';
 import Header from '../../components/Header.tsx';
 import Footer from '../../components/Footer.tsx';
 
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "../../components/static/themes.js";
+import GlobalTheme from "../../components/static/globals.js";
+
 
 const AllPosts: React.FC<{isDashboard?: boolean,
 functionEdit?: FunctionGetId
@@ -23,7 +27,6 @@ onEdit?: boolean
     if (!context){
         throw new Error("DashboardContext não está disponível.");
     }
-
     const getData = async () => {
         const {data} = await supabase.from("posts").select()
         if (data){
@@ -33,12 +36,31 @@ onEdit?: boolean
             setError("Publicações não disponíveis")
         }
     };
+
+    // THEME
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark")
+    const updateStorageChange = () =>{
+        const currentTheme = localStorage.getItem("theme")
+        setTheme(currentTheme || "dark")
+    }
+
+    const handleChangeTheme = (newTheme: string) => {
+        setTheme(newTheme)
+        localStorage.setItem("theme", newTheme)
+    }
+
+
     useEffect(() => {
+        updateStorageChange()
         getData();
-        check_path()
+        window.addEventListener("storage", (event)=> {
+            if (event.key === "theme"){
+                updateStorageChange()
+            }
+        })
     }, []);
-
-
+    
+    // POSTS
     const {submittedPost, setOnSubmittedPost, deletePost, setOnDeletePost} = context
     useEffect(() => {
         if (submittedPost){
@@ -86,17 +108,20 @@ onEdit?: boolean
 
     return (
         <>
+        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <GlobalTheme />
             {isDashboard ? (
                 <>
                     <Container_AllPosts/>
                 </>
             ) : (
                 <>
-                    <Header/>
+                    <Header onChangeTheme= {handleChangeTheme}/>
                     <main id='main_all-posts'><Container_AllPosts /></main>
                     <Footer/>
                 </>
             )}
+        </ThemeProvider>
         </>
     );
 };

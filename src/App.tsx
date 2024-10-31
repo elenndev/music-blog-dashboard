@@ -10,12 +10,20 @@ import { DashboardProvider } from './pages/Dashboard/components/Context_Dashboar
 import AboutMe from './pages/AboutMe/AboutMe';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './components/static/themes';
+import { useEffect } from 'react';
 // import globals from './components/static/globals';
 
 
 
 
 function App() {
+
+  useEffect(() => {
+    if (!localStorage.getItem('theme')){
+      localStorage.setItem('theme', 'dark')
+    }
+}, [])
+
   return (
     <DashboardProvider>
       <Routes>
