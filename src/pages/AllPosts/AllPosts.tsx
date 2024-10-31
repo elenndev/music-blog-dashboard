@@ -81,7 +81,13 @@ onEdit?: boolean
     }
 
     if (loading){
-        return <p>Carregando publicações</p>
+        
+        return(
+            <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+            <GlobalTheme />
+                <p>Carregando publicações</p>
+            </ThemeProvider>
+        ) 
     }
 
 

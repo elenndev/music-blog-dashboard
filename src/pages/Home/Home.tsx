@@ -13,7 +13,7 @@ import GlobalTheme from "../../components/static/globals.js";
 import styled from "styled-components";
 
 const Home = () => {
-    const [theme, setTheme] = useState("dark");
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark")
     
     // vai ser chamado uma vez que a pagina é carregada e ao mudar
     // em outras abas tambem
