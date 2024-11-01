@@ -4,7 +4,7 @@ export default createGlobalStyle`
 *{
     --MainColor: ${({theme}) => theme.MainColor};
     --DecorateColor: ${({ theme }) => theme.DecorateColor};
-    --SecondaryColor: ${({theme}) => theme.SecondaryColorDecorate};
+    --SecondaryColor: ${({theme}) => theme.SecondaryColor};
     --SecondaryColorDecorate: ${({theme}) => theme.SecondaryColorDecorate};
 }
 body {

@@ -10,6 +10,6 @@ export const darkTheme = {
     toggleBorder: "#6B8096",
     MainColor: "#2C2C30",
     DecorateColor: "#D5D5D6",
-    SecondaryColor: "#151518",
+    SecondaryColor: "white",
     SecondaryColorDecorate: "#4f4f52"
 };
