@@ -2,7 +2,7 @@
     --imgProfileSize: 10vmin;
     --social-iconsSize: 4.5vmin;
     --album-coverSize: 20vmin;
-    --darkMode-SecondaryColor: white;
+    /* --darkMode-SecondaryColor: #67676b; */
 
 }
 #main{
@@ -59,7 +59,7 @@
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
-                    border: solid 1px var(--darkMode-SecondaryColor);
+                    border: solid 1px var(--SecondaryColor);
                     background: none;
                     p{
                         margin: 0;
@@ -73,7 +73,7 @@
                     justify-content: center;
                     transition: width 0.5s ease-in;
                     height: 2%;
-                    background: var(--darkMode-SecondaryColor);
+                    background: var(--SecondaryColor);
                     bottom: 20%; 
                     width: 0;
                 }
@@ -92,7 +92,7 @@
                     margin-left: 20px;
                     content: "";
                     width: 90%;
-                    border-bottom: solid 1px var(--darkMode-SecondaryColor);
+                    border-bottom: solid 1px var(--SecondaryColor);
                 }
             }
             
@@ -243,7 +243,7 @@
                     .album-artist,.album-total_tracks{
                         font-size: 1rem;
                         margin: 0;
-                        font-weight: 300;
+                        font-weight: 400;
                     }
                     .album-total_tracks{
                         text-align: end;
