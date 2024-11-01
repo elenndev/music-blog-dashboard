@@ -31,25 +31,44 @@ const Form_post: React.FC<{
 
     const handleSubmit = async (event: React.FormEvent) => {
         setIsSubmitting(true)
-        setIsSubmitFail(false)
-        setIsSubmitSuccess(false)
+        // setIsSubmitFail(false)
+        // setIsSubmitSuccess(false)
         try {
             const result = await SubmitForm(event, { reqType }, { id }, context)
             if (result !== null){
                 setIsSubmitting(true)
+                console.log(result)
+                
             }
-            else if (result === 200 || result === 201 || result === 204) {
+            if (result === 200 || result === 201 || result === 204) {
+                console.log("pegou o 204")
                 setIsSubmitSuccess(true)
+                console.log(isSubmitSuccess)
+                setIsSubmitting(false)
             } else {
                 setIsSubmitFail(true)
+                setIsSubmitting(false)
             }
         }finally {
-            setIsSubmitting(false)
-            setOnSubmittedPost(true)
-            if (onEdit){
-                setEditMode(false)
+            console.log('chegou aqui')
+                if (isSubmitSuccess){
+                    console.log("sucesso")
+                    setIsSubmitting(false)
+                    setOnSubmittedPost(true)
+                    // setIsSubmitSuccess(false)
+                    // setIsSubmitFail(false)
+                    if (onEdit){
+                        setEditMode(false)
+                    }
+                } 
+                if (!isSubmitSuccess){
+                    console.log("ta pegando como falso")
+                }
+                if (isSubmitFail){
+                    setIsSubmitting(false)
+                    return "erro ao enviar ost"
+                }
             }
-        }
     }
 
     

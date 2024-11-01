@@ -29,9 +29,10 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         if (!(cover.endsWith('jpg') || cover.endsWith('jpeg') || cover.endsWith('png'))){
             alert('Imagem com formato inválido, por favor tente usar uma imagem diferente')
             return
-        } else if (cover_description.length<10){
+        }
+        if (cover_description.length<10){
             alert('Por favor preencha corretamente o campo da descrição da capa da publicação')
-            return
+            return "error"
         }
 
         if (editor.querySelectorAll("h1").length<1){
@@ -81,9 +82,10 @@ const SubmitForm = async (event, reqType, postId, context) =>{
 
             } else if(type == 'put'){
                 const {error: updateError, status} = await supabase.from('posts').update(data).eq("id",id)
+                console.log(status)
                 if (updateError){
                     editor.prepend(saveTitle);
-                    return status
+                    return updateError
                 }
                 cleanForm()
                 return status
