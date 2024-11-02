@@ -4,7 +4,7 @@ import { getAlbumById } from '../../Dashboard/components/static/getAlbumById';
 import { Album } from '../../Dashboard/components/Set_FeaturedAlbum';
 
 //midia
-import discoIcon from './img/disco-png.png'
+import discoIcon from './img/disco-png.webp'
 import SVG_spotify from '../../../components/SVG_spotify';
 
 const FeaturedAlbum: React.FC = () => {
@@ -12,7 +12,6 @@ const FeaturedAlbum: React.FC = () => {
     const [featuredAlbum, setFeaturedAlbum] = useState<Album | null>(null);
     const release_year = featuredAlbum?.release_date.slice(0,4)
 
-    // const id = localStorage.getItem("featuredAlbumId");
 
     const authenticate = async () => {
         const _token = await getToken();

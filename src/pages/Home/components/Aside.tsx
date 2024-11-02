@@ -4,8 +4,8 @@ import SVG_spotify from "../../../components/SVG_spotify"
 import FeaturedAlbum from "./Container_FeaturedAlbum"
 
 // Images
-import profileIcon from "./img/profile-icon.jpg"
-import musicboardLogo from "../../../components/musicboard.png"
+import profileIcon from "../../../components/profile-icon.webp"
+import musicboardLogo from "../../../components/musicboard.webp"
 import supabase from "../../../components/static/auth"
 
 

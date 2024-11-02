@@ -10,8 +10,8 @@ import { lightTheme, darkTheme } from "../../components/static/themes.js";
 import GlobalTheme from "../../components/static/globals.js";
 
 // Images
-import profileIcon from "./components/midia/profile-icon.jpg"
-import musicboardLogo from "../../components/musicboard.png"
+import profileIcon from "../../components/profile-icon.webp"
+import musicboardLogo from "../../components/musicboard.webp"
 import { useEffect, useState } from 'react'
 import Header from '../../components/Header.js'
 import Footer from '../../components/Footer.js'
