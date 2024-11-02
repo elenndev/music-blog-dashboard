@@ -30,7 +30,7 @@ main{
         width: 80%;
         padding-bottom: 30px;
         li:hover{
-            background: #151518;
+            background: var(--SecondaryColorDecorate);
         }
         button{
             border: none;

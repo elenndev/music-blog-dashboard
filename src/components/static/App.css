@@ -221,7 +221,8 @@ li{
   font-weight: 500;
 }
 .btn-primary:hover{
-  background: var(--SecondaryColor);
+  background: var(--DecorateColor);
+  color: var(--MainColor)
 }
 .btn-secondary {
   background: var(--SecondaryColorDecorate);
