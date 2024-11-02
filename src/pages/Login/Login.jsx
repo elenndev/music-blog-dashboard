@@ -36,11 +36,12 @@ export default function Login() {
                 }}
             >
                 <div>
-                    <Auth
+                    {/* <Auth
                         supabaseClient={supabase}
                         appearance={{ theme: ThemeSupa }}
                         providers={["google", "facebook", "github"]}
-                    />
+                    /> */}
+                    <p>Página em manutenção !</p>
                 </div>
             </div>
         );
