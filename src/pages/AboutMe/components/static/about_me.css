@@ -49,7 +49,7 @@
             }
         }
         a:hover{
-            background: #151518;
+            background: var(--SecondaryColorDecorate);
         }
         img.musicboard{
             margin-right: 10px;
