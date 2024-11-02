@@ -13,7 +13,7 @@ const Button_PostEdit: React.FC<{post: Post, editPost?: FunctionGetId}> = ({post
     const { setEditMode } = context;
     function Edit(){
         setEditMode(true)
-        EditPost(post.id,post.cover,post.title,post.content)
+        EditPost(post.id,post.cover,post.title,post.content,post.cover_description)
 
         if (editPost){
             editPost(post.id)}

@@ -17,14 +17,12 @@ const Header = ({ onChangeTheme }: { onChangeTheme: (newTheme: string) => void }
         const newTheme = theme === "dark" ? "light" : "dark";
         setTheme(newTheme)
         onChangeTheme(newTheme)
-        console.log("checkLightMode")
 
     }
 
     useEffect(() => {
         check_path()
         if (theme === "light"){setIsChecked(true)
-            console.log("esta como light, is check: ", isChecked)
         }
     }, [])
 
