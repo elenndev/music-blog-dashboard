@@ -9,8 +9,9 @@ const ProtectedRoute = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setSession(checkAuth())
-        console.log(session)
+        // setSession(checkAuth())
+        checkAuth()
+        // console.log(session)
     }, []);
 
     if (loading) {
