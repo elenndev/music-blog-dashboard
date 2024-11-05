@@ -2,7 +2,7 @@ import { useContext } from "react"
 import cleanForm from "./cleanForm"
 import exitEditMode from "./exitEditMode"
 import { DashboardContext } from "../Context_Dashboard"
-import supabase from '../../../../components/static/auth';
+import supabase from '../../../../components/static/supabaseauth';
 
 
 const SubmitForm = async (event, reqType, postId, context) =>{

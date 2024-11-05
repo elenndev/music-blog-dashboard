@@ -1,26 +1,16 @@
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import supabase from "../../components/static/auth"
+import supabase from "../../components/static/supabaseauth"
+import { checkAuth } from "./components/static/checkAuth";
 
 const ProtectedRoute = ({ children }) => {
-    const [session, setSession] = useState(null);
+    const [session, setSession] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const checkSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            setSession(session);
-            setLoading(false);
-        };
-
-        checkSession();
-
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session);
-        });
-
-        return () => subscription.unsubscribe();
+        setSession(checkAuth())
+        console.log(session)
     }, []);
 
     if (loading) {
@@ -29,9 +19,10 @@ const ProtectedRoute = ({ children }) => {
 
     if (!session) {
         return <Navigate to="/blog-login" />;
+    } else{
+        return children;
     }
 
-    return children;
 };
 
 export default ProtectedRoute;

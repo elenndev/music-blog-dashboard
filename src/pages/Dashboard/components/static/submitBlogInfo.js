@@ -1,4 +1,4 @@
-import supabase from '../../../../components/static/auth';
+import supabase from '../../../../components/static/supabaseauth';
 
 function submitBlogInfo(type,event, info_data){
     if (event != null){

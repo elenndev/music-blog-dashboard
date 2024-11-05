@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import supabase from "../../../components/static/auth"
+import supabase from "../../../components/static/supabaseauth"
 import { DashboardContext } from "./Context_Dashboard"
 
 

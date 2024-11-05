@@ -1,5 +1,5 @@
 import axios from 'axios';
-import supabase from '../../../../components/static/auth';
+import supabase from '../../../../components/static/supabaseauth';
 
 export const getAlbumById = async (token: string) => {
 

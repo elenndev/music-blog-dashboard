@@ -6,7 +6,7 @@ import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Title_Post from "../../../components/Title_Post";
 import { Truncate } from "@re-dev/react-truncate";
 import { Link } from "react-router-dom";
-import supabase from "../../../components/static/auth.js"
+import supabase from "../../../components/static/supabaseauth"
 
 
 const Post: React.FC<{ post: Model_Post }> = ({ post }) => {

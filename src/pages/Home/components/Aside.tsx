@@ -6,7 +6,7 @@ import FeaturedAlbum from "./Container_FeaturedAlbum"
 // Images
 import profileIcon from "../../../components/profile-icon.webp"
 import musicboardLogo from "../../../components/musicboard.webp"
-import supabase from "../../../components/static/auth"
+import supabase from "../../../components/static/supabaseauth"
 
 
 const Aside = () => {

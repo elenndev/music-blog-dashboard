@@ -1,4 +1,4 @@
-import supabase from "../../../components/static/auth"
+import supabase from "../../../components/static/supabaseauth"
 
 const Button_SignOut = () =>{
     return(

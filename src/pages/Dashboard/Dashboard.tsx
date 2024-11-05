@@ -7,7 +7,7 @@ import { DashboardProvider } from "./components/Context_Dashboard"
 import Form_post from "./components/Form_post"
 import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
 import Iframe from "../../components/EmbedPlaylist"
-import supabase from "../../components/static/auth"
+import supabase from "../../components/static/supabaseauth.js"
 import submitBlogInfo from "./components/static/submitBlogInfo"
 
 import { ThemeProvider } from "styled-components";

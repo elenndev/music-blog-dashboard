@@ -4,7 +4,7 @@ import './components/static/All_posts.css';
 import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
 import FunctionGetId from '../Dashboard/components/Type_FunctionGetId.tsx';
 import { DashboardContext } from '../Dashboard/components/Context_Dashboard.tsx';
-import supabase from '../../components/static/auth.js';
+import supabase from '../../components/static/supabaseauth.js';
 import Model_Post from '../../components/InterfacePost.tsx';
 import Header from '../../components/Header.tsx';
 import Footer from '../../components/Footer.tsx';

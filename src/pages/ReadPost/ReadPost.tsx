@@ -6,7 +6,7 @@ import Header from '../../components/Header.tsx';
 import Footer from '../../components/Footer.tsx';
 import { Link, useParams } from "react-router-dom"
 import './ReadPost.css'
-import supabase from "../../components/static/auth"
+import supabase from "../../components/static/supabaseauth.js"
 
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../../components/static/themes.js";
