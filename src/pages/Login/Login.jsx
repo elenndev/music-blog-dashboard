@@ -5,16 +5,29 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useEffect, useState } from "react";
 import supabase from "../../components/static/supabaseauth"
 import Button_SignOut from "../Dashboard/components/Button_SignOut";
+import { Navigate, useNavigate} from "react-router-dom";
+import { checkAuth } from "../Dashboard/components/static/checkAuth";
+import "./Login.css"
 const API_URL = import.meta.env.VITE_API_URL;
 
 
 export default function Login() {
+    const navigate = useNavigate()
     const [session, setSession] = useState(null)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [isloading, setIsLoading] = useState(null)
+
+    function getSession(){
+        const check = checkAuth();
+        if (check !== null) {
+            setIsLoading(false)
+            setSession(check);
+        }
+    };
 
     const handleLogin = async(e) =>{
-        console.log('chegou aqui, tentar: ', API_URL)
+        setIsLoading(true)
         e.preventDefault()
         const payload = {
             username: username,
@@ -22,30 +35,27 @@ export default function Login() {
         }
         try{
             const response = await axios.post(`${API_URL}/login`, payload)
-
             const token = response.data
             localStorage.setItem('token',token)
-            console.log('login bem sucedido: ', token)
         } catch (error){
-            console.log('erro', error.response ? error.response.data : error.message)
+            return error
         }
+        getSession()
     }
 
     useEffect(() => {
-        const getSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session !== null) {
-                setSession(session);
-            }
-        };
-        getSession();
-
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session);
-        });
-
-        return () => subscription.unsubscribe();
+        getSession()
     }, []);
+
+    useEffect(() => {
+        if(session){
+            return navigate('/dashboard')
+        }
+    }, [session])
+    
+    if(isloading){
+        return(<p>Carregando...</p>)
+    }
 
     if (!session) {
         return (
@@ -59,21 +69,14 @@ export default function Login() {
                 }}
             >
                 <div>
-                    <form onSubmit={handleLogin}>
+                    <form id="login-form" onSubmit={handleLogin}>
                         <label htmlFor="username">Usuário:</label>
-                        <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required></input>
+                        <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Digite seu username" required></input>
                         <label htmlFor="password">Senha:</label>
-                        <input type="password" name="input_password" value={password} onChange={(e) => setPassword(e.target.value)} required></input>
+                        <input type="password" name="input_password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Digite sua senha" required></input>
                         <button type="submit">Enviar</button>
                     </form>
                 </div>
-            </div>
-        );
-    } else {
-        return (
-            <div>
-                <div>Logged in!</div>
-                <Button_SignOut/>
             </div>
         );
     }
