@@ -1,22 +1,22 @@
 import { jwtDecode } from "jwt-decode"
+import jwt from "jsonwebtoken"
+const KEY = import.meta.env.VITE_KEY;
+
 export function checkAuth(){
-    const token = localStorage.getItem('token')
-    if (!token){
-        // colocar aqui pra encaminhar pra pagina de login
+    const full_token = localStorage.getItem('token')
+    if (!full_token){
         return false
     }
-    let payload = null
-    try{
-        const decode = jwtDecode(token)
-        payload = decode.exp
-        console.log(decode)
-    } catch(error){
-        return(error)
+    const token = jwtDecode(full_token)
+    const expired = token.exp * 1000 < Date.now()
+    if (expired){
+        return false
     }
-    const expired = payload * 1000 < Date.now()
-    console.log(expired)
     
-    const session = () => {token & !expired ? true : false}
-    return session
+    if (!token){
+        return false
+    } else {
+        return true
+    }
     
 }

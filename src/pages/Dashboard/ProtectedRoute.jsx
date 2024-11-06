@@ -9,10 +9,13 @@ const ProtectedRoute = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // setSession(checkAuth())
-        checkAuth()
-        // console.log(session)
+        const session = checkAuth()
+        setSession(session)
     }, []);
+
+    useEffect(() => {
+        setLoading(false)
+    }, [[session]])
 
     if (loading) {
         return <div>Loading...</div>;  
