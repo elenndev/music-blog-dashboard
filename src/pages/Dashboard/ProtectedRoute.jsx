@@ -1,30 +1,29 @@
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
-import supabase from "../../components/static/supabaseauth"
 import { checkAuth } from "./components/static/checkAuth";
 
 const ProtectedRoute = ({ children }) => {
-    const [session, setSession] = useState(false);
+    const [session, setSession] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const session = checkAuth()
-        setSession(session)
-    }, []);
+    const handleCheckSession = async () => {
+        const checkSession = await checkAuth()
+        setSession(checkSession)   
+        setLoading(false)
+    }
 
     useEffect(() => {
-        setLoading(false)
-    }, [[session]])
+        handleCheckSession()
+    }, []);
 
     if (loading) {
         return <div>Loading...</div>;  
     }
 
-    if (!session) {
-        return <Navigate to="/blog-login" />;
-    } else{
+    if (session) {
         return children;
+    } else{
+        return <Navigate to="/blog-login" />;
     }
 
 };

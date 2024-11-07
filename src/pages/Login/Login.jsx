@@ -1,7 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
 import axios from 'axios'
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useEffect, useState } from "react";
 import supabase from "../../components/static/supabaseauth"
 import Button_SignOut from "../Dashboard/components/Button_SignOut";
@@ -16,15 +13,17 @@ export default function Login() {
     const [session, setSession] = useState(null)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [isloading, setIsLoading] = useState(null)
+    const [isloading, setIsLoading] = useState(true)
+    
 
-    function getSession(){
-        const check = checkAuth();
-        if (check !== null) {
+    async function getSession(){
+        const checkSession = await checkAuth();
+        if (checkSession !== null) {
             setIsLoading(false)
-            setSession(check);
+            setSession(checkSession);
         }
     };
+
 
     const handleLogin = async(e) =>{
         setIsLoading(true)
@@ -36,10 +35,21 @@ export default function Login() {
         try{
             const response = await axios.post(`${API_URL}/login`, payload)
             const token = response.data
-            localStorage.setItem('token',token)
+            console.log(response.data)
+            localStorage.setItem('token', token)
+            if (response.data === false){
+                window.alert('Credenciais erradas, por favor tente novamente')
+                setSession(false)
+                setIsLoading(false)
+                setUsername("")
+                setPassword("")
+                return
+            }
         } catch (error){
             return error
         }
+        setUsername("")
+        setPassword("")
         getSession()
     }
 
@@ -47,12 +57,7 @@ export default function Login() {
         getSession()
     }, []);
 
-    useEffect(() => {
-        if(session){
-            return navigate('/dashboard')
-        }
-    }, [session])
-    
+
     if(isloading){
         return(<p>Carregando...</p>)
     }
@@ -71,13 +76,21 @@ export default function Login() {
                 <div>
                     <form id="login-form" onSubmit={handleLogin}>
                         <label htmlFor="username">Usuário:</label>
-                        <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Digite seu username" required></input>
+                        <input type="text" name="username" value={username} 
+                        onChange={(e) => setUsername(e.target.value)} placeholder="Digite seu username"
+                        required></input>
                         <label htmlFor="password">Senha:</label>
-                        <input type="password" name="input_password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Digite sua senha" required></input>
+                        <input type="password" name="input_password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        placeholder="Digite sua senha"
+                        required></input>
                         <button type="submit">Enviar</button>
                     </form>
                 </div>
             </div>
         );
+    } else{
+        return <Navigate to="/dashboard" />
     }
 }

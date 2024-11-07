@@ -12,12 +12,9 @@
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^9.3.0",
     "@re-dev/react-truncate": "^0.4.2",
-    "@supabase/auth-ui-react": "^0.4.7",
     "@supabase/supabase-js": "^2.45.4",
     "axios": "^1.7.7",
     "dompurify": "^3.1.7",
-    "jsonwebtoken": "^9.0.2",
-    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-quill-new": "^3.3.3",
