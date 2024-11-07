@@ -1,22 +1,23 @@
-import { jwtDecode } from "jwt-decode"
-import jwt from "jsonwebtoken"
-const KEY = import.meta.env.VITE_KEY;
+import axios from 'axios'
+const API_URL = import.meta.env.VITE_API_URL;
 
-export function checkAuth(){
+
+export async function checkAuth(){
     const full_token = localStorage.getItem('token')
     if (!full_token){
         return false
     }
-    const token = jwtDecode(full_token)
-    const expired = token.exp * 1000 < Date.now()
-    if (expired){
+
+    try{
+        const validateToken = await axios.get(`${API_URL}/check-token`,{
+            headers: {
+                Authorization: `Bearer ${full_token}`
+            }
+        })
+        return validateToken.data
+    } catch(error){
+        console.error('Erro ao fazer o check token', error)
         return false
-    }
-    
-    if (!token){
-        return false
-    } else {
-        return true
     }
     
 }
