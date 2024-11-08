@@ -33,7 +33,6 @@ export default function Login() {
             password: password
         }
         try{
-            console.log(API_URL)
             const response = await axios.post(`${API_URL}/login`, payload)
             const token = response.data
             localStorage.setItem('token', token)
