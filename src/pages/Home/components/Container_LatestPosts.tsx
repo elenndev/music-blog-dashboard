@@ -7,6 +7,8 @@ import Title_Post from "../../../components/Title_Post";
 import { Truncate } from "@re-dev/react-truncate";
 import { Link } from "react-router-dom";
 import supabase from "../../../components/static/supabaseauth"
+import axios from 'axios';
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
 const Post: React.FC<{ post: Model_Post }> = ({ post }) => {
@@ -24,7 +26,7 @@ const Post: React.FC<{ post: Model_Post }> = ({ post }) => {
                     {<Content_Post content={post.content} />}
             </Truncate>
             <span className="buttons-area">
-                <Button_PostReadMore id={post.id} />
+                <Button_PostReadMore id={post._id} />
                 <hr></hr>
             </span>
         </div>
@@ -38,15 +40,25 @@ const LatestPosts = () => {
     
     useEffect(() => {
         const getData = async () => {
-            const {data} = await supabase.from('posts').select()
-            
-            if (data){
-                setPosts(data)
-            } if (!data){
-                setError('Erro ao buscar publicações')
+            try{
+                const response = await axios.get(`${SERVER_URL}/all-posts`,{
+                    params: {
+                        sort: -1
+                    }
+                })
+                console.log(response.data)
+                if (response.data){
+                    setPosts(response.data);   
+                    setLoading(false);
+                } else if(!response.data){
+                    setError("Publicações não disponíveis")
+                }
+            } catch(error){
+                console.error("Erro ao acessar as publicações: ", error)
+                return false
             }
-            setLoading(false)
-        }
+            
+        };
         getData()
     }, [])
 
@@ -63,7 +75,7 @@ const LatestPosts = () => {
                 </div>
                 {loading && <p>Carregando publicações...</p>}
                 {posts.map((post)=>(
-                    <Post key={post.id} post = {post}/>
+                    <Post key={post._id} post = {post}/>
                 ))}
             </section>
         </>

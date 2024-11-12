@@ -29,7 +29,7 @@ functionEdit?: FunctionGetId;}> = ({ post, isDashboard, functionEdit}) => {
     
 
     return(
-        <div key={post.id} className='post-card'>
+        <div key={post._id} className='post-card'>
             <p className='post-card_date'>{date.dateMonth} | {date.dateDay}</p>
             <span>
                 <img alt={post.cover_description} src={post.cover}></img>
@@ -45,9 +45,9 @@ functionEdit?: FunctionGetId;}> = ({ post, isDashboard, functionEdit}) => {
                     {<Content_Post content={post.content} />}
                 </Truncate>
                 <span className="buttons-area">
-                    <Button_PostReadMore id={post.id}/>
+                    <Button_PostReadMore id={post._id}/>
                     {isDashboard && <span className="buttons-dashboard">
-                        {isDashboard && <Button_PostDelete id={post.id}/>}
+                        {isDashboard && <Button_PostDelete id={post._id}/>}
                         {isDashboard && !onEdit &&
                         <Button_PostEdit post={post} editPost={functionEdit}/>}
                     </span>}

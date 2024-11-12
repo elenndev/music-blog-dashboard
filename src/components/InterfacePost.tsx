@@ -1,5 +1,5 @@
 interface Model_Post {
-    id: number; 
+    _id: string; 
     cover: string;
     cover_description: string;
     title: string;

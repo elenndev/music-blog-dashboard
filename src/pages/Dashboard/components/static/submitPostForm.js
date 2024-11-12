@@ -3,6 +3,8 @@ import cleanForm from "./cleanForm"
 import exitEditMode from "./exitEditMode"
 import { DashboardContext } from "../Context_Dashboard"
 import supabase from '../../../../components/static/supabaseauth';
+import axios from 'axios';
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
 const SubmitForm = async (event, reqType, postId, context) =>{
@@ -18,13 +20,6 @@ const SubmitForm = async (event, reqType, postId, context) =>{
     let id = postId.id 
     
     const {setEditMode} = context
-    
-    const {data: {user}} = await supabase.auth.getUser();
-    if (user.error) {
-        console.error('Erro ao obter usuário:', user.error);
-        return;
-    }
-    
 
         if (!(cover.endsWith('webp'))){
             alert('Imagem com formato inválido, por favor tente usar uma imagem de formato webp')
@@ -68,25 +63,27 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         }
 
         // Verificar auth e define method
-        if (user.aud == 'authenticated'){
-            if (type == 'post'){
-                const {error: insertError, status} = await supabase.from('posts').insert(data)
-                if (insertError){
-                    return status
-                }
-                cleanForm()
-                return status
-            } else if(type == 'put'){
-                const {error: updateError, status} = await supabase.from('posts').update(data).eq("id",id)
-                if (updateError){
-                    return status
-                }
-                cleanForm()
+        if (type == 'post'){
+            // // const {error: insertError, status} = await supabase.from('posts').insert(data)
+            // // if (insertError){
+            // //     return status
+            // }
+            // cleanForm()
+            // // return status
+
+            const response = await axios.post(`${SERVER_URL}/create-post`, data)
+            if(!response.data){
+                return false
+            }
+            cleanForm()
+            return 200
+        } else if(type == 'put'){
+            const {error: updateError, status} = await supabase.from('posts').update(data).eq("id",id)
+            if (updateError){
                 return status
             }
-
-        } else {
-            return
+            cleanForm()
+            return status
         }
 
     

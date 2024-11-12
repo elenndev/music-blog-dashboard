@@ -12,6 +12,9 @@ import Footer from '../../components/Footer.tsx';
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../../components/static/themes.js";
 import GlobalTheme from "../../components/static/globals.js";
+import axios from 'axios';
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 
 
 const AllPosts: React.FC<{isDashboard?: boolean,
@@ -26,14 +29,27 @@ onEdit?: boolean
     if (!context){
         throw new Error("DashboardContext não está disponível.");
     }
+
     const getData = async () => {
-        const {data} = await supabase.from("posts").select()
-        if (data){
-            setPosts(data);   
-            setLoading(false);
-        } else if(!data){
-            setError("Publicações não disponíveis")
+        try{
+            const response = await axios.get(`${SERVER_URL}/all-posts`,{
+                params: {
+                    sort: -1
+                }
+            })
+            console.log(response.data)
+            if (response.data){
+                setPosts(response.data);   
+                setLoading(false);
+                console.log(response.data)
+            } else if(!response.data){
+                setError("Publicações não disponíveis")
+            }
+        } catch(error){
+            console.error("Erro ao acessar as publicações: ", error)
+            return false
         }
+        
     };
 
     // THEME
@@ -51,7 +67,7 @@ onEdit?: boolean
 
     useEffect(() => {
         updateStorageChange()
-        getData();
+        getData()
         window.addEventListener("storage", (event)=> {
             if (event.key === "theme"){
                 updateStorageChange()
@@ -100,7 +116,7 @@ onEdit?: boolean
             {loading && <p>Carregando publicações...</p>}
             <div className='card-container'>
                 {posts.map((post) => (
-                    <CardPost key={post.id}
+                    <CardPost key={post._id}
                         post = {post}
                         isDashboard = {isDashboard}
                         functionEdit={functionEdit}
