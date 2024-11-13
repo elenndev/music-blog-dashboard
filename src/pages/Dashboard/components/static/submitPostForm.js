@@ -59,10 +59,15 @@ const SubmitForm = async (event, reqType, postId, context) =>{
             content: content,
             created_at: new Date()
         }
+        const full_token = localStorage.getItem('token')
 
         // Verificar auth e define method
         if (type == 'post'){
-            const response = await axios.post(`${SERVER_URL}/create-post`, data)
+            const response = await axios.post(`${SERVER_URL}/create-post`, data, {
+                headers: {
+                    Authorization: `Bearer ${full_token}`
+                }
+            })
             if(!response.data){
                 return false
             }
@@ -72,6 +77,9 @@ const SubmitForm = async (event, reqType, postId, context) =>{
             const response = await axios.put(`${SERVER_URL}/update-post`, data, {
                 params: {
                     get_id: id
+                },
+                headers: {
+                    Authorization: `Bearer ${full_token}`
                 }
             })
             if (!response.data) { return false}

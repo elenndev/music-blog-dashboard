@@ -10,12 +10,17 @@ function submitBlogInfo(type,event, info_data){
     const playlist = embed_link + input.split('playlist/')[1]
     
     const submit = async() =>{
+        const full_token = localStorage.getItem('token')
         if (type== "featured playlist"){
             const data = {
                 "info_name": "featured_playlist",
                 "text_value": playlist
             }
-            const response = await axios.put(`${SERVER_URL}/set-fast-infos`, data)
+            const response = await axios.put(`${SERVER_URL}/set-fast-infos`, data, {
+                headers: {
+                    Authorization: `Bearer ${full_token}`
+                }
+            })
             if (response.data){
                 document.querySelector('div.featured-playlist>form>input').value = ""
             } else {
@@ -25,7 +30,11 @@ function submitBlogInfo(type,event, info_data){
                 "info_name": "week_album",
                 "text_value": info_data
             }
-            const response = await axios.put(`${SERVER_URL}/set-fast-infos`, data)
+            const response = await axios.put(`${SERVER_URL}/set-fast-infos`, data, {
+                headers: {
+                    Authorization: `Bearer ${full_token}`
+                }
+            })
         }
     }
     
