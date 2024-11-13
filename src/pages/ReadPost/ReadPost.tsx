@@ -6,11 +6,13 @@ import Header from '../../components/Header.tsx';
 import Footer from '../../components/Footer.tsx';
 import { Link, useParams } from "react-router-dom"
 import './ReadPost.css'
-import supabase from "../../components/static/supabaseauth.js"
 
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../../components/static/themes.js";
 import GlobalTheme from "../../components/static/globals.js";
+
+import axios from 'axios';
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const ReadPost: React.FC = () => {
     const ButtonStyle = {
@@ -23,9 +25,13 @@ const ReadPost: React.FC = () => {
 
 
     const getData = async () =>{
-        const {data} = await supabase.from("posts").select('*').eq("id",id)
-        if (data){
-            setPost(data);
+        const response = await axios.get(`${SERVER_URL}/get-post`,{
+            params: {
+                get_id: id
+            }
+        })
+        if (response.data){
+            setPost(response.data);
             setLoading(false);
         }
 
@@ -69,7 +75,7 @@ const ReadPost: React.FC = () => {
             <Header onChangeTheme={handleChangeTheme}/>
             <main>  
                 {post.map((post) => (
-                    <article className="container read-post" key={post.id}>
+                    <article className="container read-post" key={post._id}>
                         <h1>{post.title}</h1>
                         <img src={post.cover}></img>
                         <Content_Post content={post.content}/>

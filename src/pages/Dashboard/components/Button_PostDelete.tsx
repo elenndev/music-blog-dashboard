@@ -15,7 +15,6 @@ const Button_PostDelete: React.FC<{id: string }> = ({ id }) =>{
     const {setOnDeletePost} = context
 
     const handleDeletePost = async () => {
-        window.alert(`${id}`)
         const confirmDelete = window.confirm("Tem certeza que deseja excluir essa publicação?")
         if (confirmDelete){
             const full_token = localStorage.getItem('token')

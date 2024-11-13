@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useEffect, useState } from "react";
-import supabase from "../../components/static/supabaseauth"
 import Button_SignOut from "../Dashboard/components/Button_SignOut";
 import { Navigate, useNavigate} from "react-router-dom";
 import { checkAuth } from "../Dashboard/components/static/checkAuth";

@@ -1,3 +1,3 @@
-type FunctionGetId = (id: number) => void
+type FunctionGetId = (id: string) => void
 
 export default FunctionGetId

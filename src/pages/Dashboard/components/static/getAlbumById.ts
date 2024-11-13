@@ -1,12 +1,17 @@
 import axios from 'axios';
-import supabase from '../../../../components/static/supabaseauth';
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const getAlbumById = async (token: string) => {
 
-    const {data, error} = await supabase.from("blog-saves").select("text_value").eq("info_name", "week_album")
-    if (data && data.length > 0){
+    const response = await axios.get(`${SERVER_URL}/fast-infos`,{
+        params: {
+            info_name: "week_album"
+        }
+    })
+
+    if (response.data){
         try {
-            const albumId = data[0].text_value 
+            const albumId = response.data.text_value 
             const result = await axios.get(`https://api.spotify.com/v1/albums/${albumId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -18,8 +23,6 @@ export const getAlbumById = async (token: string) => {
             throw error;
         }
     
-    } else {
-        return error
     }
 
 };

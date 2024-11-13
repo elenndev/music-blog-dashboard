@@ -5,10 +5,10 @@ import { useContext, useEffect, useState } from "react"
 import { DashboardContext} from "./Context_Dashboard"
 
 const Form_post: React.FC<{
-    post_id?: number
+    post_id?: string
 }> = ({ post_id }) => {
-    let reqType = ''
-    let id = 0
+    const [reqType, setReqType] = useState('')
+    let id = ""
 
 
     const style = {
@@ -34,7 +34,8 @@ const Form_post: React.FC<{
         setIsSubmitFail(false)
         setIsSubmitSuccess(false)
         try {
-            const result = await SubmitForm(event, { reqType }, { id }, context)
+            if(post_id){ id=post_id}
+            const result = await SubmitForm(event, { reqType }, {id} , context)
             if (result !== null){
                 setIsSubmitting(true)
             }
@@ -42,6 +43,7 @@ const Form_post: React.FC<{
                 setIsSubmitSuccess(true)
             } else {
                 setIsSubmitFail(true)
+                return
             }
         }finally {
             setIsSubmitting(false)
@@ -55,17 +57,16 @@ const Form_post: React.FC<{
     
 
     useEffect(() => {
-        
         if (!onEdit){
             setIsSubmitFail(false)
             setIsSubmitSuccess(false)
         }
         if (onEdit) {
-            reqType = 'put'
+            setReqType('put')
             if (post_id) { id = post_id }
-    
+            
         } else {
-            reqType = 'post'
+            setReqType('post')
         }    
     }, [onEdit]);
 

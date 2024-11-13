@@ -2,7 +2,6 @@ import { useContext } from "react"
 import cleanForm from "./cleanForm"
 import exitEditMode from "./exitEditMode"
 import { DashboardContext } from "../Context_Dashboard"
-import supabase from '../../../../components/static/supabaseauth';
 import axios from 'axios';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -17,14 +16,14 @@ const SubmitForm = async (event, reqType, postId, context) =>{
     let reqURL = null
     let method = null
     let type = reqType.reqType
-    let id = postId.id 
+    let id = postId.id
     
     const {setEditMode} = context
 
         if (!(cover.endsWith('webp'))){
             alert('Imagem com formato inválido, por favor tente usar uma imagem de formato webp')
             return
-        } else if (cover_description.length<10){
+        } else if (cover_description.length<5){
             alert('Por favor preencha corretamente o campo da descrição da capa da publicação')
             return
         }
@@ -52,25 +51,17 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         //Formatar conteudos para o submit
         let result = null
         const title = editor.querySelector("h1").innerHTML
-        // const remove_h1 = editor.querySelector("h1")
-        // remove_h1.remove()
         const content = editor.innerHTML
         let data = {
             cover: cover,
             cover_description: cover_description,
             title: title,
-            content: content
+            content: content,
+            created_at: new Date()
         }
 
         // Verificar auth e define method
         if (type == 'post'){
-            // // const {error: insertError, status} = await supabase.from('posts').insert(data)
-            // // if (insertError){
-            // //     return status
-            // }
-            // cleanForm()
-            // // return status
-
             const response = await axios.post(`${SERVER_URL}/create-post`, data)
             if(!response.data){
                 return false
@@ -78,12 +69,14 @@ const SubmitForm = async (event, reqType, postId, context) =>{
             cleanForm()
             return 200
         } else if(type == 'put'){
-            const {error: updateError, status} = await supabase.from('posts').update(data).eq("id",id)
-            if (updateError){
-                return status
-            }
+            const response = await axios.put(`${SERVER_URL}/update-post`, data, {
+                params: {
+                    get_id: id
+                }
+            })
+            if (!response.data) { return false}
             cleanForm()
-            return status
+            return 200
         }
 
     

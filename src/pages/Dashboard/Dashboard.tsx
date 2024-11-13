@@ -7,12 +7,13 @@ import { DashboardProvider } from "./components/Context_Dashboard"
 import Form_post from "./components/Form_post"
 import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
 import Iframe from "../../components/EmbedPlaylist"
-import supabase from "../../components/static/supabaseauth.js"
 import submitBlogInfo from "./components/static/submitBlogInfo"
 
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../../components/static/themes.js";
 import GlobalTheme from "../../components/static/globals.js";
+import axios from "axios";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
 const Dashboard = () => {
@@ -23,14 +24,20 @@ const Dashboard = () => {
         flexDirection: 'column',
         alignItems: 'center'
     }
-    const [postId, setId] = useState(0)
-    const handleButtonEdit = (id: number) => {setId(id)}
+    const [postId, setId] = useState("")
+    const handleButtonEdit = (id: string) => {
+        setId(id)
+    }
 
     const [featuredPlaylist, setFeaturedPlaylist] = useState<string | null>('3AqqJn20LczJtoaHjVLipe?utm_source=generator')
-    const getFeaturedPlaylist = async()=>{
-        const {data} = await supabase.from("blog-saves").select('*').eq("info_name","featured_playlist")
-        if (data && data.length > 0){
-            setFeaturedPlaylist(data[0].text_value)
+    const getFeaturedPlaylist = async()=>{  
+        const response = await axios.get(`${SERVER_URL}/fast-infos`, {
+            params: {
+                info_name: "featured_playlist"
+            }
+        })
+        if (response.data){
+            setFeaturedPlaylist(response.data.text_value)
         } else {
             setFeaturedPlaylist("Playlist não definida")
         }

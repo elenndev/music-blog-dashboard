@@ -6,7 +6,6 @@ import Button_PostReadMore from "../../../components/Button_PostReadMore";
 import Title_Post from "../../../components/Title_Post";
 import { Truncate } from "@re-dev/react-truncate";
 import { Link } from "react-router-dom";
-import supabase from "../../../components/static/supabaseauth"
 import axios from 'axios';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -46,7 +45,6 @@ const LatestPosts = () => {
                         sort: -1
                     }
                 })
-                console.log(response.data)
                 if (response.data){
                     setPosts(response.data);   
                     setLoading(false);

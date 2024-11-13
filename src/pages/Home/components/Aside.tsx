@@ -2,20 +2,24 @@ import { useEffect, useState } from "react"
 import SVG_lastFm from "../../../components/SVG_lastFm"
 import SVG_spotify from "../../../components/SVG_spotify"
 import FeaturedAlbum from "./Container_FeaturedAlbum"
+import axios from "axios";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 // Images
 import profileIcon from "../../../components/profile-icon.webp"
 import musicboardLogo from "../../../components/musicboard.webp"
-import supabase from "../../../components/static/supabaseauth"
 
 
 const Aside = () => {
     const [featuredPlaylist, setFeaturedPlaylist] = useState<string>('3AqqJn20LczJtoaHjVLipe?utm_source=generator')
 
     const getPlaylistLink = async () => {
-        const {data} = await supabase.from("blog-saves").select('*').eq("info_name", "featured_playlist")
-        if (data && data.length > 0) {
-            setFeaturedPlaylist(data[0].text_value)
+        const response = await axios.get(`${SERVER_URL}/fast-infos`,{
+            params: {
+                info_name: "featured_playlist"}})
+
+        if (response.data) {
+            setFeaturedPlaylist(response.data.text_value)
         } else {
             return
         }
