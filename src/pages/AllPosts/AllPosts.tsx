@@ -12,6 +12,7 @@ import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../../components/static/themes.js";
 import GlobalTheme from "../../components/static/globals.js";
 import axios from 'axios';
+import Button_GoToDrafts from '../Dashboard/components/Button_GoToDrafts.tsx';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
@@ -30,22 +31,41 @@ onEdit?: boolean
     }
 
     const getData = async () => {
-        try{
-            const response = await axios.get(`${SERVER_URL}/all-posts`,{
-                params: {
-                    sort: 1
+        if (onDrafts){
+            const full_token = localStorage.getItem('token')
+            try{
+                const response = await axios.get(`${SERVER_URL}/get-drafts`,{
+                    headers: {
+                        Authorization: `Bearer ${full_token}`
+                    }
+                })
+                if (response.data){
+                    setPosts(response.data)
+                    setLoading(false)
                 }
-            })
-            if (response.data){
-                setPosts(response.data);   
-                setLoading(false);
-            } else if(!response.data){
-                setError("Publicações não disponíveis")
+
+            }catch(error){
+                console.error("Problemas ao acessar")
             }
-        } catch(error){
-            console.error("Erro ao acessar as publicações: ", error)
-            return false
+        } else {
+            try{
+                const response = await axios.get(`${SERVER_URL}/all-posts`,{
+                    params: {
+                        sort: 1
+                    }
+                })
+                if (response.data){
+                    setPosts(response.data);   
+                    setLoading(false);
+                } else if(!response.data){
+                    setError("Publicações não disponíveis")
+                }
+            } catch(error){
+                console.error("Erro ao acessar as publicações: ", error)
+                return false
+            }
         }
+
         
     };
 
@@ -73,7 +93,7 @@ onEdit?: boolean
     }, []);
     
     // POSTS
-    const {submittedPost, setOnSubmittedPost, deletePost, setOnDeletePost} = context
+    const {submittedPost, setOnSubmittedPost, deletePost, setOnDeletePost, onDrafts} = context
     useEffect(() => {
         if (submittedPost){
             getData()
@@ -87,6 +107,10 @@ onEdit?: boolean
             setOnDeletePost(false)
         }
     }, [deletePost])
+
+    useEffect(() => {
+        getData()
+    }, [onDrafts])
 
     if (error) {
         return <p>{error}</p>;
@@ -108,7 +132,7 @@ onEdit?: boolean
             <div className='container all-posts'>
             <div className='container_header'>
                 <h2>Todos as publicações</h2>
-                {isDashboard && <Button_SignOut/>}
+                {isDashboard && <><Button_SignOut/><Button_GoToDrafts/></>}
             </div>
             {loading && <p>Carregando publicações...</p>}
             <div className='card-container'>

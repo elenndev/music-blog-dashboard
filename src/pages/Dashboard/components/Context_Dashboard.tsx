@@ -7,6 +7,8 @@ interface DashboardContextType{
     setOnSubmittedPost: (value: boolean) => void;
     deletePost: boolean;
     setOnDeletePost: (value: boolean) => void;
+    onDrafts: boolean;
+    setOnDrafts: (value: boolean) => void;
 }
 
 export const DashboardContext = createContext<DashboardContextType | undefined>(undefined);
@@ -15,9 +17,11 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
     const [onEdit, setOnEdit] = useState(false);
     const [submittedPost, setSubmittedPost] = useState(false)
     const [deletePost, setDeletePost] = useState(false)
+    const [onDrafts, setDrafts] = useState(false)
 
     return (
-        <DashboardContext.Provider value={{ onEdit, setEditMode: setOnEdit, submittedPost, setOnSubmittedPost: setSubmittedPost, deletePost, setOnDeletePost: setDeletePost }}>
+        <DashboardContext.Provider value={{ onEdit, setEditMode: setOnEdit, submittedPost, setOnSubmittedPost: setSubmittedPost, deletePost, setOnDeletePost: setDeletePost,
+        onDrafts, setOnDrafts: setDrafts}}>
             {children}
         </DashboardContext.Provider>
     );

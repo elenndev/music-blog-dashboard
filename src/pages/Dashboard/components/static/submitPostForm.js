@@ -13,12 +13,19 @@ const SubmitForm = async (event, reqType, postId, context) =>{
     const cover_description = document.querySelector("#cover_description").value
     const editor = document.querySelector('div.ql-editor')
     const h1 = editor.querySelector("h1")
+    // guardar url se e pra postagem mesmo ou rascunho
     let reqURL = null
     let method = null
     let type = reqType.reqType
     let id = postId.id
     
-    const {setEditMode} = context
+    const {setEditMode, onDrafts} = context
+
+    if (onDrafts){
+        reqURL = "draft"
+    } else {
+        reqURL = 'post'
+    }
 
         if (!(cover.endsWith('webp'))){
             alert('Imagem com formato inválido, por favor tente usar uma imagem de formato webp')
@@ -63,7 +70,7 @@ const SubmitForm = async (event, reqType, postId, context) =>{
 
         // Verificar auth e define method
         if (type == 'post'){
-            const response = await axios.post(`${SERVER_URL}/create-post`, data, {
+            const response = await axios.post(`${SERVER_URL}/create-{${reqURL}}`, data, {
                 headers: {
                     Authorization: `Bearer ${full_token}`
                 }
@@ -74,7 +81,7 @@ const SubmitForm = async (event, reqType, postId, context) =>{
             cleanForm()
             return 200
         } else if(type == 'put'){
-            const response = await axios.put(`${SERVER_URL}/update-post`, data, {
+            const response = await axios.put(`${SERVER_URL}/update-${reqURL}`, data, {
                 params: {
                     get_id: id
                 },

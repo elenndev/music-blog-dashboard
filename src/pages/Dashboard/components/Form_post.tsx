@@ -35,6 +35,7 @@ const Form_post: React.FC<{
         setIsSubmitSuccess(false)
         try {
             if(post_id){ id=post_id}
+            
             const result = await SubmitForm(event, { reqType }, {id} , context)
             if (result !== null){
                 setIsSubmitting(true)
