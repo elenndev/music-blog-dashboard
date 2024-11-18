@@ -13,14 +13,18 @@ const SubmitForm = async (event, reqType, postId, context) =>{
     const cover_description = document.querySelector("#cover_description").value
     const editor = document.querySelector('div.ql-editor')
     const h1 = editor.querySelector("h1")
-    // guardar url se e pra postagem mesmo ou rascunho
+    // guardar url se é pra postagem mesmo ou rascunho
     let reqURL = null
+
     let method = null
     let type = reqType.reqType
     let id = postId.id
     
     const {setEditMode, onDrafts} = context
 
+    // Identifica se voce esta enviando/editando uma nova publicação ou salvando rascunho
+    // No backend o endpoint para posts e rascunhos são iguais, muda somente o final:
+        // Ex "/create-post" ou "/create-draft"  || "/update-post" ou "/update-draft"
     if (onDrafts){
         reqURL = "draft"
     } else {
@@ -68,7 +72,7 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         }
         const full_token = localStorage.getItem('token')
 
-        // Verificar auth e define method
+        // Verificar auth e define method 
         if (type == 'post'){
             const response = await axios.post(`${SERVER_URL}/create-${reqURL}`, data, {
                 headers: {
@@ -76,6 +80,7 @@ const SubmitForm = async (event, reqType, postId, context) =>{
                 }
             })
             if(!response.data){
+                // substituir por uma verificação de erro compativel com o seu backend
                 return false
             }
             cleanForm()
@@ -89,11 +94,14 @@ const SubmitForm = async (event, reqType, postId, context) =>{
                     Authorization: `Bearer ${full_token}`
                 }
             })
-            if (!response.data) { return false}
+            if (!response.data) { 
+                // substituir por uma verificação de erro compativel com o seu backend
+                return false
+            }
+
             cleanForm()
             return 200
         }
-
     
     }
 

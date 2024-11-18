@@ -7,102 +7,60 @@ import { DashboardContext } from '../Dashboard/components/Context_Dashboard.tsx'
 import Model_Post from '../../components/InterfacePost.tsx';
 import Header from '../../components/Header.tsx';
 import Footer from '../../components/Footer.tsx';
-
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../../components/static/themes.js";
 import GlobalTheme from "../../components/static/globals.js";
 import axios from 'axios';
 import Button_GoToDrafts from '../Dashboard/components/Button_GoToDrafts.tsx';
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
+const AllPosts: React.FC<{
+  isDashboard?: boolean,
+  functionEdit?: FunctionGetId,
+  onEdit?: boolean    
+}> = ({ isDashboard = false, functionEdit }) => {
+  const [posts, setPosts] = useState<Model_Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  const context = useContext(DashboardContext);
+  if (!context) {
+    throw new Error("DashboardContext não está disponível.");
+  }
 
-const AllPosts: React.FC<{isDashboard?: boolean,
-functionEdit?: FunctionGetId
-onEdit?: boolean    
-}> = ({isDashboard = false, functionEdit}) => {
-    const [posts, setPosts] = useState<Model_Post[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+  const { submittedPost, setOnSubmittedPost, deletePost, setOnDeletePost, onDrafts } = context;
 
-    const context = useContext(DashboardContext)
-    if (!context){
-        throw new Error("DashboardContext não está disponível.");
+  const getData = async () => {
+    try {
+      const result = await axios.get(onDrafts 
+        ? '/data/draftExemplo.json' 
+        : '/data/postExemplo.json');
+        console.log(result.data)
+      setPosts(result.data);
+      setLoading(false);
+    } catch (err) {
+      setError("Erro ao carregar os dados.");
+      setLoading(false);
     }
+  };
 
-    const getData = async () => {
-        if (onDrafts){
-            const full_token = localStorage.getItem('token')
-            try{
-                const response = await axios.get(`${SERVER_URL}/get-drafts`,{
-                    headers: {
-                        Authorization: `Bearer ${full_token}`
-                    },
-                    params: {
-                        sort: 1
-                    }
-                })
-                if (response.data){
-                    setPosts(response.data)
-                    setLoading(false)
-                }
+  // THEME
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const updateStorageChange = () => {
+    const currentTheme = localStorage.getItem("theme");
+    setTheme(currentTheme || "dark");
+  };
 
-            }catch(error){
-                console.error("Problemas ao acessar")
-            }
-        } else {
-            try{
-                const response = await axios.get(`${SERVER_URL}/all-posts`,{
-                    params: {
-                        sort: 1
-                    }
-                })
-                if (response.data){
-                    setPosts(response.data);   
-                    setLoading(false);
-                } else if(!response.data){
-                    setError("Publicações não disponíveis")
-                }
-            } catch(error){
-                console.error("Erro ao acessar as publicações: ", error)
-                return false
-            }
-        }
+  const handleChangeTheme = (newTheme: string) => {
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
 
-        
-    };
-
-    // THEME
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark")
-    const updateStorageChange = () =>{
-        const currentTheme = localStorage.getItem("theme")
-        setTheme(currentTheme || "dark")
-    }
-
-    const handleChangeTheme = (newTheme: string) => {
-        setTheme(newTheme)
-        localStorage.setItem("theme", newTheme)
-    }
-
-
-    useEffect(() => {
-        updateStorageChange()
+  useEffect(() => {
+    if (submittedPost){
         getData()
-        window.addEventListener("storage", (event)=> {
-            if (event.key === "theme"){
-                updateStorageChange()
-            }
-        })
-    }, []);
-    
-    // POSTS
-    const {submittedPost, setOnSubmittedPost, deletePost, setOnDeletePost, onDrafts} = context
-    useEffect(() => {
-        if (submittedPost){
-            getData()
-            setOnSubmittedPost(false)
-        }
-    }, [submittedPost])
+        setOnSubmittedPost(false)
+    }
+}, [submittedPost])
 
     useEffect(() => {
         if (deletePost){
@@ -116,63 +74,52 @@ onEdit?: boolean
         setLoading(true)
     }, [onDrafts])
 
-    if (error) {
-        return <p>{error}</p>;
+  useEffect(() => {
+    updateStorageChange();
+    getData();
+    if (!isDashboard) {
+      window.addEventListener("storage", (event) => {
+        if (event.key === "theme") {
+          updateStorageChange();
+        }
+      });
     }
+  }, []);
 
-    if (loading){
-        
-        return(
-            <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-            <GlobalTheme />
-                <p>Carregando publicações</p>
-            </ThemeProvider>
-        ) 
-    }
+  if (error) {
+    return <p>{error}</p>;
+  }
 
-
-    const Container_AllPosts = () =>{
-        return(
-            <div className='container all-posts'>
-            <div className='container_header'>
-                <h2>Todos as publicações</h2>
-                <span className="buttons_area">{isDashboard && <><Button_SignOut/><Button_GoToDrafts/></>}</span>
-            </div>
-            {loading && <p>Carregando publicações...</p>}
-            <div className='card-container'>
-                {posts.map((post) => (
-                    <CardPost key={post._id}
-                        post = {post}
-                        isDashboard = {isDashboard}
-                        functionEdit={functionEdit}
-                    />
-                ))}
-            </div>
-        </div>
-        )
-    }
-
+  if (loading) {
     return (
-        <>
-        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-        <GlobalTheme />
-            {isDashboard ? (
-                <>
-                    <Container_AllPosts/>
-                </>
-            ) : (
-                <>
-                    <Header onChangeTheme= {handleChangeTheme}/>
-                    <main id='main_all-posts'><Container_AllPosts /></main>
-                    <Footer/>
-                </>
-            )}
-        </ThemeProvider>
-        </>
+      <p>Carregando publicações</p>
     );
+  }
+
+  const Container_AllPosts = () => {
+    return (
+      <div className='container all-posts'>
+        <div className='container_header'>
+          <h2>Todos as {onDrafts? "rascunhos" : "publicações"}</h2>
+          <span className="buttons_area">{isDashboard && <><Button_SignOut/><Button_GoToDrafts/></>}</span>
+        </div>
+        {loading && <p>Carregando {onDrafts? "rascunhos" : "publicações"}...</p>}
+        <div className='card-container'>
+          {posts.map((post) => (
+            <CardPost key={post._id}
+              post={post}
+              isDashboard={isDashboard}
+              functionEdit={functionEdit}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <Container_AllPosts />
+  );
 };
 
-
 export default AllPosts;
-
-

@@ -1,7 +1,7 @@
 import axios from "axios";
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-function submitBlogInfo(type,event, info_data){
+function submitBlogInfo(type,event, album){
     if (event != null){
         event.preventDefault()
     }
@@ -24,17 +24,23 @@ function submitBlogInfo(type,event, info_data){
             if (response.data){
                 document.querySelector('div.featured-playlist>form>input').value = ""
             } else {
-                return false
+                // Depois de configurar uma conexão com o backend, remova esse Else
+                localStorage.setItem('featured_playlist', playlist)
+                document.querySelector('div.featured-playlist>form>input').value = ""
+                
         }}else if (type =="week album"){
+            // Ao estabelecer uma conexão com o backend, delete esse trecho do localStorage
+            const localstorage = localStorage.setItem('week_album', album)
             const data = {
                 "info_name": "week_album",
-                "text_value": info_data
+                "text_value": album
             }
             const response = await axios.put(`${SERVER_URL}/set-fast-infos`, data, {
                 headers: {
                     Authorization: `Bearer ${full_token}`
                 }
             })
+
         }
     }
     
