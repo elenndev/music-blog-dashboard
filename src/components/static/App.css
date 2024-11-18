@@ -165,11 +165,15 @@ footer{
     flex-direction: row;
     justify-content: space-between;
     align-items: end;
+    .buttons_area{
+      width: fit-content;
+      margin-right: 30px;
+    }
     h2 {
       margin: 5px 0 0 40px;
     }
     a.btn,button{
-      margin: 5px 35px;
+      margin: 5px 5px;
     }
   }}
 

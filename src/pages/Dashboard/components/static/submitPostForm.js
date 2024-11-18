@@ -70,7 +70,7 @@ const SubmitForm = async (event, reqType, postId, context) =>{
 
         // Verificar auth e define method
         if (type == 'post'){
-            const response = await axios.post(`${SERVER_URL}/create-{${reqURL}}`, data, {
+            const response = await axios.post(`${SERVER_URL}/create-${reqURL}`, data, {
                 headers: {
                     Authorization: `Bearer ${full_token}`
                 }

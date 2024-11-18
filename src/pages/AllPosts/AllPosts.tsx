@@ -37,6 +37,9 @@ onEdit?: boolean
                 const response = await axios.get(`${SERVER_URL}/get-drafts`,{
                     headers: {
                         Authorization: `Bearer ${full_token}`
+                    },
+                    params: {
+                        sort: 1
                     }
                 })
                 if (response.data){
@@ -110,6 +113,7 @@ onEdit?: boolean
 
     useEffect(() => {
         getData()
+        setLoading(true)
     }, [onDrafts])
 
     if (error) {
@@ -132,7 +136,7 @@ onEdit?: boolean
             <div className='container all-posts'>
             <div className='container_header'>
                 <h2>Todos as publicações</h2>
-                {isDashboard && <><Button_SignOut/><Button_GoToDrafts/></>}
+                <span className="buttons_area">{isDashboard && <><Button_SignOut/><Button_GoToDrafts/></>}</span>
             </div>
             {loading && <p>Carregando publicações...</p>}
             <div className='card-container'>

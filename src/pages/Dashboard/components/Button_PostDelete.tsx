@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { DashboardContext } from "./Context_Dashboard"
 import axios from 'axios';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
@@ -12,27 +12,35 @@ const Button_PostDelete: React.FC<{id: string }> = ({ id }) =>{
         return null
     }
 
-    const {setOnDeletePost} = context
+    const {setOnDeletePost, onDrafts} = context
+    const [reqURL, setReqURL] = useState(" ")
 
     const handleDeletePost = async () => {
+        if(onDrafts){
+            setReqURL("draft")
+        } else {
+            setReqURL("post")
+        }
         const confirmDelete = window.confirm("Tem certeza que deseja excluir essa publicação?")
-        if (confirmDelete){
-            const full_token = localStorage.getItem('token')
-            const response = await axios.delete(`${SERVER_URL}/delete-post`,{
-                params: {
-                    get_id: id
-                },
-                headers: {
-                    Authorization: `Bearer ${full_token}`
+        if(reqURL){
+            if (confirmDelete){
+                const full_token = localStorage.getItem('token')
+                const response = await axios.delete(`${SERVER_URL}/delete-${reqURL}`,{
+                    params: {
+                        get_id: id
+                    },
+                    headers: {
+                        Authorization: `Bearer ${full_token}`
+                    }
+                })
+                if (!response){
+                    return false
+                } else{
+                    setOnDeletePost(true)
+                    return 200
                 }
-            })
-            if (!response){
-                return false
-            } else{
-                setOnDeletePost(true)
-                return 200
+    
             }
-
         }
 
     }

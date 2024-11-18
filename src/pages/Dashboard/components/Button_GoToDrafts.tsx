@@ -18,8 +18,10 @@ const Button_GoToDrafts = () =>{
         }
     }
 
+
+
     return(
-        <button className="btn btn-primary" onClick={handleSetOnDrafts}>{onDrafts? <p>Ver rascunhos</p> : <p>Sair dos rascunhos</p>}</button>
+        <button className="btn btn-primary" onClick={handleSetOnDrafts}>{!onDrafts? "Ver rascunhos" : "Sair dos rascunhos"}</button>
     )
 }
 

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import './components/static/Dashboard.css'
 import AllPosts from "../AllPosts/AllPosts"
 import Header from '../../components/Header.tsx';
 import Footer from '../../components/Footer.tsx';
-import { DashboardProvider } from "./components/Context_Dashboard"
+import { DashboardContext, DashboardProvider } from "./components/Context_Dashboard"
 import Form_post from "./components/Form_post"
 import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
 import Iframe from "../../components/EmbedPlaylist"
@@ -60,14 +60,19 @@ const Dashboard = () => {
         localStorage.setItem("theme", newTheme)
     }
 
+    const context = useContext(DashboardContext)
+    if (!context){
+        throw new Error("DashboardContext não está disponível")}
+    const {setOnDrafts} = context
+
     useEffect(() => {
         window.addEventListener("storage", (event) => {
             if (event.key === "theme") {
                 updateStorageChange();
             }
         });
+        setOnDrafts(false)
         updateStorageChange()
-
         getFeaturedPlaylist()
     }, [])
 
