@@ -10,7 +10,7 @@ Base do Dashboard utilizado no Blog [Music Archive](https://music-archive-blog.v
 - Siga o envExample para fornecer as variáveis de ambiente que são necessárias.
 - Para utilizar a funcionalidade do albúm do Spotify, é necessário que você crie um Web API do spotify, é bem simples e eles fornecem uma [documentação com o passo a passo](https://developer.spotify.com/documentation/web-api).
 
-Caso queira verificar como utilizo esse dashboard de forma completa com a minha aplicação web, [confira a documentação do blog]().
+Caso queira verificar como utilizo esse dashboard de forma completa com a minha aplicação web, [confira a documentação do front do blog](https://github.com/elenndev/music-archive.git) e do [backend](https://github.com/elenndev/music-archive-server.git).
 
 
 
