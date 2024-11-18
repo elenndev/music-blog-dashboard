@@ -8,7 +8,7 @@ Base do Dashboard utilizado no Blog [Music Archive](https://music-archive-blog.v
 
 # Utilização
 - Siga o envExample para fornecer as variáveis de ambiente que são necessárias.
-- Para utilizar a funcionalidade do albúm do Spotify, é necessário que você crie um App no Spotify Deve.
+- Para utilizar a funcionalidade do albúm do Spotify, é necessário que você crie um App no Spotify Deve. 
 
 
 

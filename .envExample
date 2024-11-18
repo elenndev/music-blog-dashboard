@@ -1,0 +1,3 @@
+VITE_CLIENT_ID=client id do seu app spotify
+VITE_CLIENT_SECRET=client secret do seu app spotify
+VITE_SERVER_URL=url do seu backend
