@@ -79,7 +79,9 @@ const ReadPost: React.FC = () => {
                         <h1>{post.title}</h1>
                         <img src={post.cover}></img>
                         <Content_Post content={post.content}/>
-                        <Link to={'/todas-publicacoes'} className="btn btn-secondary" style={ButtonStyle}>Voltar</Link>
+                        <span className="buttons_area">
+                            <Link to={'/todas-publicacoes'} className="btn btn-secondary" style={ButtonStyle}>Voltar</Link>
+                        </span>
                     </article>
 
                 ))}
