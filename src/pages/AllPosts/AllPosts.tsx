@@ -5,11 +5,6 @@ import Button_SignOut from '../Dashboard/components/Button_SignOut.tsx';
 import FunctionGetId from '../Dashboard/components/Type_FunctionGetId.tsx';
 import { DashboardContext } from '../Dashboard/components/Context_Dashboard.tsx';
 import Model_Post from '../../components/InterfacePost.tsx';
-import Header from '../../components/Header.tsx';
-import Footer from '../../components/Footer.tsx';
-import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme } from "../../components/static/themes.js";
-import GlobalTheme from "../../components/static/globals.js";
 import axios from 'axios';
 import Button_GoToDrafts from '../Dashboard/components/Button_GoToDrafts.tsx';
 
@@ -34,7 +29,6 @@ const AllPosts: React.FC<{
       const result = await axios.get(onDrafts 
         ? '/data/draftExemplo.json' 
         : '/data/postExemplo.json');
-        console.log(result.data)
       setPosts(result.data);
       setLoading(false);
     } catch (err) {
@@ -43,17 +37,6 @@ const AllPosts: React.FC<{
     }
   };
 
-  // THEME
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-  const updateStorageChange = () => {
-    const currentTheme = localStorage.getItem("theme");
-    setTheme(currentTheme || "dark");
-  };
-
-  const handleChangeTheme = (newTheme: string) => {
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
 
   useEffect(() => {
     if (submittedPost){
@@ -75,15 +58,7 @@ const AllPosts: React.FC<{
     }, [onDrafts])
 
   useEffect(() => {
-    updateStorageChange();
     getData();
-    if (!isDashboard) {
-      window.addEventListener("storage", (event) => {
-        if (event.key === "theme") {
-          updateStorageChange();
-        }
-      });
-    }
   }, []);
 
   if (error) {

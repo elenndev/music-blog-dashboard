@@ -29,7 +29,6 @@ const Set_FeaturedAlbum: React.FC = () => {
     };
     const fetchAlbum = async (token: string) => {
         const getAlbum = await getAlbumById(token);
-        console.log("aqui no front ", getAlbum)
         setFeaturedAlbum(getAlbum);
     };
 
