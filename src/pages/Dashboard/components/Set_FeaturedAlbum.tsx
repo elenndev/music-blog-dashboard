@@ -1,5 +1,5 @@
 import getToken from '../../../components/static/spotifyAuth';
-import SeeFeaturedAlbum from './See_FeaturedAlbum'
+// import SeeFeaturedAlbum from './See_FeaturedAlbum'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getAlbumById } from '../../Dashboard/components/static/getAlbumById';
@@ -33,10 +33,10 @@ const Set_FeaturedAlbum: React.FC = () => {
         setFeaturedAlbum(getAlbum);
     };
 
-    const handleSubmitAlbum = (album) => {
+    const handleSubmitAlbum = (album: string) => {
         localStorage.setItem("week_album", album)
         fetchAlbum(token)
-        submitBlogInfo("week album", null, selectedAlbum.id)
+        submitBlogInfo("week album", null, selectedAlbum?.id)
     }
 
     useEffect(() => {
@@ -140,7 +140,6 @@ const Set_FeaturedAlbum: React.FC = () => {
                 </span>
             ) : (
                 <>
-                    <p>Albúm em destaque no momento</p>
                     <p>Selecione um álbum para ver os detalhes</p>
                 </>
             )}

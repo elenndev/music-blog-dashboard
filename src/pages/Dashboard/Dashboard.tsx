@@ -1,16 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 import './components/static/Dashboard.css'
 import AllPosts from "../AllPosts/AllPosts"
-import Header from '../../components/Header.tsx';
-import Footer from '../../components/Footer.tsx';
 import { DashboardContext, DashboardProvider } from "./components/Context_Dashboard"
 import Form_post from "./components/Form_post"
 import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
 import Iframe from "../../components/EmbedPlaylist"
 import submitBlogInfo from "./components/static/submitBlogInfo"
 
-import axios from "axios";
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
 const Dashboard = () => {

@@ -12,6 +12,8 @@ function submitBlogInfo(type,event, album){
     const submit = async() =>{
         const full_token = localStorage.getItem('token')
         if (type== "featured playlist"){
+            // Ao estabelecer uma conexão com o backend, delete esse trecho do localStorage
+            localStorage.setItem('featured_playlist', playlist)
             const data = {
                 "info_name": "featured_playlist",
                 "text_value": playlist
@@ -22,25 +24,18 @@ function submitBlogInfo(type,event, album){
                 }
             })
             if (response.data){
-                document.querySelector('div.featured-playlist>form>input').value = ""
-            } else {
-                // Depois de configurar uma conexão com o backend, remova esse Else
-                localStorage.setItem('featured_playlist', playlist)
-                document.querySelector('div.featured-playlist>form>input').value = ""
-                
-        }}else if (type =="week album"){
+                document.querySelector('div.featured-playlist>form>input').value = ""}
+        }else if (type =="week album"){
             // Ao estabelecer uma conexão com o backend, delete esse trecho do localStorage
             const localstorage = localStorage.setItem('week_album', album)
             const data = {
                 "info_name": "week_album",
-                "text_value": album
-            }
+                "text_value": album }
             const response = await axios.put(`${SERVER_URL}/set-fast-infos`, data, {
                 headers: {
                     Authorization: `Bearer ${full_token}`
                 }
             })
-
         }
     }
     

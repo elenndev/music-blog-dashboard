@@ -6,7 +6,7 @@ import axios from 'axios';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
-const SubmitForm = async (event, reqType, postId, context) =>{
+const SubmitForm = async (event, reqType, draftOrPost, postId, context) =>{
     event.preventDefault()
     const form_submit = document.querySelector('#form_submit')
     const cover = document.querySelector('#cover').value
@@ -14,11 +14,11 @@ const SubmitForm = async (event, reqType, postId, context) =>{
     const editor = document.querySelector('div.ql-editor')
     const h1 = editor.querySelector("h1")
     // guardar url se é pra postagem mesmo ou rascunho
-    let reqURL = null
+    let reqURL = draftOrPost
 
     let method = null
-    let type = reqType.reqType
-    let id = postId.id
+    let type = reqType
+    let id = postId
     
     const {setEditMode, onDrafts} = context
 
@@ -62,6 +62,7 @@ const SubmitForm = async (event, reqType, postId, context) =>{
         //Formatar conteudos para o submit
         let result = null
         const title = editor.querySelector("h1").innerHTML
+        editor.removeChild(editor.querySelector("h1"))
         const content = editor.innerHTML
         let data = {
             cover: cover,
