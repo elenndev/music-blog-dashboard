@@ -6,7 +6,8 @@ import Form_post from "./components/Form_post"
 import Set_FeaturedAlbum from "./components/Set_FeaturedAlbum"
 import Iframe from "../../components/EmbedPlaylist"
 import submitBlogInfo from "./components/static/submitBlogInfo"
-
+import axios from "axios";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
 const Dashboard = () => {
@@ -20,24 +21,29 @@ const Dashboard = () => {
         borderRadius: 'var(--borderRadius)',
         margin: '20px'
     }
+
     // POST EDIT
     const [postId, setId] = useState("")
     const handleButtonEdit = (id: string) => {
         setId(id)
     }
 
-
-
     // PLAYLIST
     const [featuredPlaylist, setFeaturedPlaylist] = useState<string | null>('3AqqJn20LczJtoaHjVLipe?utm_source=generator')
-    const getFeaturedPlaylist = ()=>{
-            const playlist = localStorage.getItem('featured_playlist')
-            if (playlist == null){
-                setFeaturedPlaylist("https://open.spotify.com/embed/playlist/6tCKLs0WDeNwEzbCdQSXQn?si=sUyg68daSxy8rA9fLsfQTw")
-                return
+    const getFeaturedPlaylist = async()=>{  
+        const response = await axios.get(`${SERVER_URL}/fast-infos`, {
+            params: {
+                info_name: "featured_playlist"
             }
-            setFeaturedPlaylist(playlist)
+        })
+        if (response.data){
+            setFeaturedPlaylist(response.data.text_value)
+        } else {
+            setFeaturedPlaylist("Playlist não definida")
+        }    
     }
+
+
     function handleSubmitPlaylist(event: React.FormEvent){
         submitBlogInfo("featured playlist",event, null)
         getFeaturedPlaylist()

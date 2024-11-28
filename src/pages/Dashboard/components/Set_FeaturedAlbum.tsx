@@ -1,5 +1,4 @@
 import getToken from '../../../components/static/spotifyAuth';
-// import SeeFeaturedAlbum from './See_FeaturedAlbum'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getAlbumById } from '../../Dashboard/components/static/getAlbumById';
@@ -21,32 +20,29 @@ const Set_FeaturedAlbum: React.FC = () => {
     const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null); 
     const [token, setToken] = useState<string>(''); 
 
-    // SET ALBUM
+    // album em destaque
     const [featuredAlbum, setFeaturedAlbum] = useState<Album | null>(null);
-    const authenticate = async () => {
-        const _token = await getToken();
-        setToken(_token);
-    };
+    /// atualiza no dashboard qual o album em destaque
     const fetchAlbum = async (token: string) => {
         const getAlbum = await getAlbumById(token);
         setFeaturedAlbum(getAlbum);
     };
 
-    const handleSubmitAlbum = (album: string) => {
-        localStorage.setItem("week_album", album)
+    const handleSubmitAlbum = (submit_album: string) => {
         fetchAlbum(token)
-        submitBlogInfo("week album", null, selectedAlbum?.id)
+        submitBlogInfo("week album", null, submit_album)
     }
 
     useEffect(() => {
-        if (token) {
-            fetchAlbum(token); 
-        }
+        fetchAlbum(token); 
     }, [token]); 
 
     useEffect(() => {
+        const authenticate = async () => {
+            const _token = await getToken();
+            setToken(_token);
+        };
         authenticate();
-        fetchAlbum(token)
     }, []);
 
     useEffect(() => {
@@ -139,7 +135,7 @@ const Set_FeaturedAlbum: React.FC = () => {
                 </span>
             ) : (
                 <>
-                    <p>Selecione um álbum para ver os detalhes</p>
+                    <p>Aguardando album</p>
                 </>
             )}
         </>

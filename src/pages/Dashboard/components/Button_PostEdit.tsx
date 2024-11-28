@@ -19,8 +19,7 @@ const Button_PostEdit: React.FC<{post: Post, editPost?: FunctionGetId}> = ({post
             setIsDraft(true)
         } else{
             setIsDraft(false)
-        }
-        
+        }        
         if (editPost){
             editPost(post._id)}
     }
